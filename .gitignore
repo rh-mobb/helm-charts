@@ -1,0 +1,4 @@
+charts/*/charts
+*.tgz
+*.tar.gz
+**/Chart.lock

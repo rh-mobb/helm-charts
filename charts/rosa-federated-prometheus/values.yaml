@@ -1,0 +1,42 @@
+# Default values for rosa-federated-prometheus.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+nameOverride: ""
+fullnameOverride: ""
+
+prometheus:
+  replicaCount: 2
+  version: v2.8.0
+  sessionSecret: "112RXXaWl7wUQiSdXUMrUya7kN5gOZmHc0s202bKqAw" # changeme
+  basicAuthUsername: "internal"
+  basicAuthPassword: "KgX1EUO3eQOBr1u9Df5B6XEhfxWGKaBKMhEa1ALQvu6" # changeme
+
+grafana:
+  sessionSecret: "112RXXaWl7wUQiSdXUMrUya7kN5gOZmHc0s202bKqAw" # changeme
+  basicAuthUsername: "internal"
+  basicAuthPassword: "KgX1EUO3eQOBr1u9Df5B6XEhfxWGKaBKMhEa1ALQvu6" # changeme
+  operator:
+    createSubscription: true
+    creteCatalogSource: true
+
+  dataSources: []
+
+
+  dashboards: []
+
+alertManager:
+  configYaml: |
+    global:
+      slack_api_url: "https://hooks.slack.com/services/<your-slack-webhook-url>" # changeme
+    route:
+      receiver: slack-notifications
+      group_by: [alertname]
+    receivers:
+    - name: slack-notifications
+      slack_configs:
+      - channel: "#alerts"
+        send_resolved: true
+
+  exampleAlert:
+    enabled: true

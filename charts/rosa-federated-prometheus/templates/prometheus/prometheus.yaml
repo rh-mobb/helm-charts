@@ -1,0 +1,118 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ include "rosa-federated-prometheus.fullname" . }}-proxy
+  labels:
+    {{- include "rosa-federated-prometheus.labels" . | nindent 4 }}
+type: Opaque
+data:
+  session_secret: "{{ .Values.prometheus.sessionSecret | b64enc }}"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ include "rosa-federated-prometheus.fullname" . }}-htpasswd
+  labels:
+    {{- include "rosa-federated-prometheus.labels" . | nindent 4 }}
+type: Opaque
+data:
+  auth: "{{ htpasswd .Values.prometheus.basicAuthUsername .Values.prometheus.basicAuthPassword  | b64enc }}"
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: {{ include "rosa-federated-prometheus.fullname" . }}
+  labels:
+    {{- include "rosa-federated-prometheus.labels" . | nindent 4 }}
+    prometheus: {{ include "rosa-federated-prometheus.fullname" . }}
+spec:
+  replicas: {{ .Values.prometheus.replicaCount }}
+  version: {{ .Values.prometheus.version }}
+  ruleSelector:
+    matchLabels:
+      prometheus: {{ include "rosa-federated-prometheus.fullname" . }}
+      role: alert-rules
+  ruleNamespaceSelector: {}
+  alerting:
+    alertmanagers:
+      - namespace: {{ .Release.Namespace}}
+        name: {{ include "rosa-federated-prometheus.fullname" . }}-alertmanager
+        port: web
+  serviceAccountName: {{ include "rosa-federated-prometheus.fullname" . }}
+  serviceMonitorSelector:
+    matchLabels:
+      prometheus: {{ include "rosa-federated-prometheus.fullname" . }}
+  configMaps:
+  - openshift-service-ca.crt
+  containers:
+  - args:
+      - -provider=openshift
+      - -https-address=:9091
+      - -http-address=
+      - -email-domain=*
+      - -upstream=http://localhost:9090
+      - -openshift-service-account={{ include "rosa-federated-prometheus.fullname" . }}
+      - '-openshift-sar={"resource": "namespaces", "verb": "get"}'
+      - -tls-cert=/etc/tls/private/tls.crt
+      - -tls-key=/etc/tls/private/tls.key
+      - -cookie-secret-file=/etc/proxy/secrets/session_secret
+      - -client-secret-file=/var/run/secrets/kubernetes.io/serviceaccount/token
+      - -openshift-ca=/etc/pki/tls/cert.pem
+      - -openshift-ca=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      - -htpasswd-file=/etc/proxy/htpasswd/auth
+      - -skip-auth-regex=^/metrics
+    image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:2343bdce7a33e42269488bf7a429ea3c8f366f54b304b67706d5dd3f6df44f7c
+    name: oauth-proxy
+    ports:
+    - containerPort: 9091
+      name: web-proxy
+    volumeMounts:
+    - mountPath: /etc/tls/private
+      name: secret-{{ include "rosa-federated-prometheus.fullname" . }}-tls
+      readOnly: true
+    - mountPath: /etc/proxy/secrets
+      name: secret-{{ include "rosa-federated-prometheus.fullname" . }}-proxy
+      readOnly: true
+    - mountPath: /etc/proxy/htpasswd
+      name: secret-{{ include "rosa-federated-prometheus.fullname" . }}-htpasswd
+      readOnly: true
+  secrets:
+    - {{ include "rosa-federated-prometheus.fullname" . }}-tls
+    - {{ include "rosa-federated-prometheus.fullname" . }}-proxy
+    - {{ include "rosa-federated-prometheus.fullname" . }}-htpasswd
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "rosa-federated-prometheus.fullname" . }}-prometheus
+  labels:
+    {{- include "rosa-federated-prometheus.labels" . | nindent 4 }}
+  annotations:
+    service.alpha.openshift.io/serving-cert-secret-name: {{ include "rosa-federated-prometheus.fullname" . }}-tls
+spec:
+  ports:
+  - name: web-proxy
+    port: 9091
+    protocol: TCP
+    targetPort: web-proxy
+  selector:
+    app.kubernetes.io/name: prometheus
+    app.kubernetes.io/instance: {{ include "rosa-federated-prometheus.fullname" . }}
+    prometheus: {{ include "rosa-federated-prometheus.fullname" . }}
+  type: ClusterIP
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: prometheus-route
+  labels:
+    {{- include "rosa-federated-prometheus.labels" . | nindent 4 }}
+spec:
+  port:
+    targetPort: web-proxy
+  to:
+    kind: Service
+    name: {{ include "rosa-federated-prometheus.fullname" . }}-prometheus
+  tls:
+    termination: Reencrypt
+---

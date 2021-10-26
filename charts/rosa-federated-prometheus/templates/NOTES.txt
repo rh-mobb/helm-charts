@@ -1,0 +1,22 @@
+Access the Stack:
+{{ $promRoute := lookup "route.openshift.io/v1" "Route"  .Release.Namespace  "prometheus-route" }}
+{{- if hasKey $promRoute "spec" }}
+Prometheus:  {{ $promRoute.spec.host }}
+{{- else }}
+Prometheus: <pending>
+{{- end }}
+{{ $grafanaRoute := lookup "route.openshift.io/v1" "Route"  .Release.Namespace  "grafana-route" }}
+{{- if hasKey $grafanaRoute "spec" }}
+Grafana:  {{ $grafanaRoute.spec.host }}
+{{- else }}
+Grafana: <pending>
+{{- end }}
+
+Alert Manager: $ kubectl port-forward -n {{ .Release.Namespace }} svc/{{ include "rosa-federated-prometheus.fullname" . }}-alertmanager 9093
+
+* If any of the above show <pending> wait a few minutes and run `kubectl -n {{ .Release.Namespace }} get routes`.
+
+Grafana Admin credentials can be found by running:
+
+Username - kubectl get secret -n {{ .Release.Namespace }} {{ include "rosa-federated-prometheus.fullname" . }}-grafana-creds -o "jsonpath={.data.GF_SECURITY_ADMIN_USER}" | base64 --decode
+Password - kubectl get secret -n {{ .Release.Namespace }} {{ include "rosa-federated-prometheus.fullname" . }}-grafana-creds -o "jsonpath={.data.GF_SECURITY_ADMIN_PASSWORD}" | base64 --decode

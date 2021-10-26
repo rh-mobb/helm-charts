@@ -1,0 +1,15 @@
+{{- if .Values.alertManager.exampleAlert.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ include "rosa-federated-prometheus.fullname" . }}-example
+  labels:
+    prometheus: {{ include "rosa-federated-prometheus.fullname" . }}
+    role: alert-rules
+spec:
+  groups:
+  - name: example.rules
+    rules:
+    - alert: ExampleAlert
+      expr: vector(1)
+{{- end }}
