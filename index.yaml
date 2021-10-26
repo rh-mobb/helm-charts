@@ -1,5 +1,18 @@
 apiVersion: v1
 entries:
+  grafana-cr:
+  - apiVersion: v2
+    created: "2021-10-26T21:37:52.816471227Z"
+    description: A Helm chart for Deploying Grafana instances using the Grafana Operator
+    digest: b53407f085016737f9fd11c57d9cd8eecdef2e96b18527c7313bcbb93116b3f1
+    home: https://github.com/rh-mobb/helm-charts
+    maintainers:
+    - name: paulczar
+    name: grafana-cr
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/grafana-cr-0.1.0/grafana-cr-0.1.0.tgz
+    version: 0.1.0
   rosa-federated-prometheus:
   - apiVersion: v2
     appVersion: 0.1.0
