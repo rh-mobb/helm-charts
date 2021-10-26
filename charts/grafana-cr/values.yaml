@@ -1,0 +1,12 @@
+sessionSecret: "112RXXaWl7wUQiSdXUMrUya7kN5gOZmHc0s202bKqAw"
+basicAuthUsername: "admin"
+basicAuthPassword: "password"
+
+oauthProxy:
+  # If this is set will use the basic Auth credentials from above
+  # as a bypass from using the cluster oath
+  allowHtpasswd: false
+
+dashboards: []
+
+dataSources: []
