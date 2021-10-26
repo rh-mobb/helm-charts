@@ -1,0 +1,17 @@
+apiVersion: v1
+entries:
+  rosa-federated-prometheus:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2021-10-26T18:31:13.726032769Z"
+    description: A Helm chart for Kubernetes
+    digest: ecec2560ae61bfa9d43c370f771ec77378922cac997b50388a6a39571d83ebf3
+    home: https://github.com/rh-mobb/helm-charts
+    maintainers:
+    - name: paulczar
+    name: rosa-federated-prometheus
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/rosa-federated-prometheus-0.1.1/rosa-federated-prometheus-0.1.1.tgz
+    version: 0.1.1
+generated: "2021-10-26T18:31:13.568877653Z"
