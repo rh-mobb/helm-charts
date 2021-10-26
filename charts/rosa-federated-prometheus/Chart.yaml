@@ -6,9 +6,14 @@ type: application
 
 version: 0.2.0
 
-appVersion: "0.1.0"
+appVersion: "0.2.0"
 
 maintainers:
   - name: paulczar
 
 home: https://github.com/rh-mobb/helm-charts
+
+dependencies:
+- name: grafana-cr
+  version: "0.1.0"
+  repository: "https://rh-mobb.github.io/helm-charts/"

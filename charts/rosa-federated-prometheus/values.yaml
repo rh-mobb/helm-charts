@@ -14,13 +14,11 @@ prometheus:
   basicAuthPassword: "KgX1EUO3eQOBr1u9Df5B6XEhfxWGKaBKMhEa1ALQvu6"
 
 grafana:
-  basicAuthUsername: "internal"
+  basicAuthUsername: "admin"
   # Change these two fields
   sessionSecret: "112RXXaWl7wUQiSdXUMrUya7kN5gOZmHc0s202bKqAw"
-  basicAuthPassword: "KgX1EUO3eQOBr1u9Df5B6XEhfxWGKaBKMhEa1ALQvu6"
-  operator:
-    createSubscription: true
-    creteCatalogSource: true
+  basicAuthPassword: "password"
+
 
 # Update this to suit your slack, or other notification methods
 alertManager:

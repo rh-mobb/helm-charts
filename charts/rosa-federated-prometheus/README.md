@@ -12,23 +12,23 @@ This Helm chart will deploy a Prometheus server on ROSA and configure it to slur
 Set the following environment variables
 
 ```
-export PROM_NAMESPACE=custom-prometheus
+export NAMESPACE=custom-prometheus
 ```
 
 ## Install Operators
 
-This relies on the Prometheus and Grafana operators, you can deploy them from the OpenShift Console, or via the script found in `./files/deploy-operators.sh`.
+This relies on the Prometheus and Grafana operators, you can deploy them from the OpenShift Console, or via the script found in `./files/pre-install.sh`.
 
 Run one of the following:
 
     ```bash
-    curl -sSL https://raw.githubusercontent.com/rh-mobb/helm-charts/main/charts/rosa-federated-prometheus/files/deploy-operators.sh | bash
+    curl -sSL https://raw.githubusercontent.com/rh-mobb/helm-charts/main/charts/rosa-federated-prometheus/files/pre-install.sh | bash
     ```
 
     or if you've cloned down this repository
 
     ```bash
-    ./files/deploy-operators.sh
+    ./files/pre-install.sh
     ```
 
 ## Deploy the Helm Chart
@@ -42,13 +42,13 @@ Run one of the following:
 1. Update your Repository
 
     ```bash
-    helm repo update
+    helm repo update && helm dependency update
     ```
 
 1. Install a Chart
 
     ```bash
-    helm install -n my-prometheus mobb/rosa-federated-prometheus
+    helm install -n $NAMESPACE monitoring mobb/rosa-federated-prometheus
     ```
 
 1. Find the Routes
