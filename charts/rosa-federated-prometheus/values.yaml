@@ -22,14 +22,11 @@ grafana:
     createSubscription: true
     creteCatalogSource: true
 
-  dataSources: []
-
-  dashboards: []
-
+# Update this to suit your slack, or other notification methods
 alertManager:
   configYaml: |
     global:
-      slack_api_url: "https://hooks.slack.com/services/<your-slack-webhook-url>" # changeme
+      slack_api_url: "https://hooks.slack.com/services/<your-slack-webhook-url>"
     route:
       receiver: slack-notifications
       group_by: [alertname]
