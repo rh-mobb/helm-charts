@@ -1,7 +1,7 @@
 apiVersion: integreatly.org/v1alpha1
 kind: GrafanaDataSource
 metadata:
-  name: {{ include "rosa-federated-prometheus.fullname" . }}
+  name: federated
   labels:
     {{- include "rosa-federated-prometheus.labels" . | nindent 4 }}
 spec:
@@ -18,4 +18,4 @@ spec:
         tlsSkipVerify: true
       name: prometheus
       type: prometheus
-      url: 'https://{{ include "rosa-federated-prometheus.fullname" . }}-prometheus.{{ .Release.Namespace }}.svc.cluster.local:9091'
+      url: 'https://{{ .Release.Name }}-prometheus-cr.{{ .Release.Namespace }}.svc.cluster.local:9091'

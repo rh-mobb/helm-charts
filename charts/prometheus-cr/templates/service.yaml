@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "prometheus-cr.fullname" . }}
+  labels:
+    {{- include "prometheus-cr.labels" . | nindent 4 }}
+  annotations:
+    service.alpha.openshift.io/serving-cert-secret-name: {{ include "prometheus-cr.fullname" . }}-tls
+spec:
+  ports:
+  - name: web-proxy
+    port: 9091
+    protocol: TCP
+    targetPort: web-proxy
+  selector:
+    app.kubernetes.io/instance: {{ include "prometheus-cr.fullname" . }}
+    prometheus: {{ include "prometheus-cr.fullname" . }}
+  type: ClusterIP
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: prometheus-route
+  labels:
+    {{- include "prometheus-cr.labels" . | nindent 4 }}
+spec:
+  port:
+    targetPort: web-proxy
+  to:
+    kind: Service
+    name: {{ include "prometheus-cr.fullname" . }}
+  tls:
+    termination: Reencrypt
