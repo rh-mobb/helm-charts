@@ -1,0 +1,12 @@
+apiVersion: v2
+name: alertmanager-cr
+description: A Helm chart for Deploying alertmanager instances using the alertmanager Operator
+
+type: application
+
+version: 0.1.0
+
+home: https://github.com/rh-mobb/helm-charts
+
+maintainers:
+  - name: paulczar
