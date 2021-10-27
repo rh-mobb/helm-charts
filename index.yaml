@@ -69,6 +69,6 @@ entries:
     name: prometheus-cr
     type: application
     urls:
-    - prometheus-cr-0.1.0.tgz
+    - https://github.com/rh-mobb/helm-charts/releases/download/prometheus-cr-0.1.0/prometheus-cr-0.1.0.tgz
     version: 0.1.0
 generated: "2021-10-27T15:22:35.343987-05:00"
