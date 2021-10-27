@@ -16,6 +16,23 @@ entries:
   rosa-federated-prometheus:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2021-10-27T15:53:47.602211757Z"
+    dependencies:
+    - name: grafana-cr
+      repository: https://rh-mobb.github.io/helm-charts/
+      version: 0.1.0
+    description: A Helm chart for Kubernetes
+    digest: 1acd250afc3a5ba4d976bad4ade1a9118b253edd6b96b8adfe4e23198f7cddac
+    home: https://github.com/rh-mobb/helm-charts
+    maintainers:
+    - name: paulczar
+    name: rosa-federated-prometheus
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/rosa-federated-prometheus-0.3.0/rosa-federated-prometheus-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2021-10-26T19:57:17.719740174Z"
     description: A Helm chart for Kubernetes
     digest: 7ec450bf0d39fd1a4a3b51b16d092597c28f1050ad74d31959ab57599a1a45a3
