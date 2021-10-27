@@ -4,7 +4,7 @@ metadata:
   name: {{ include "rosa-federated-prometheus.fullname" . }}-cluster
   labels:
     {{- include "rosa-federated-prometheus.labels" . | nindent 4 }}
-    prometheus: {{ include "rosa-federated-prometheus.fullname" . }}
+    prometheus: {{ .Release.Name }}-prometheus-cr
 spec:
   endpoints:
   - interval: 30s

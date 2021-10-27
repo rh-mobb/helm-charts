@@ -1,0 +1,6 @@
+{{ $prometheusRoute := lookup "route.openshift.io/v1" "Route"  .Release.Namespace  "prometheus-route" }}
+{{- if hasKey $prometheusRoute "spec" }}
+Prometheus URL:  {{ $prometheusRoute.spec.host }}
+{{- else }}
+Prometheus URL: kubectl -n {{ .Release.Namespace }} get route prometheus-route
+{{- end }}

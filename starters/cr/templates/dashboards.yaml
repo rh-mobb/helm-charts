@@ -1,0 +1,12 @@
+{{ range .Values.dashboards }}
+---
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  name: {{ .name }}
+  labels:
+    app: grafana
+spec:
+  json: {{ .json }}
+{{ end }}
+

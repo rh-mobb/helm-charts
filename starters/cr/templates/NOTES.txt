@@ -1,0 +1,11 @@
+{{ $grafanaRoute := lookup "route.openshift.io/v1" "Route"  .Release.Namespace  "grafana-route" }}
+{{- if hasKey $grafanaRoute "spec" }}
+Grafana URL:  {{ $grafanaRoute.spec.host }}
+{{- else }}
+Grafana URL: kubectl -n {{ .Release.Namespace }} get route grafana-route
+{{- end }}
+
+Grafana Admin credentials can be found by running:
+
+Username - kubectl get secret -n {{ .Release.Namespace }} {{ include "grafana-cr.fullname" . }}-creds -o "jsonpath={.data.GF_SECURITY_ADMIN_USER}" | base64 --decode
+Password - kubectl get secret -n {{ .Release.Namespace }} {{ include "grafana-cr.fullname" . }}-creds -o "jsonpath={.data.GF_SECURITY_ADMIN_PASSWORD}" | base64 --decode
