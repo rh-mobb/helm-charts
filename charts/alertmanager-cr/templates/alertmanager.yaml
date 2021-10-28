@@ -6,4 +6,3 @@ spec:
   securityContext: {}
   replicas: 3
   configSecret: {{ include "alertmanager-cr.fullname" . }}-config
-
