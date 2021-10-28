@@ -29,6 +29,19 @@ entries:
   prometheus-cr:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2021-10-28T20:25:55.967671711Z"
+    description: A Helm chart for Kubernetes
+    digest: 5b60beff77df8de0fe7907c013a5a1a8d5a24f84dfb818781118a4048aeb427a
+    home: https://rh-mobb.github.io/helm-charts/
+    maintainers:
+    - name: rh-mobb
+    name: prometheus-cr
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/prometheus-cr-0.2.0/prometheus-cr-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2021-10-27T15:22:35.3446148-05:00"
     description: A Helm chart for Kubernetes
     digest: 0ec011db2276cc8f5058361193e24bc275b23f7aa9f81752ef46ebdc0d4878de
