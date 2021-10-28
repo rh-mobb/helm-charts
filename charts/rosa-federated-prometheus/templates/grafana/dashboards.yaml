@@ -9,4 +9,3 @@ metadata:
 spec:
   json: {{ $.Files.Get $path }}
 {{ end }}
-
