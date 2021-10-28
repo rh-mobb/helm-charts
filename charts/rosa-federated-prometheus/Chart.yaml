@@ -18,5 +18,8 @@ dependencies:
   version: "0.1.0"
   repository: "https://rh-mobb.github.io/helm-charts/"
 - name: prometheus-cr
+  version: "0.2.0"
+  repository: "https://rh-mobb.github.io/helm-charts/"
+- name: alertmanager-cr
   version: "0.1.0"
   repository: "https://rh-mobb.github.io/helm-charts/"

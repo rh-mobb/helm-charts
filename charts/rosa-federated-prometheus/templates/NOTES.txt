@@ -12,7 +12,7 @@ Grafana:  {{ $grafanaRoute.spec.host }}
 Grafana: <pending>
 {{- end }}
 
-Alert Manager: $ kubectl port-forward -n {{ .Release.Namespace }} svc/{{ include "rosa-federated-prometheus.fullname" . }}-alertmanager 9093
+Alert Manager: $ kubectl port-forward -n {{ .Release.Namespace }} svc/{{ .Release.Name }}-alertmanager-cr 9093
 
 * If any of the above show <pending> wait a few minutes and run `kubectl -n {{ .Release.Namespace }} get routes`.
 

@@ -11,8 +11,8 @@ spec:
       editable: false
       isDefault: true
       basicAuth: true
-      basicAuthPassword: "{{ .Values.prometheus.basicAuthPassword }}"
-      basicAuthUser: "{{ .Values.prometheus.basicAuthUsername }}"
+      basicAuthPassword: "{{ index .Values "prometheus-cr" "basicAuthPassword" }}"
+      basicAuthUser: "{{ index .Values "prometheus-cr" "basicAuthUsername" }}"
       jsonData:
         timeInterval: 5s
         tlsSkipVerify: true
