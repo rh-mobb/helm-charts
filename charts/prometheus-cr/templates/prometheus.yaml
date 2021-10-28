@@ -16,7 +16,7 @@ spec:
   alerting:
     alertmanagers:
       - namespace: {{ .Release.Namespace}}
-        name: {{ include "prometheus-cr.fullname" . }}-alertmanager
+        name: {{ .Release.Name }}-alertmanager-cr
         port: web
   serviceAccountName: {{ include "prometheus-cr.fullname" . }}
   serviceMonitorSelector:
