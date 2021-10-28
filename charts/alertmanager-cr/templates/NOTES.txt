@@ -1,0 +1,1 @@
+Alert Manager: $ kubectl port-forward -n {{ .Release.Namespace }} svc/{{ include "alertmanager-cr.fullname" . }}-alertmanager 9093

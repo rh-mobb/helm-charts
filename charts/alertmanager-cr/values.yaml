@@ -1,0 +1,10 @@
+nameOverride: ""
+fullnameOverride: ""
+
+config:
+  global: {}
+  route: {}
+  receivers: []
+
+exampleAlert:
+  enabled: true
