@@ -26,6 +26,19 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/grafana-cr-0.1.0/grafana-cr-0.1.0.tgz
     version: 0.1.0
+  operatorhub:
+  - apiVersion: v2
+    created: "2021-10-29T18:24:16.784509539Z"
+    description: A Helm chart for Kubernetes
+    digest: b5f952c0ea40843c4b2626ba9d0c3c1e50437e4214fe8be55523ce8cbf054902
+    home: https://github.com/rh-mobb/mobb-charts
+    maintainers:
+    - name: rh-mobb
+    name: operatorhub
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/operatorhub-0.1.0/operatorhub-0.1.0.tgz
+    version: 0.1.0
   prometheus-cr:
   - apiVersion: v2
     appVersion: 0.1.0
