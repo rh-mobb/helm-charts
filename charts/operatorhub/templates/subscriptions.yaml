@@ -13,5 +13,4 @@ spec:
   installPlanApproval: {{ .installPlanApproval }}
   source: {{ .source }}
   sourceNamespace: {{ .sourceNamespace | default $c.Release.Namespace }}
----
 {{ end }}

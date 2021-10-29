@@ -1,5 +1,6 @@
 {{ $c := . }}
 {{ range .Values.catalogSources }}
+---
 apiVersion: operators.coreos.com/v1alpha1
 kind: CatalogSource
 metadata:
@@ -11,5 +12,4 @@ spec:
   image: {{ .image }}
   displayName: {{ .displayName }}
   publisher: {{ .publisher }}
----
 {{ end }}
