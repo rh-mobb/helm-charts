@@ -18,5 +18,5 @@ Alert Manager: $ kubectl port-forward -n {{ .Release.Namespace }} svc/{{ .Releas
 
 Grafana Admin credentials can be found by running:
 
-Username - kubectl get secret -n {{ .Release.Namespace }} {{ include "rosa-federated-prometheus.fullname" . }}-grafana-creds -o "jsonpath={.data.GF_SECURITY_ADMIN_USER}" | base64 --decode
-Password - kubectl get secret -n {{ .Release.Namespace }} {{ include "rosa-federated-prometheus.fullname" . }}-grafana-creds -o "jsonpath={.data.GF_SECURITY_ADMIN_PASSWORD}" | base64 --decode
+Username - kubectl get secret -n {{ .Release.Namespace }} {{ include "rosa-federated-prometheus.fullname" . }}-grafana-cr-creds -o "jsonpath={.data.GF_SECURITY_ADMIN_USER}" | base64 --decode
+Password - kubectl get secret -n {{ .Release.Namespace }} {{ include "rosa-federated-prometheus.fullname" . }}-grafana-cr-creds -o "jsonpath={.data.GF_SECURITY_ADMIN_PASSWORD}" | base64 --decode
