@@ -1,0 +1,13 @@
+{{ $c := . }}
+{{ range .Values.operatorGroups }}
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: {{ .name }}
+  labels:
+    {{- include "operatorhub.labels" $c | nindent 4 }}
+spec:
+  targetNamespaces:
+  - {{ .targetNamespace | default $c.Release.Namespace }}
+{{ end }}

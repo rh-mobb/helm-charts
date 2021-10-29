@@ -1,0 +1,15 @@
+{{ $c := . }}
+{{ range .Values.catalogSources }}
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: {{ .name }}
+  labels:
+    {{- include "operatorhub.labels" $c | nindent 4 }}
+spec:
+  sourceType: {{ .sourceType }}
+  image: {{ .image }}
+  displayName: {{ .displayName }}
+  publisher: {{ .publisher }}
+---
+{{ end }}

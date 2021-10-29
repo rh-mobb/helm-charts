@@ -1,0 +1,17 @@
+{{ $c := . }}
+{{ range .Values.subscriptions }}
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: {{ .name }}
+  labels:
+    {{- include "operatorhub.labels" $c | nindent 4 }}
+spec:
+  channel: {{ .channel }}
+  name: {{ .name }}
+  installPlanApproval: {{ .installPlanApproval }}
+  source: {{ .source }}
+  sourceNamespace: {{ .sourceNamespace | default $c.Release.Namespace }}
+---
+{{ end }}
