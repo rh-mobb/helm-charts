@@ -5,9 +5,12 @@ apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
   name: {{ .name }}
+  namespace: {{ .namespace | default $c.Release.Namespace }}
   labels:
     {{- include "operatorhub.labels" $c | nindent 4 }}
 spec:
+  {{- if not (eq (.targetNamespace | default "") "all") }}
   targetNamespaces:
   - {{ .targetNamespace | default $c.Release.Namespace }}
+  {{- end }}
 {{ end }}
