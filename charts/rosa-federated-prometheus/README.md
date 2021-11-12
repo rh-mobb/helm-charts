@@ -7,48 +7,62 @@ This Helm chart will deploy a Prometheus server on ROSA and configure it to slur
 * A ROSA cluster
 * Helm CLI
 
-## Set environment variables
+## Prepare Environment
 
-Set the following environment variables
-
-```
-export NAMESPACE=custom-prometheus
-```
-
-## Install Operators
-
-This relies on the Prometheus and Grafana operators, you can deploy them from the OpenShift Console, or via the script found in `./files/pre-install.sh`.
-
-Run one of the following:
+1. Set the following environment variables
 
     ```bash
-    curl -sSL https://raw.githubusercontent.com/rh-mobb/helm-charts/main/charts/rosa-federated-prometheus/files/pre-install.sh | bash
+    export NAMESPACE=federated-metrics
     ```
 
-    or if you've cloned down this repository
+1. Create the namespace
 
     ```bash
-    ./files/pre-install.sh
+    oc new-project $NAMESPACE
     ```
 
-## Deploy the Helm Chart
-
-1. Add This Repository to your Helm
+1. Add the MOBB chart repository to your Helm
 
     ```bash
     helm repo add mobb https://rh-mobb.github.io/helm-charts/
     ```
 
-1. Update your Repository
+1. Update your repositories
 
     ```bash
-    helm repo update && helm dependency update
+    helm repo update
     ```
+
+1. Use the `mobb/operatorhub` chart to deploy the needed operators
+
+    ```bash
+    helm upgrade -n $NAMESPACE federated-metrics-operators \
+      mobb/operatorhub --version 0.1.0 --install \
+      --values https://raw.githubusercontent.com/rh-mobb/helm-charts/main/charts/rosa-federated-prometheus/files/operatorhub.yaml
+    ```
+
+1. Wait until the two operators are running
+
+    ```bash
+    watch kubectl get pods -n $NAMESPACE
+    ```
+
+    ```
+    NAME                                                   READY   STATUS    RESTARTS   AGE
+    grafana-operator-controller-manager-775f8d98c9-822h7   2/2     Running   0          7m33s
+    operatorhubio-dtb2v                                    1/1     Running   0          8m32s
+    prometheus-operator-5cb6844699-t7wfd                   1/1     Running   0          7m29s
+    ```
+
+## Deploy the Helm Chart
+
+
 
 1. Install a Chart
 
     ```bash
-    helm install -n $NAMESPACE monitoring mobb/rosa-federated-prometheus
+    helm upgrade --install -n $NAMESPACE monitoring \
+      mobb/rosa-federated-prometheus
     ```
 
 1. Find the Routes

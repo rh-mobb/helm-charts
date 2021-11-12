@@ -20,6 +20,7 @@ spec:
     auth:
       disable_login_form: False
       disable_signout_menu: False
+      sigv4_auth_enabled: True
     auth.anonymous:
       enabled: True
     security:
@@ -88,6 +89,9 @@ spec:
   serviceAccount:
     annotations:
       serviceaccounts.openshift.io/oauth-redirectreference.primary: '{"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"grafana-route"}}'
+      {{- with .Values.serviceAccountAnnotations }}
+      {{- toYaml . | nindent 6 }}
+      {{- end }}
   dashboardLabelSelector:
     - matchExpressions:
         - { key: "app", operator: In, values: ['grafana'] }

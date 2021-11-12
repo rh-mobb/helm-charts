@@ -10,3 +10,5 @@ oauthProxy:
 dashboards: []
 
 dataSources: []
+
+serviceAccountAnnotations: {}

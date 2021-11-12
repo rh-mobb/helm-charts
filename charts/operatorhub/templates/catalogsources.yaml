@@ -5,6 +5,7 @@ apiVersion: operators.coreos.com/v1alpha1
 kind: CatalogSource
 metadata:
   name: {{ .name }}
+  namespace: {{ .namespace | default $c.Release.Namespace }}
   labels:
     {{- include "operatorhub.labels" $c | nindent 4 }}
 spec:
