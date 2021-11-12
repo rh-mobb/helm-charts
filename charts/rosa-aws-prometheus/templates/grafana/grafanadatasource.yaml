@@ -1,0 +1,20 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDataSource
+metadata:
+  name: {{ include "rosa-aws-prometheus.fullname" . }}
+  labels:
+    {{- include "rosa-aws-prometheus.labels" . | nindent 4 }}
+spec:
+  name: {{ include "rosa-aws-prometheus.fullname" . }}.yaml
+  datasources:
+    - access: proxy
+      editable: true
+      isDefault: true
+      jsonData:
+        timeInterval: 5s
+        tlsSkipVerify: true
+        sigV4Auth: true
+        sigV4Region: {{ .Values.aws.region }}
+      name: prometheus
+      type: prometheus
+      url: 'https://aps-workspaces.{{ .Values.aws.region }}.amazonaws.com/workspaces/{{ .Values.aws.workspaceId }}'
