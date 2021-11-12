@@ -15,6 +15,18 @@ entries:
     version: 0.1.0
   grafana-cr:
   - apiVersion: v2
+    created: "2021-11-12T21:33:26.938177Z"
+    description: A Helm chart for Deploying Grafana instances using the Grafana Operator
+    digest: ff6c3b05edfd4d647a9ff096ec92bc514f7a9c2c0f1fe83490dd9d055bcf683e
+    home: https://github.com/rh-mobb/helm-charts
+    maintainers:
+    - name: paulczar
+    name: grafana-cr
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/grafana-cr-0.1.1/grafana-cr-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
     created: "2021-10-26T21:37:52.816471227Z"
     description: A Helm chart for Deploying Grafana instances using the Grafana Operator
     digest: b53407f085016737f9fd11c57d9cd8eecdef2e96b18527c7313bcbb93116b3f1
@@ -27,6 +39,18 @@ entries:
     - https://github.com/rh-mobb/helm-charts/releases/download/grafana-cr-0.1.0/grafana-cr-0.1.0.tgz
     version: 0.1.0
   operatorhub:
+  - apiVersion: v2
+    created: "2021-11-12T21:33:27.079578683Z"
+    description: A Helm chart for Kubernetes
+    digest: ac2f9ab11c093de480333343284cc61a0aed5f42ec3d1c716d32c93d35ec7e61
+    home: https://github.com/rh-mobb/mobb-charts
+    maintainers:
+    - name: rh-mobb
+    name: operatorhub
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/operatorhub-0.1.1/operatorhub-0.1.1.tgz
+    version: 0.1.1
   - apiVersion: v2
     created: "2021-10-29T18:24:16.784509539Z"
     description: A Helm chart for Kubernetes
@@ -67,6 +91,28 @@ entries:
     - https://github.com/rh-mobb/helm-charts/releases/download/prometheus-cr-0.1.0/prometheus-cr-0.1.0.tgz
     version: 0.1.0
   rosa-federated-prometheus:
+  - apiVersion: v2
+    created: "2021-11-12T21:33:27.281080921Z"
+    dependencies:
+    - name: grafana-cr
+      repository: https://rh-mobb.github.io/helm-charts/
+      version: 0.1.0
+    - name: prometheus-cr
+      repository: https://rh-mobb.github.io/helm-charts/
+      version: 0.2.0
+    - name: alertmanager-cr
+      repository: https://rh-mobb.github.io/helm-charts/
+      version: 0.1.0
+    description: A Helm chart for Kubernetes
+    digest: 0da3c1773906e41030d2547de18fe3fbb59db3b9001416b81eedb17c61698464
+    home: https://github.com/rh-mobb/helm-charts
+    maintainers:
+    - name: paulczar
+    name: rosa-federated-prometheus
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/rosa-federated-prometheus-0.5.2/rosa-federated-prometheus-0.5.2.tgz
+    version: 0.5.2
   - apiVersion: v2
     appVersion: 0.1.0
     created: "2021-10-29T16:25:26.100517615Z"
