@@ -8,7 +8,7 @@ version: 0.1.0
 
 dependencies:
   - name: grafana-cr
-    version: "0.1.2"
+    version: "0.1.1"
     repository: "https://rh-mobb.github.io/helm-charts/"
     # repository: file://../grafana-cr
 
