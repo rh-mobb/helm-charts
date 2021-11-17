@@ -90,6 +90,23 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/prometheus-cr-0.1.0/prometheus-cr-0.1.0.tgz
     version: 0.1.0
+  rosa-aws-prometheus:
+  - apiVersion: v2
+    created: "2021-11-17T21:55:31.155436938Z"
+    dependencies:
+    - name: grafana-cr
+      repository: https://rh-mobb.github.io/helm-charts/
+      version: 0.1.1
+    description: A Helm chart for Kubernetes
+    digest: 4eb9a22ea570d998b7f622d15d00c11347b8a870a04c91aa253ef0c6f121bc07
+    home: https://rh-mobb.github.io/helm-charts/
+    maintainers:
+    - name: rh-mobb
+    name: rosa-aws-prometheus
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/rosa-aws-prometheus-0.1.0/rosa-aws-prometheus-0.1.0.tgz
+    version: 0.1.0
   rosa-federated-prometheus:
   - apiVersion: v2
     created: "2021-11-12T21:33:27.281080921Z"
