@@ -1,7 +1,7 @@
 apiVersion: integreatly.org/v1alpha1
 kind: GrafanaDataSource
 metadata:
-  name: {{ include "rosa-aws-prometheus.fullname" . }}
+  name: {{ include "rosa-aws-prometheus.fullname" . }}-prometheus
   labels:
     {{- include "rosa-aws-prometheus.labels" . | nindent 4 }}
 spec:
@@ -18,3 +18,20 @@ spec:
       name: prometheus
       type: prometheus
       url: 'https://aps-workspaces.{{ .Values.aws.region }}.amazonaws.com/workspaces/{{ .Values.aws.workspaceId }}'
+---
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDataSource
+metadata:
+  name: {{ include "rosa-aws-prometheus.fullname" . }}-cloudwatch
+  labels:
+    {{- include "rosa-aws-prometheus.labels" . | nindent 4 }}
+spec:
+  datasources:
+  - access: proxy
+    editable: false
+    isDefault: false
+    name: cloudwatch
+    type: cloudwatch
+    jsonData:
+      defaultRegion: us-east-2
+  name: cloudwatch.yaml
