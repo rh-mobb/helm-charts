@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "rosa-aws-prometheus.fullname" . }}
+  labels:
+    {{- include "rosa-aws-prometheus.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "rosa-aws-prometheus.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "rosa-aws-prometheus.selectorLabels" . | nindent 8 }}
+    spec:
+      serviceAccount: {{ include "rosa-aws-prometheus.serviceAccountName" . }}
+      containers:
+        - name: aws-sigv4-proxy
+          image: public.ecr.aws/aws-observability/aws-sigv4-proxy:1.0
+          args:
+            - --name
+            - aps
+            - --region
+            - {{ .Values.aws.region }}
+            - --host
+            - aps-workspaces.{{ .Values.aws.region }}.amazonaws.com
+            - --port
+            - :8005
+          ports:
+          - name: aws-sigv4-proxy
+            containerPort: 8005
