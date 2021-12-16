@@ -34,4 +34,5 @@ spec:
     type: cloudwatch
     jsonData:
       defaultRegion: us-east-2
+      authType: default
   name: cloudwatch.yaml
