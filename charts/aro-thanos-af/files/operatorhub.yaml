@@ -1,0 +1,26 @@
+subscriptions:
+  - name: grafana-operator
+    channel: v4
+    installPlanApproval: Automatic
+    source: community-operators
+    sourceNamespace: openshift-marketplace
+  # - name: resource-locker-operator
+  #   channel: alpha
+  #   installPlanApproval: Automatic
+  #   source: community-operators
+  #   sourceNamespace: openshift-marketplace
+  #   namespace: resource-locker-operator
+
+operatorGroups:
+  - name: federated-metrics
+    targetNamespace: ~
+  # - name: resource-locker
+  #   namespace: resource-locker-operator
+  #   targetNamespace: resource-locker-operator
+
+catalogSources:
+  - name: community-operators
+    sourceType: grpc
+    image: quay.io/operator-framework/upstream-community-operators:latest
+    displayName: Community Operators
+    publisher: OperatorHub.io
