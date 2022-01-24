@@ -13,6 +13,23 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/alertmanager-cr-0.1.0/alertmanager-cr-0.1.0.tgz
     version: 0.1.0
+  aro-thanos-af:
+  - apiVersion: v2
+    created: "2022-01-24T18:19:21.946176021Z"
+    dependencies:
+    - name: grafana-cr
+      repository: https://rh-mobb.github.io/helm-charts/
+      version: 0.1.1
+    description: A Helm chart for Kubernetes
+    digest: a306aa8bfcc3c22a1a0f6bc6bbb0acd8e63fc6072864930d7d6891d77e6d92b2
+    home: https://rh-mobb.github.io/helm-charts/
+    maintainers:
+    - name: rh-mobb
+    name: aro-thanos-af
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/aro-thanos-af-0.1.0/aro-thanos-af-0.1.0.tgz
+    version: 0.1.0
   grafana-cr:
   - apiVersion: v2
     created: "2021-11-12T21:33:26.938177Z"
