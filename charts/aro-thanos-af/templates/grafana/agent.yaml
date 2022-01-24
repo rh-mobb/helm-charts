@@ -1,0 +1,208 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ include "aro-thanos-af.fullname" . }}-grafana-agent
+  labels:
+    {{- include "aro-thanos-af.labels" . | nindent 4 }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "aro-thanos-af.fullname" . }}-grafana-agent
+  labels:
+    {{- include "aro-thanos-af.labels" . | nindent 4 }}
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - nodes
+  - nodes/proxy
+  - services
+  - endpoints
+  - pods
+  - namespaces
+  verbs:
+  - get
+  - list
+  - watch
+- nonResourceURLs:
+  - /metrics
+  verbs:
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "aro-thanos-af.fullname" . }}-grafana-agent
+  labels:
+    {{- include "aro-thanos-af.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ include "aro-thanos-af.fullname" . }}-grafana-agent
+subjects:
+- kind: ServiceAccount
+  name: {{ include "aro-thanos-af.fullname" . }}-grafana-agent
+  namespace: {{ .Release.Namespace }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "aro-thanos-af.fullname" . }}-grafana-agent
+  labels:
+    {{- include "aro-thanos-af.labels" . | nindent 4 }}
+spec:
+  minReadySeconds: 10
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      name: {{ include "aro-thanos-af.fullname" . }}-grafana-agent
+  template:
+    metadata:
+      labels:
+        name: {{ include "aro-thanos-af.fullname" . }}-grafana-agent
+    spec:
+      containers:
+      - args:
+        - -config.file=/etc/agent/agent.yaml
+        command:
+        - /bin/agent
+        env:
+        - name: HOSTNAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        image: grafana/agent:v0.20.0
+        imagePullPolicy: IfNotPresent
+        name: agent
+        ports:
+        - containerPort: 12345
+          name: http-metrics
+        volumeMounts:
+        - mountPath: /etc/agent
+          name: grafana-agent
+      serviceAccount: {{ include "aro-thanos-af.fullname" . }}-grafana-agent
+      volumes:
+      - configMap:
+          name: {{ include "aro-thanos-af.fullname" . }}-grafana-agent
+        name: grafana-agent
+---
+kind: ConfigMap
+metadata:
+  name: {{ include "aro-thanos-af.fullname" . }}-grafana-agent
+  labels:
+    {{- include "aro-thanos-af.labels" . | nindent 4 }}
+apiVersion: v1
+data:
+  agent.yaml: |
+    server:
+      http_listen_port: 12345
+    prometheus:
+      wal_directory: /tmp/grafana-agent-wal
+      global:
+        scrape_interval: 15s
+        external_labels:
+          cluster: {{ .Values.rosa.clusterName }}
+      configs:
+        - name: integrations
+          remote_write:
+            - url: "http://thanos-receive.{{ .Release.Namespace }}.svc.cluster.local:9091/api/v1/receive"
+              queue_config:
+                max_samples_per_send: 1000
+                max_shards: 200
+                capacity: 2500
+          scrape_configs:
+            - job_name: cluster-monitoring
+              honor_labels: true
+              params:
+                'match[]':
+                - '{job!=""}'
+              scrape_interval: 30s
+              scrape_timeout: 30s
+              metrics_path: /federate
+              scheme: https
+              kubernetes_sd_configs:
+              - role: endpoints
+                namespaces:
+                  names:
+                  - openshift-monitoring
+              bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+              tls_config:
+                insecure_skip_verify: true
+              relabel_configs:
+              - source_labels: [job]
+                separator: ;
+                regex: (.*)
+                target_label: __tmp_prometheus_job_name
+                replacement: $1
+                action: replace
+              - source_labels: [__meta_kubernetes_service_label_prometheus]
+                separator: ;
+                regex: k8s
+                replacement: $1
+                action: keep
+              - source_labels: [__meta_kubernetes_endpoint_port_name]
+                separator: ;
+                regex: web
+                replacement: $1
+                action: keep
+              - source_labels: [__meta_kubernetes_endpoint_address_target_kind, __meta_kubernetes_endpoint_address_target_name]
+                separator: ;
+                regex: Node;(.*)
+                target_label: node
+                replacement: ${1}
+                action: replace
+              - source_labels: [__meta_kubernetes_endpoint_address_target_kind, __meta_kubernetes_endpoint_address_target_name]
+                separator: ;
+                regex: Pod;(.*)
+                target_label: pod
+                replacement: ${1}
+                action: replace
+              - source_labels: [__meta_kubernetes_namespace]
+                separator: ;
+                regex: (.*)
+                target_label: namespace
+                replacement: $1
+                action: replace
+              - source_labels: [__meta_kubernetes_service_name]
+                separator: ;
+                regex: (.*)
+                target_label: service
+                replacement: $1
+                action: replace
+              - source_labels: [__meta_kubernetes_pod_name]
+                separator: ;
+                regex: (.*)
+                target_label: pod
+                replacement: $1
+                action: replace
+              - source_labels: [__meta_kubernetes_pod_container_name]
+                separator: ;
+                regex: (.*)
+                target_label: container
+                replacement: $1
+                action: replace
+              - source_labels: [__meta_kubernetes_service_name]
+                separator: ;
+                regex: (.*)
+                target_label: job
+                replacement: ${1}
+                action: replace
+              - separator: ;
+                regex: (.*)
+                target_label: endpoint
+                replacement: web
+                action: replace
+              - source_labels: [__address__]
+                separator: ;
+                regex: (.*)
+                modulus: 1
+                target_label: __tmp_hash
+                replacement: $1
+                action: hashmod
+              - source_labels: [__tmp_hash]
+                separator: ;
+                regex: "0"
+                replacement: $1
+                action: keep

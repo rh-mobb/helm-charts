@@ -1,0 +1,28 @@
+# Default values for rosa-aws-prometheus.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+fullnameOverride: "aro-thanos-af"
+
+replicaCount: 3
+
+rosa:
+  clusterName: "my-cluster"
+
+aro:
+  storageAccount:
+  storageAccountKey:
+  storageContainer:
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  # name: "aro-prometheus-proxy"
+
+# grafana-cr:
+#   basicAuthUsername: "admin"
+#   basicAuthPassword: "password"
+  # serviceAccountAnnotations: {}
