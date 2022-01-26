@@ -1,0 +1,54 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ include "aro-clf-am.fullname" . }}
+  labels:
+    {{- include "aro-clf-am.labels" . | nindent 4 }}
+    kubernetes.io/cluster-service: "true"
+spec:
+  selector:
+    matchLabels:
+      {{- include "aro-clf-am.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "2020"
+        prometheus.io/path: /api/v1/metrics/prometheus
+      {{- end }}
+      labels:
+        {{- include "aro-clf-am.selectorLabels" . | nindent 8 }}
+        kubernetes.io/cluster-service: "true"
+    spec:
+      serviceAccountName: {{ include "aro-clf-am.fullname" . }}
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: fluent-bit
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+          - containerPort: 2020
+          - containerPort: 24224
+        env:
+        - name: WorkspaceId
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "aro-clf-am.fullname" . }}
+              key: WorkspaceId
+        - name: SharedKey
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "aro-clf-am.fullname" . }}
+              key: SharedKey
+        - name: LogName
+          value: logapp
+        volumeMounts:
+          - name: fluent-bit-etc
+            mountPath: /fluent-bit/etc/
+      volumes:
+      - name: fluent-bit-etc
+        configMap:
+            name: {{ include "aro-clf-am.fullname" . }}-config
