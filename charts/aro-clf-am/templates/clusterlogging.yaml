@@ -1,0 +1,19 @@
+apiVersion: logging.openshift.io/v1
+kind: ClusterLogging
+metadata:
+  name: instance
+  namespace: openshift-logging
+spec:
+  collection:
+    logs:
+      fluentd: {}
+      type: fluentd
+  logStore:
+    elasticsearch:
+      nodeCount: 0
+    type: elasticsearch
+  managementState: Managed
+  visualization:
+    kibana:
+      replicas: 0
+    type: kibana
