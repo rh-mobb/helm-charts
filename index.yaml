@@ -13,6 +13,19 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/alertmanager-cr-0.1.0/alertmanager-cr-0.1.0.tgz
     version: 0.1.0
+  aro-clf-am:
+  - apiVersion: v2
+    created: "2022-01-26T22:51:18.050532172Z"
+    description: A Helm chart for Kubernetes
+    digest: 9e3716d5455db0c9d3addb2d79798e38c437aedd1a908b93e9bb716502463749
+    home: https://rh-mobb.github.io/helm-charts/
+    maintainers:
+    - name: rh-mobb
+    name: aro-clf-am
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/aro-clf-am-0.1.0/aro-clf-am-0.1.0.tgz
+    version: 0.1.0
   aro-thanos-af:
   - apiVersion: v2
     created: "2022-01-26T17:18:17.332064099Z"
