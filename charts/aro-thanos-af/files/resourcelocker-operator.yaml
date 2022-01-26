@@ -1,0 +1,20 @@
+subscriptions:
+  - name: resource-locker-operator
+    channel: alpha
+    installPlanApproval: Automatic
+    source: ocp-community-operators
+    sourceNamespace: ~
+    namespace: resource-locker-operator
+
+operatorGroups:
+  - name: resource-locker
+    namespace: resource-locker-operator
+    targetNamespace: all
+
+catalogSources:
+  - name: ocp-community-operators
+    sourceType: grpc
+    image: registry.redhat.io/redhat/community-operator-index:latest
+    displayName: OCP Community Operators
+    publisher: OperatorHub.io
+    namespace: resource-locker-operator
