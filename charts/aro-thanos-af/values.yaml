@@ -26,3 +26,5 @@ serviceAccount:
 #   basicAuthUsername: "admin"
 #   basicAuthPassword: "password"
   # serviceAccountAnnotations: {}
+
+enableUserWorkloadMetrics: false

@@ -1,0 +1,24 @@
+subscriptions:
+  - name: grafana-operator
+    channel: v4
+    installPlanApproval: Automatic
+    source: ocp-community-operators
+    sourceNamespace: ~
+    startingCSV: grafana-operator.v4.1.1
+
+operatorGroups:
+  - name: aro-thanos-af
+    targetNamespace: ~
+
+# catalogSources:
+#   - name: upstream-community-operators
+#     sourceType: grpc
+#     image: quay.io/operator-framework/upstream-community-operators:latest
+#     displayName: Upstream Community Operators
+#     publisher: OperatorHub.io
+catalogSources:
+  - name: ocp-community-operators
+    sourceType: grpc
+    image: registry.redhat.io/redhat/community-operator-index:latest
+    displayName: OCP Community Operators
+    publisher: OperatorHub.io

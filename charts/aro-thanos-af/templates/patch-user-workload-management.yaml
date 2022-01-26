@@ -1,0 +1,144 @@
+{{ if .Values.enableUserWorkloadMetrics }}
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: ResourceLocker
+metadata:
+  name: {{ include "aro-thanos-af.fullname" . }}-uwm
+  labels:
+    {{- include "aro-thanos-af.labels" . | nindent 4 }}
+spec:
+  serviceAccountRef:
+    name: {{ include "aro-thanos-af.serviceAccountName" . }}-rl-uwm
+  patches:
+  - targetObjectRef:
+      apiVersion: v1
+      kind: ConfigMap
+      name: cluster-monitoring-config
+      namespace: openshift-monitoring
+    patchTemplate: |
+        data:
+          config.yaml: |
+            enableUserWorkload: true
+    patchType: application/strategic-merge-patch+json
+    # sourceObjectRefs:
+    # - apiVersion: v1
+    #   kind: Namespace
+    #   name: openshift-monitoring
+    # - apiVersion: v1
+    #   kind: ServiceAccount
+    #   name: {{ include "aro-thanos-af.serviceAccountName" . }}-rl-enable-uwm
+    #   namespace: resource-locker-test
+    id: enable-user-workload-metrics
+---
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: ResourceLocker
+metadata:
+  name: {{ include "aro-thanos-af.serviceAccountName" . }}-rl-uwm-config
+spec:
+  resources:
+    - excludedPaths:
+        - .metadata
+        - .status
+        - .spec.replicas
+      object:
+        apiVersion: v1
+        kind: ConfigMap
+        metadata:
+          name: user-workload-monitoring-config
+          namespace: openshift-user-workload-monitoring
+        data:
+          config.yaml: |
+            kubernetes:
+              remoteWrite:
+                - url: "http://thanos-receive.{{ .Release.Namespace }}.svc.cluster.local:9091/api/v1/receive"
+  serviceAccountRef:
+    name: {{ include "aro-thanos-af.serviceAccountName" . }}-rl-uwm
+# ---
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: user-workload-monitoring-config
+#   namespace: openshift-user-workload-monitoring
+# data:
+#   config.yaml: |
+#     kubernetes:
+#       remoteWrite:
+#         - url: "http://thanos-receive.{{ .Release.Namespace }}.svc.cluster.local:9091/api/v1/receive"
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ include "aro-thanos-af.serviceAccountName" . }}-rl-uwm
+  labels:
+    {{- include "aro-thanos-af.labels" . | nindent 4 }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ include "aro-thanos-af.fullname" . }}-rl-uwm
+  namespace: openshift-user-workload-monitoring
+  labels:
+    {{- include "aro-thanos-af.labels" . | nindent 4 }}
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - list
+  - get
+  - watch
+  - create
+  - update
+  - patch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "aro-thanos-af.fullname" . }}-rl-cm
+  labels:
+    {{- include "aro-thanos-af.labels" . | nindent 4 }}
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - list
+  - get
+  - watch
+  - create
+  - update
+  - patch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "aro-thanos-af.fullname" . }}-rl-uwm
+  namespace: openshift-user-workload-monitoring
+  labels:
+    {{- include "aro-thanos-af.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ include "aro-thanos-af.fullname" . }}-rl-cm
+subjects:
+- kind: ServiceAccount
+  name: {{ include "aro-thanos-af.serviceAccountName" . }}-rl-uwm
+  namespace: {{ .Release.Namespace }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "aro-thanos-af.fullname" . }}-rl-uwm
+  namespace: openshift-monitoring
+  labels:
+    {{- include "aro-thanos-af.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ include "aro-thanos-af.fullname" . }}-rl-cm
+subjects:
+- kind: ServiceAccount
+  name: {{ include "aro-thanos-af.serviceAccountName" . }}-rl-uwm
+  namespace: {{ .Release.Namespace }}
+{{ end }}
