@@ -25,4 +25,4 @@ spec:
     - openshift-monitoring
   selector:
     matchLabels:
-      prometheus: "k8s"
+      app.kubernetes.io/instance: k8s
