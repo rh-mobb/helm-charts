@@ -1,0 +1,6 @@
+# location: eastus1
+
+# Standard_NC4as_T4_v3, Standard_NC8as_T4_v3, Standard_NC16as_T4_v3, Standard_NC464as_T4_v3
+vmSize: Standard_NC4as_T4_v3
+
+replicas: 1
