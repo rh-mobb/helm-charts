@@ -26,6 +26,19 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/aro-clf-am-0.1.0/aro-clf-am-0.1.0.tgz
     version: 0.1.0
+  aro-gpu:
+  - apiVersion: v2
+    created: "2022-07-13T22:01:35.301859004Z"
+    description: A Helm chart for Deploying GPU-enabled machinesets in Azure.
+    digest: b4483480c6c0fdaf8fe7a33ea1f6e561236c27ec880af7919950d18f1392594b
+    home: https://github.com/rh-mobb/helm-charts
+    maintainers:
+    - name: paulczar
+    name: aro-gpu
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/aro-gpu-0.1.0/aro-gpu-0.1.0.tgz
+    version: 0.1.0
   aro-thanos-af:
   - apiVersion: v2
     created: "2022-01-26T17:18:17.332064099Z"
