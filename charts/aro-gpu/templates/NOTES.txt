@@ -1,0 +1,4 @@
+{{- $cluster := lookup "aro.openshift.io/v1alpha1" "Cluster" "" "cluster" -}}
+{{- if not (empty $cluster.spec) -}}
+Could not proceed as chart does not support tempate or --dry-run.
+{{- end -}}

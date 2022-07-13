@@ -1,0 +1,60 @@
+{{- $cluster := lookup "aro.openshift.io/v1alpha1" "Cluster" "" "cluster" -}}
+{{- if not (empty $cluster.spec) -}}
+{{- $machineSetName := printf "%s-worker-%s" $cluster.spec.infraId $cluster.spec.location -}}
+{{- $machineSetName1 := printf "%s1" $machineSetName -}}
+{{- $machineSet := default (lookup "machine.openshift.io/v1beta1" "MachineSet" "openshift-machine-api" $machineSetName) (lookup "machine.openshift.io/v1beta1" "MachineSet" "openshift-machine-api" $machineSetName1) -}}
+{{- $machineSetSpec := $machineSet.spec.template.spec.providerSpec.value -}}
+apiVersion: machine.openshift.io/v1beta1
+kind: MachineSet
+metadata:
+  annotations:
+    machine.openshift.io/GPU: "0"
+    machine.openshift.io/memoryMb: "16384"
+    machine.openshift.io/vCPU: "4"
+  labels:
+    machine.openshift.io/cluster-api-cluster: {{ $cluster.spec.infraId }}
+    machine.openshift.io/cluster-api-machine-role: worker
+    machine.openshift.io/cluster-api-machine-type: worker
+  name: {{ $cluster.spec.infraId }}-{{ include "aro-gpu.fullname" . }}-{{ $cluster.spec.location }}
+  namespace: openshift-machine-api
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      machine.openshift.io/cluster-api-cluster: {{ $cluster.spec.infraId }}
+      machine.openshift.io/cluster-api-machineset: {{ $cluster.spec.infraId }}-{{ include "aro-gpu.fullname" . }}-{{ $cluster.spec.location }}
+  template:
+    metadata:
+      labels:
+        machine.openshift.io/cluster-api-cluster: {{ $cluster.spec.infraId }}
+        machine.openshift.io/cluster-api-machine-role: worker
+        machine.openshift.io/cluster-api-machine-type: worker
+        machine.openshift.io/cluster-api-machineset: {{ $cluster.spec.infraId }}-{{ include "aro-gpu.fullname" . }}-{{ $cluster.spec.location }}
+    spec:
+      lifecycleHooks: {}
+      metadata: {}
+      providerSpec:
+        value:
+          apiVersion: machine.openshift.io/v1beta1
+          credentialsSecret:
+            name: azure-cloud-credentials
+            namespace: openshift-machine-api
+          image: {{ $machineSetSpec.image | toYaml | nindent 12 }}
+          kind: AzureMachineProviderSpec
+          location: {{ $machineSetSpec.location}}
+          metadata:
+            creationTimestamp: null
+          networkResourceGroup: {{ $machineSetSpec.networkResourceGroup }}
+          osDisk: {{ $machineSetSpec.osDisk | toYaml | nindent 12 }}
+          publicIP: {{ $machineSetSpec.publicIP }}
+          publicLoadBalancer: {{ $machineSetSpec.publicLoadBalancer }}
+          resourceGroup: {{ $machineSetSpec.resourceGroup }}
+          subnet: {{ $machineSetSpec.subnet }}
+          userDataSecret:
+            name: worker-user-data
+          vmSize: {{ .Values.vmSize }}
+          vnet: {{ $machineSetSpec.vnet }}
+          {{ if $machineSetSpec.zone }}
+          zone: "1"
+          {{ end }}
+{{- end }}
