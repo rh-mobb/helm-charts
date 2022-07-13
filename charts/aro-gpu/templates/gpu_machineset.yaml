@@ -1,7 +1,5 @@
 {{- $cluster := lookup "aro.openshift.io/v1alpha1" "Cluster" "" "cluster" -}}
-{{- if empty $cluster.spec -}}
-{{- fail "Could look look up cluster values. This chart does not support template or --dry-run arguments" -}}
-{{- end }}
+{{- if not (empty $cluster.spec) -}}
 {{- $machineSetName := printf "%s-worker-%s" $cluster.spec.infraId $cluster.spec.location -}}
 {{- $machineSetName1 := printf "%s1" $machineSetName -}}
 {{- $machineSet := default (lookup "machine.openshift.io/v1beta1" "MachineSet" "openshift-machine-api" $machineSetName) (lookup "machine.openshift.io/v1beta1" "MachineSet" "openshift-machine-api" $machineSetName1) -}}
@@ -59,4 +57,4 @@ spec:
           {{ if $machineSetSpec.zone }}
           zone: "1"
           {{ end }}
-
+{{- end }}
