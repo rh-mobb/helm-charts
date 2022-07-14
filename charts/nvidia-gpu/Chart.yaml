@@ -1,0 +1,9 @@
+apiVersion: v2
+name: nvidia-gpu
+description: A Helm chart for Kubernetes
+maintainers:
+  - name: paulczar
+home: https://github.com/rh-mobb/helm-charts
+type: application
+version: 0.1.0
+appVersion: "1.16.0"
