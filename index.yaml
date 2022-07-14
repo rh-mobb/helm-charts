@@ -51,6 +51,19 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/aro-gpu-0.1.0/aro-gpu-0.1.0.tgz
     version: 0.1.0
+  aro-pull-secret:
+  - apiVersion: v2
+    created: "2022-07-14T20:30:43.941984181Z"
+    description: A Helm chart configuring a pull secret for the Aro cluster.
+    digest: a6a9d6c8bc49a19d90e6cf5f015f0440b5c3e90f069bc31bf7cbf715f2f05df0
+    home: https://github.com/rh-mobb/helm-charts
+    maintainers:
+    - name: paulczar
+    name: aro-pull-secret
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/aro-pull-secret-0.1.0/aro-pull-secret-0.1.0.tgz
+    version: 0.1.0
   aro-thanos-af:
   - apiVersion: v2
     created: "2022-01-26T17:18:17.332064099Z"
