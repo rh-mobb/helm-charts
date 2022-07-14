@@ -122,6 +122,20 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/grafana-cr-0.1.0/grafana-cr-0.1.0.tgz
     version: 0.1.0
+  nvidia-gpu:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-07-14T21:20:36.742750758Z"
+    description: A Helm chart for Kubernetes
+    digest: 19fed7760f21ba8ef043e6a7b1345f6b3aed29f2ae077d509673d426220e77ff
+    home: https://github.com/rh-mobb/helm-charts
+    maintainers:
+    - name: paulczar
+    name: nvidia-gpu
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/nvidia-gpu-0.1.0/nvidia-gpu-0.1.0.tgz
+    version: 0.1.0
   operatorhub:
   - apiVersion: v2
     created: "2021-11-12T21:33:27.079578683Z"
