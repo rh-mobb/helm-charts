@@ -2,7 +2,7 @@ apiVersion: v2
 name: aro-gpu
 description: A Helm chart for Deploying GPU-enabled machinesets in Azure.
 type: application
-version: 0.1.0
+version: 0.1.1
 maintainers:
   - name: paulczar
 home: https://github.com/rh-mobb/helm-charts
