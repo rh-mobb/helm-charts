@@ -1,0 +1,21 @@
+subscriptions:
+  - name: gpu-operator-certified
+    channel: v1.11
+    installPlanApproval: Automatic
+    source: certified-operators
+    sourceNamespace: openshift-marketplace
+    namespace: nvidia-gpu-operator
+  - name: nfd
+    channel: stable
+    installPlanApproval: Automatic
+    source: redhat-operators
+    sourceNamespace: openshift-marketplace
+    namespace: openshift-nfd
+
+operatorGroups:
+  - name: nvidia-gpu-operator-group
+    namespace: nvidia-gpu-operator
+    targetNamespace: nvidia-gpu-operator
+  - name: openshift-nfd
+    namespace: openshift-nfd
+    targetNamespace: ~
