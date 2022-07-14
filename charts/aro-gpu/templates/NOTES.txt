@@ -1,4 +1,10 @@
 {{- $cluster := lookup "aro.openshift.io/v1alpha1" "Cluster" "" "cluster" -}}
-{{- if not (empty $cluster.spec) -}}
+{{- if (empty $cluster.spec) -}}
 Could not proceed as chart does not support tempate or --dry-run.
+{{- else }}
+Check that the new MachineSet is creating:
+  $ oc get machineset {{ $cluster.spec.infraId }}-{{ include "aro-gpu.fullname" . }}-{{ $cluster.spec.location }}
+
+Check on the Created machines:
+  $ oc get machines oc get machines --selector "machine.openshift.io/cluster-api-machineset={{ $cluster.spec.infraId }}-{{ include "aro-gpu.fullname" . }}-{{ $cluster.spec.location }}
 {{- end -}}

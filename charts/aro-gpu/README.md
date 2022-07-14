@@ -29,8 +29,8 @@ This Helm chart will deploy GPU nodes on ARO clusters.
 1. Install a Chart
 
     ```bash
-    helm upgrade --install -n $NAMESPACE openshift-cluster-api \
-      mobb/aro-gpu
+    helm upgrade --install -n $NAMESPACE openshift-machine-api \
+      gpu mobb/aro-gpu
     ```
 
 1. Wait for the new GPU nodes to be available
