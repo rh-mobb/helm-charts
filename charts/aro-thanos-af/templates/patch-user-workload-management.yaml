@@ -47,7 +47,7 @@ spec:
           namespace: openshift-user-workload-monitoring
         data:
           config.yaml: |
-            kubernetes:
+            prometheus:
               remoteWrite:
                 - url: "http://thanos-receive.{{ .Release.Namespace }}.svc.cluster.local:9091/api/v1/receive"
   serviceAccountRef:
@@ -60,7 +60,7 @@ spec:
 #   namespace: openshift-user-workload-monitoring
 # data:
 #   config.yaml: |
-#     kubernetes:
+#     prometheus:
 #       remoteWrite:
 #         - url: "http://thanos-receive.{{ .Release.Namespace }}.svc.cluster.local:9091/api/v1/receive"
 ---
