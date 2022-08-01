@@ -27,6 +27,6 @@ This Helm chart will deploy the Red Hat DBAAS Operator.
 1. Use helm to deploy the DBAAS Operator
 
    ```bash
-helm upgrade --install -n redhat-dbaas-operator dbaas-operator \
+   helm upgrade --install -n redhat-dbaas-operator dbaas-operator \
       --create-namespace mobb/redhat-dbaas-operator
    ```
