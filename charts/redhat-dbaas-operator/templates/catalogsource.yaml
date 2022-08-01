@@ -1,0 +1,11 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: {{ include "redhat-dbaas-operator.fullname" . }}
+  namespace: openshift-marketplace
+  labels:
+    {{- include "redhat-dbaas-operator.labels" . | nindent 4 }}
+spec:
+  sourceType: grpc
+  image: {{ .Values.catalogSource.image }}
+  displayName: DBaaS Operator
