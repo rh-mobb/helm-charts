@@ -206,6 +206,18 @@ entries:
     version: 0.1.0
   redhat-dbaas-operator:
   - apiVersion: v2
+    created: "2022-08-01T20:17:45.612208234Z"
+    description: A Helm chart for Kubernetes
+    digest: c94779c4c333f16d5c5f3e251db588cb2a1285560fcec66aa957f96aa359c84d
+    home: https://rh-mobb.github.io/helm-charts/
+    maintainers:
+    - name: rh-mobb
+    name: redhat-dbaas-operator
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/redhat-dbaas-operator-0.1.1/redhat-dbaas-operator-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
     created: "2022-08-01T20:14:45.013206988Z"
     description: A Helm chart for Kubernetes
     digest: d746f5defbe2e77b6867cbd3849f93c5dc27daa5d4f19f83fc0ad4b4c1ecf906
