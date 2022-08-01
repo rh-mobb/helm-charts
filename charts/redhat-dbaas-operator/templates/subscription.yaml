@@ -1,0 +1,14 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  # namespace: openshift-dbaas-operator
+  name: {{ include "redhat-dbaas-operator.fullname" . }}
+  labels:
+    {{- include "redhat-dbaas-operator.labels" . | nindent 4 }}
+spec:
+  channel: alpha
+  installPlanApproval: Automatic
+  name: dbaas-operator
+  source: {{ include "redhat-dbaas-operator.fullname" . }}
+  sourceNamespace: openshift-marketplace
+  startingCSV: {{ .Values.subscription.startingCSV }}
