@@ -204,6 +204,19 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/prometheus-cr-0.1.0/prometheus-cr-0.1.0.tgz
     version: 0.1.0
+  redhat-dbaas-operator:
+  - apiVersion: v2
+    created: "2022-08-01T20:14:45.013206988Z"
+    description: A Helm chart for Kubernetes
+    digest: d746f5defbe2e77b6867cbd3849f93c5dc27daa5d4f19f83fc0ad4b4c1ecf906
+    home: https://rh-mobb.github.io/helm-charts/
+    maintainers:
+    - name: rh-mobb
+    name: redhat-dbaas-operator
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/redhat-dbaas-operator-0.1.0/redhat-dbaas-operator-0.1.0.tgz
+    version: 0.1.0
   rosa-aws-prometheus:
   - apiVersion: v2
     created: "2021-12-16T22:44:12.800720441Z"
