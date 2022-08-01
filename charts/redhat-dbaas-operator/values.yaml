@@ -3,4 +3,3 @@ catalogSource:
 
 subscription:
   startingCSV: dbaas-operator.v0.2.0
-
