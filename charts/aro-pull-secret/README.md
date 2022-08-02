@@ -1,12 +1,11 @@
-# Helm Chart to set up GPU nodes on ARO clusters
+# Helm Chart to update the Pull Secret in ARO clusters
 
-This Helm chart will deploy GPU nodes on ARO clusters.
+This Helm chart will update the pull-secret of the ARO clusters.
 
 ## Prerequisites
 
 * An ARO 4.10 cluster
 * Helm CLI
-* [Azure GPU Quota](https://mobb.ninja/docs/aro/gpu/)
 
 ## Prepare Environment
 
@@ -24,7 +23,7 @@ This Helm chart will deploy GPU nodes on ARO clusters.
 
 ## Deploy the Helm Chart
 
-1. Before Deploying the chart you need it to adopt the existing pull secret
+1. Before deploying the chart you need it to adopt the existing pull secret
 
    ```bash
    kubectl -n openshift-config annotate secret \
