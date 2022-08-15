@@ -1,6 +1,5 @@
-# Helm Chart to set up GPU nodes on ARO clusters
+# Helm Chart to set up a Red Hat pull secret for your ARO cluster
 
-This Helm chart will deploy GPU nodes on ARO clusters.
 
 ## Prerequisites
 
