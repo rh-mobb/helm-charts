@@ -5,7 +5,6 @@
 
 * An ARO 4.10 cluster
 * Helm CLI
-* [Azure GPU Quota](https://mobb.ninja/docs/aro/gpu/)
 
 ## Prepare Environment
 
