@@ -1,0 +1,44 @@
+# location: eastus1
+
+# see https://docs.microsoft.com/en-us/azure/openshift/support-policies-v4#supported-virtual-machine-sizes
+vmSize: Standard_D4s_v3
+
+# zones: ['1','2','3']
+zoneCount: 3
+replicasPerZone: 1
+
+# default will create infra nodes
+machineRole: "infra"
+
+machineLabels:
+  node-role.kubernetes.io/infra: ""
+
+machineTaints:
+  - key: node-role.kubernetes.io/infra
+    effect: NoSchedule
+
+## Ignore these unless using `helm template` as they're auto-discovered.
+clusterSpec:
+  infraId: aro-cluster-hsmtw
+  location: eastus
+
+machineSetSpec:
+  image:
+    offer: aro4
+    publisher: azureopenshift
+    resourceID: ""
+    sku: aro_410
+    version: 410.84.20220125
+  location: eastus
+  networkResourceGroup: aro-cluster-rg
+  osDisk:
+    diskSettings: {}
+    diskSizeGB: 128
+    managedDisk:
+      storageAccountType: Premium_LRS
+    osType: Linux
+  publicIP: false
+  publicLoadBalancer: aro-cluster-hsmtw
+  resourceGroup: aro-cddajpe1
+  subnet: aro-cluster-machine-subnet
+  vnet: aro-cluster-vnet
