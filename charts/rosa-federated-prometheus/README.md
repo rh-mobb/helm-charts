@@ -37,7 +37,7 @@ This Helm chart will deploy a Prometheus server on ROSA and configure it to slur
 
     ```bash
     helm upgrade -n $NAMESPACE federated-metrics-operators \
-      mobb/operatorhub --version 0.1.0 --install \
+      mobb/operatorhub --install \
       --values https://raw.githubusercontent.com/rh-mobb/helm-charts/main/charts/rosa-federated-prometheus/files/operatorhub.yaml
     ```
 

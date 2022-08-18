@@ -2,8 +2,8 @@ subscriptions:
   - name: grafana-operator
     channel: v4
     installPlanApproval: Automatic
-    source: operatorhubio
-    sourceNamespace: ~
+    source: community-operators
+    sourceNamespace: openshift-marketplace
   - name: prometheus-operator
     channel: beta
     installPlanApproval: Automatic
@@ -15,9 +15,9 @@ operatorGroups:
   - name: federated-prometheus
     targetNamespace: ~
 
-catalogSources:
-  - name: operatorhubio
-    sourceType: grpc
-    image: quay.io/operator-framework/upstream-community-operators:latest
-    displayName: Community Operators
-    publisher: OperatorHub.io
+catalogSources: []
+#   - name: operatorhubio
+#     sourceType: grpc
+#     image: quay.io/operator-framework/upstream-community-operators:latest
+#     displayName: Community Operators
+#     publisher: OperatorHub.io
