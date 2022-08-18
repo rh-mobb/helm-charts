@@ -166,6 +166,18 @@ entries:
     version: 0.1.0
   operatorhub:
   - apiVersion: v2
+    created: "2022-08-18T20:17:41.625157655Z"
+    description: A Helm chart for Kubernetes
+    digest: ebb6430726ec3368b15a3d7cb9cd951cafc70073760dde8b1f87628ac6e2ccca
+    home: https://github.com/rh-mobb/mobb-charts
+    maintainers:
+    - name: rh-mobb
+    name: operatorhub
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/operatorhub-0.1.2/operatorhub-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
     created: "2021-11-12T21:33:27.079578683Z"
     description: A Helm chart for Kubernetes
     digest: ac2f9ab11c093de480333343284cc61a0aed5f42ec3d1c716d32c93d35ec7e61
@@ -307,6 +319,28 @@ entries:
     - https://github.com/rh-mobb/helm-charts/releases/download/rosa-aws-prometheus-0.1.0/rosa-aws-prometheus-0.1.0.tgz
     version: 0.1.0
   rosa-federated-prometheus:
+  - apiVersion: v2
+    created: "2022-08-18T20:17:41.768783282Z"
+    dependencies:
+    - name: grafana-cr
+      repository: https://rh-mobb.github.io/helm-charts/
+      version: 0.1.0
+    - name: prometheus-cr
+      repository: https://rh-mobb.github.io/helm-charts/
+      version: 0.2.0
+    - name: alertmanager-cr
+      repository: https://rh-mobb.github.io/helm-charts/
+      version: 0.1.0
+    description: A Helm chart for Kubernetes
+    digest: 385fb8db24ff4ffed249b53a7c0d8cb098682884319e8bb488dd5d624b587cef
+    home: https://github.com/rh-mobb/helm-charts
+    maintainers:
+    - name: paulczar
+    name: rosa-federated-prometheus
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/rosa-federated-prometheus-0.5.4/rosa-federated-prometheus-0.5.4.tgz
+    version: 0.5.4
   - apiVersion: v2
     created: "2022-06-07T20:51:00.99221271Z"
     dependencies:
