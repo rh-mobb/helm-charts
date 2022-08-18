@@ -6,15 +6,15 @@ subscriptions:
     channel: v4
     installPlanApproval: Automatic
     source: operatorhubio
-    sourceNamespace: ~
+    sourceNamespace: openshift-marketplace
 
 operatorGroups:
   - name: operatorhubio
     targetNamespace: ~
 
-catalogSources:
-  - name: operatorhubio
-    sourceType: grpc
-    image: quay.io/operator-framework/upstream-community-operators:latest
-    displayName: Community Operators
-    publisher: OperatorHub.io
+catalogSources: []
+  # - name: operatorhubio
+  #   sourceType: grpc
+  #   image: quay.io/operator-framework/upstream-community-operators:latest
+  #   displayName: Community Operators
+  #   publisher: OperatorHub.io
