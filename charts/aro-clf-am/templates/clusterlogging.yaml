@@ -5,15 +5,6 @@ metadata:
   namespace: openshift-logging
 spec:
   collection:
-    logs:
-      fluentd: {}
-      type: fluentd
-  logStore:
-    elasticsearch:
-      nodeCount: 0
-    type: elasticsearch
-  managementState: Managed
-  visualization:
-    kibana:
-      replicas: 0
-    type: kibana
+    type: fluentd
+  forwarder:
+    managementState: Managed
