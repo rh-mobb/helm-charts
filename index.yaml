@@ -15,6 +15,18 @@ entries:
     version: 0.1.0
   aro-clf-am:
   - apiVersion: v2
+    created: "2022-10-11T17:20:19.295754919Z"
+    description: A Helm chart for Kubernetes
+    digest: 1a4b0d0b2472a89781583713bae96a66eee957402e041b2050b35c7e90fc222c
+    home: https://rh-mobb.github.io/helm-charts/
+    maintainers:
+    - name: rh-mobb
+    name: aro-clf-am
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/aro-clf-am-0.1.1/aro-clf-am-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
     created: "2022-01-26T22:51:18.050532172Z"
     description: A Helm chart for Kubernetes
     digest: 9e3716d5455db0c9d3addb2d79798e38c437aedd1a908b93e9bb716502463749
