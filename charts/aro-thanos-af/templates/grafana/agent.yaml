@@ -60,6 +60,8 @@ spec:
       name: {{ include "aro-thanos-af.fullname" . }}-grafana-agent
   template:
     metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/grafana/agent-cm.yaml") . | sha256sum }}
       labels:
         name: {{ include "aro-thanos-af.fullname" . }}-grafana-agent
     spec:
