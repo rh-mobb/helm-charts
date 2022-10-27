@@ -1,0 +1,12 @@
+
+azure:
+  storageAccount: ""
+  storageAccountKey: ""
+  storageContainer: ""
+  # Valid environments AzureGlobal, AzureChinaCloud, AzureGermanCloud, AzureUSGovernment
+  environment: "AzureGlobal"
+
+clf:
+  infrastructure: true
+  application: true
+  audit: false

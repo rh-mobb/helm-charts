@@ -1,0 +1,19 @@
+apiVersion: loki.grafana.com/v1
+kind: LokiStack
+metadata:
+  name: logging-loki
+  namespace: openshift-logging
+  labels:
+    {{- include "aro-clf-blob.labels" . | nindent 4 }}
+spec:
+  size: 1x.extra-small
+  storage:
+    schemas:
+    - version: v12
+      effectiveDate: 2022-06-01
+    secret:
+      name: logging-loki-azure
+      type: azure
+  storageClassName: managed-premium
+  tenants:
+    mode: openshift-logging

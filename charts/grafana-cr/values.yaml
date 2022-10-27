@@ -2,10 +2,16 @@ sessionSecret: "112RXXaWl7wUQiSdXUMrUya7kN5gOZmHc0s202bKqAw"
 basicAuthUsername: "admin"
 basicAuthPassword: "password"
 
+logLevel: "warn"
+
 oauthProxy:
   # If this is set will use the basic Auth credentials from above
-  # as a bypass from using the cluster oath
-  allowHtpasswd: false
+  # as a bypass to allow you to manage/modify grafana settings in the GUI
+  allowHtpasswd: ""
+  # The Grafa Role to assign to Oauth Users
+  # Viewier, Editor, Admin
+  orgRoleAssigned: Viewer
+  cookieSecret: "ZXhhbXBsZS1jb29raWUtc2VjcmV0enp6"
 
 dashboards: []
 
