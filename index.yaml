@@ -173,6 +173,18 @@ entries:
   - apiVersion: v2
     created: "2021-11-12T21:33:26.938177Z"
     description: A Helm chart for Deploying Grafana instances using the Grafana Operator
+    digest: 99f39968e5dca75c51c79b321c38a40a955273bfdd7cb8f3411ea01898b7786e
+    home: https://github.com/rh-mobb/helm-charts
+    maintainers:
+    - name: paulczar
+    name: grafana-cr
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/grafana-cr-0.2.0/grafana-cr-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    created: "2021-11-12T21:33:26.938177Z"
+    description: A Helm chart for Deploying Grafana instances using the Grafana Operator
     digest: ff6c3b05edfd4d647a9ff096ec92bc514f7a9c2c0f1fe83490dd9d055bcf683e
     home: https://github.com/rh-mobb/helm-charts
     maintainers:
