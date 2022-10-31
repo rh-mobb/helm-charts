@@ -19,7 +19,6 @@ See [/charts](charts) for a list of charts.
 1. Install a Chart
 
     ```bash
-    curl -sSL https://raw.githubusercontent.com/rh-mobb/helm-charts/main/charts/rosa-federated-prometheus/files/deploy-operators.sh | bash
     helm install -n my-prometheus mobb/rosa-federated-prometheus
     ```
 
