@@ -8,29 +8,32 @@ metadata:
 spec:
   name: {{ include "aro-clf-blob.fullname" . }}.yaml
   datasources:
+  {{ if .Values.clf.application }}
     - name: Loki (Application)
       type: loki
       editable: true
       access: proxy
       url: https://logging-loki-gateway-http.openshift-logging.svc.cluster.local:8080/api/logs/v1/application/
       jsonData:
-        tlsAuthWithCACert: true
+        # tlsAuthWithCACert: true
         tlsSkipVerify: true
-        oauthPassThru: true
+  {{ end }}
+  {{ if .Values.clf.infrastructure }}
     - name: Loki (Infrastructure)
       type: loki
       editable: true
       access: proxy
       url: https://logging-loki-gateway-http.openshift-logging.svc.cluster.local:8080/api/logs/v1/infrastructure/
       jsonData:
-        tlsAuthWithCACert: true
+        # tlsAuthWithCACert: true
         tlsSkipVerify: true
-        oauthPassThru: true
+  {{ end }}
+  {{ if .Values.clf.audit }}
     - name: Loki (Audit)
       type: loki
       access: proxy
-      url: http://logging-loki-gateway-http.openshift-logging.svc.cluster.local:8080/api/logs/v1/audit/
+      url: https://logging-loki-gateway-http.openshift-logging.svc.cluster.local:8080/api/logs/v1/audit/
       jsonData:
-        tlsAuthWithCACert: true
+        # tlsAuthWithCACert: true
         tlsSkipVerify: true
-        oauthPassThru: true
+  {{ end }}

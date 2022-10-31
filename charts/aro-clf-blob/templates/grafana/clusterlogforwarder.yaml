@@ -7,8 +7,14 @@ spec:
   pipelines:
   - name: all-to-default
     inputRefs:
+    {{ if .Values.clf.infrastructure }}
     - infrastructure
+    {{ end }}
+    {{ if .Values.clf.application }}
     - application
+    {{ end }}
+    {{ if .Values.clf.audit }}
     - audit
+    {{ end }}
     outputRefs:
     - default

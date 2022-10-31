@@ -13,58 +13,55 @@ spec:
           name: {{ include "grafana-cr.fullname" . }}-creds
   config:
     analytics:
-      check_for_updates: False
-      reporting_enabled: False
-    log:
-      mode: "console"
-      level: {{ .Values.logLevel }}
-    auth.basic:
-      enabled: False
+      check_for_updates: false
+      reporting_enabled: false
     auth:
-      disable_login_form: True
-      disable_signout_menu: True
-      sigv4_auth_enabled: True
-    # auth.anonymous:
-    #   enabled: True
+      disable_login_form: true
+      disable_signout_menu: true
+      sigv4_auth_enabled: true
+    auth.basic:
+      enabled: false
     auth.proxy:
       auto_sign_up: true
       enabled: true
       header_name: X-Forwarded-User
+    log:
+      level: {{ .Values.logLevel }}
+      mode: console
     security:
-      admin_user: admin
+      admin_user: system:does-not-exist
       cookie_secure: true
     users:
-      # allow_sign_up: false
-      viewers_can_edit: true
-      editors_can_admin: true
-      default_theme: light
-      auto_assign_org_role: {{ .Values.oauthProxy.orgRoleAssigned }}
       auto_assign_org: true
+      auto_assign_org_role: {{ .Values.oauthProxy.orgRoleAssigned }}
+      default_theme: light
+      editors_can_admin: true
+      viewers_can_edit: true
   containers:
-    - args:
-        - '-provider=openshift'
-        - '-https-address=:9091'
-        - '-http-address='
-        - '-email-domain=*'
-        - '-upstream=http://localhost:3000'
-        - '-openshift-sar={"resource": "namespaces", "verb": "get"}'
-        - '-openshift-delegate-urls={"/": {"resource": "namespaces", "verb": "get"}}'
-        - '-tls-cert=/etc/tls/private/tls.crt'
-        - '-tls-key=/etc/tls/private/tls.key'
-        - '-client-secret-file=/var/run/secrets/kubernetes.io/serviceaccount/token'
-        - '-openshift-service-account=grafana-serviceaccount'
-        - '-openshift-ca=/etc/pki/tls/cert.pem'
-        - '-openshift-ca=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt'
-        - -cookie-secret={{ .Values.oauthProxy.cookieSecret }}
-        - -cookie-expire=24h
-        - -scope=user:info user:check-access user:list-projects
-        - -pass-access-token=true
-        - -pass-basic-auth=true
-        - -display-htpasswd-form=true
-        - '-htpasswd-file=/etc/proxy/htpasswd/auth'
-        - '-skip-provider-button=false'
-      image: 'quay.io/openshift/origin-oauth-proxy:4.12'
+    - image: 'quay.io/openshift/origin-oauth-proxy:4.12'
       name: grafana-proxy
+      args:
+      - -provider=openshift
+      - -https-address=:9091
+      - -http-address=
+      - -email-domain=*
+      - -upstream=http://localhost:3000
+      - '-openshift-sar={"resource": "namespaces", "verb": "get"}'
+      - '-openshift-delegate-urls={"/": {"resource": "namespaces", "verb": "get"}}'
+      - -tls-cert=/etc/tls/private/tls.crt
+      - -tls-key=/etc/tls/private/tls.key
+      - -client-secret-file=/var/run/secrets/kubernetes.io/serviceaccount/token
+      - -openshift-service-account=grafana-serviceaccount
+      - -openshift-ca=/etc/pki/tls/cert.pem
+      - -openshift-ca=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      - -cookie-secret-file=/etc/proxy/secrets/session_secret
+      - -cookie-expire=24h
+      - -scope=user:info user:check-access user:list-projects
+      - -pass-access-token=true
+      - -pass-basic-auth=false
+      - -display-htpasswd-form=false
+      - -htpasswd-file=/etc/proxy/htpasswd/auth
+      - -skip-provider-button=true
       ports:
         - containerPort: 9091
           name: grafana-proxy
