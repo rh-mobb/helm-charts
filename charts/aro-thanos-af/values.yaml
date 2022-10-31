@@ -22,9 +22,11 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   # name: "aro-prometheus-proxy"
 
-# grafana-cr:
-#   basicAuthUsername: "admin"
-#   basicAuthPassword: "password"
+grafana-cr:
+  basicAuthUsername: "admin"
+  basicAuthPassword: "th5t43r43t43sdfsd"
   # serviceAccountAnnotations: {}
 
 enableUserWorkloadMetrics: false
+
+

@@ -1,0 +1,20 @@
+apiVersion: logging.openshift.io/v1
+kind: ClusterLogForwarder
+metadata:
+  name: instance
+  namespace: openshift-logging
+spec:
+  pipelines:
+  - name: all-to-default
+    inputRefs:
+    {{ if .Values.clf.infrastructure }}
+    - infrastructure
+    {{ end }}
+    {{ if .Values.clf.application }}
+    - application
+    {{ end }}
+    {{ if .Values.clf.audit }}
+    - audit
+    {{ end }}
+    outputRefs:
+    - default
