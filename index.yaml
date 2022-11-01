@@ -64,6 +64,19 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/aro-gpu-0.1.0/aro-gpu-0.1.0.tgz
     version: 0.1.0
+  aro-machinesets:
+  - apiVersion: v2
+    created: "2022-11-01T17:35:46.67979254Z"
+    description: A Helm chart to configure machinesets for ARO
+    digest: d184fc64a16cbad9faf3598953ec216ee1486cca1de7c4d6a65433fd2a27d63c
+    home: https://github.com/rh-mobb/helm-charts
+    maintainers:
+    - name: paulczar
+    name: aro-machinesets
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/aro-machinesets-0.1.1/aro-machinesets-0.1.1.tgz
+    version: 0.1.1
   aro-pull-secret:
   - apiVersion: v2
     created: "2022-08-17T13:45:11.345716009Z"
@@ -560,4 +573,4 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/rosa-thanos-s3-0.1.0/rosa-thanos-s3-0.1.0.tgz
     version: 0.1.0
-generated: "2022-11-01T16:13:32.59149905Z"
+generated: "2022-11-01T17:35:46.68001714Z"
