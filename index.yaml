@@ -39,6 +39,19 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/aro-clf-am-0.1.0/aro-clf-am-0.1.0.tgz
     version: 0.1.0
+  aro-clf-blob:
+  - apiVersion: v2
+    created: "2022-11-01T21:34:04.240710791Z"
+    description: A Helm chart for Kubernetes
+    digest: f475cb6aa318a2f3151d9e7be2394f1767f65fc37607a31ed620e4ff1af6f54e
+    home: https://github.com/rh-mobb/helm-charts
+    maintainers:
+    - name: paulczar
+    name: aro-clf-blob
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/aro-clf-blob-0.1.1/aro-clf-blob-0.1.1.tgz
+    version: 0.1.1
   aro-gpu:
   - apiVersion: v2
     created: "2022-07-14T16:15:21.487455757Z"
@@ -103,6 +116,22 @@ entries:
     - https://github.com/rh-mobb/helm-charts/releases/download/aro-pull-secret-0.1.0/aro-pull-secret-0.1.0.tgz
     version: 0.1.0
   aro-thanos-af:
+  - apiVersion: v2
+    created: "2022-11-01T21:34:04.391091522Z"
+    dependencies:
+    - name: grafana-cr
+      repository: https://rh-mobb.github.io/helm-charts/
+      version: 0.2.1
+    description: A Helm chart for Kubernetes
+    digest: ceeaa2004898e89b3006187ce1c0f2bb3210a07718dca34dc9446010a1208d14
+    home: https://rh-mobb.github.io/helm-charts/
+    maintainers:
+    - name: rh-mobb
+    name: aro-thanos-af
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/aro-thanos-af-0.4.1/aro-thanos-af-0.4.1.tgz
+    version: 0.4.1
   - apiVersion: v2
     created: "2022-10-17T21:22:25.878070162Z"
     dependencies:
@@ -573,4 +602,4 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/rosa-thanos-s3-0.1.0/rosa-thanos-s3-0.1.0.tgz
     version: 0.1.0
-generated: "2022-11-01T17:35:46.68001714Z"
+generated: "2022-11-01T21:34:04.391174621Z"
