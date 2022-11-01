@@ -3,7 +3,8 @@ entries:
   alertmanager-cr:
   - apiVersion: v2
     created: "2021-10-28T11:42:55.563592698Z"
-    description: A Helm chart for Deploying alertmanager instances using the alertmanager Operator
+    description: A Helm chart for Deploying alertmanager instances using the alertmanager
+      Operator
     digest: a18d0b2d5056db32e64f165af37cb3b5cd013aa75e780b64ccd72b5bd13d7f8d
     home: https://github.com/rh-mobb/helm-charts
     maintainers:
@@ -170,6 +171,18 @@ entries:
     - https://github.com/rh-mobb/helm-charts/releases/download/aro-thanos-af-0.1.0/aro-thanos-af-0.1.0.tgz
     version: 0.1.0
   grafana-cr:
+  - apiVersion: v2
+    created: "2022-11-01T16:13:32.591426345Z"
+    description: A Helm chart for Deploying Grafana instances using the Grafana Operator
+    digest: 8f59889a00af99ba0b3f6d20f3c884b80e0e571c43560d3af011c8c200ffbf14
+    home: https://github.com/rh-mobb/helm-charts
+    maintainers:
+    - name: paulczar
+    name: grafana-cr
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/grafana-cr-0.2.1/grafana-cr-0.2.1.tgz
+    version: 0.2.1
   - apiVersion: v2
     created: "2021-11-12T21:33:26.938177Z"
     description: A Helm chart for Deploying Grafana instances using the Grafana Operator
@@ -547,4 +560,4 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/rosa-thanos-s3-0.1.0/rosa-thanos-s3-0.1.0.tgz
     version: 0.1.0
-generated: "2021-10-27T15:22:35.343987-05:00"
+generated: "2022-11-01T16:13:32.59149905Z"
