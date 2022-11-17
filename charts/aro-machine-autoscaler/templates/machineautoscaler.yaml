@@ -1,0 +1,41 @@
+{{- $labels := include "aro-machine-autoscaler.labels" . }}
+{{- $machineSets := .Values.machineSets }}
+{{- if  not $machineSets }}
+{{- $machineSetsLookup := lookup "machine.openshift.io/v1beta1" "MachineSet" "openshift-machine-api" "" }}
+{{-   if not $machineSetsLookup }}
+{{-     fail "\n\n\n\n.Values.MachineSets is empty and cannot query cluster for existing machinesets" }}
+{{-   end }}
+{{-   range $machineSetsLookup.items }}
+{{-     $machineSets = append $machineSets (dict "name" .metadata.name) }}
+{{-   end }}
+{{- end }}
+---
+apiVersion: "v1"
+kind: "ConfigMap"
+metadata:
+  labels:
+    {{- $labels | nindent 4 }}
+  name: machinesets
+  namespace: {{ .Release.Namespace }}
+data:
+  machines: |
+    {{ range $machineSets }}
+    {{ .name }}
+    {{ end }}
+{{ range $machineSets }}
+---
+apiVersion: "autoscaling.openshift.io/v1beta1"
+kind: "MachineAutoscaler"
+metadata:
+  labels:
+    {{- $labels | nindent 4 }}
+  name: "{{ .name }}"
+  namespace: "openshift-machine-api"
+spec:
+  minReplicas: {{ .minReplicas | default $.Values.defaultMinReplicas }}
+  maxReplicas: {{ .maxReplicas | default $.Values.defaultMaxReplicas }}
+  scaleTargetRef:
+    apiVersion: machine.openshift.io/v1beta1
+    kind: MachineSet
+    name: "{{ .name }}"
+{{ end }}
