@@ -77,6 +77,19 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/aro-gpu-0.1.0/aro-gpu-0.1.0.tgz
     version: 0.1.0
+  aro-machine-autoscaler:
+  - apiVersion: v2
+    created: "2022-11-17T22:20:46.791375484Z"
+    description: A Helm chart for Kubernetes
+    digest: 0b42922ae99f498dec05fb7e6d694e77b31b68a430cae5d4fe1c1f7498c57b64
+    home: https://github.com/rh-mobb/helm-charts
+    maintainers:
+    - name: paulczar
+    name: aro-machine-autoscaler
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/aro-machine-autoscaler-0.1.0/aro-machine-autoscaler-0.1.0.tgz
+    version: 0.1.0
   aro-machinesets:
   - apiVersion: v2
     created: "2022-11-01T17:35:46.67979254Z"
@@ -602,4 +615,4 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/rosa-thanos-s3-0.1.0/rosa-thanos-s3-0.1.0.tgz
     version: 0.1.0
-generated: "2022-11-01T21:34:04.391174621Z"
+generated: "2022-11-17T22:20:46.791434384Z"
