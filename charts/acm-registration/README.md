@@ -46,7 +46,7 @@ In order to run the example `oc` command in the instructions, it will be necessa
 1. Install the Chart
 
     ```bash
-    helm upgrade --install --debug my-cluster-acm-registration rh-mobb/acm-registration/ --set clusterName=my-cluster --set kubeconfigPath=kube.local --set
+    helm upgrade --install --debug my-cluster-acm-registration mobb/acm-registration --set clusterName=my-cluster --set kubeConfig="$(cat <path_to_kubeconfig>)"
     ```
 
 1. Validate that the cluster shows up in ACM
