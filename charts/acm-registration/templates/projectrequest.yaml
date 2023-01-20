@@ -1,6 +1,0 @@
-apiVersion: project.openshift.io/v1
-kind: ProjectRequest
-description: "{{ .Values.description }}"
-displayName: {{ .Values.cluster_name }}
-metadata:
-    name: {{ .Values.cluster_name }}
