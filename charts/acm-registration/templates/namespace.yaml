@@ -1,9 +1,9 @@
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: {{ .Values.cluster_name }}
-  # labels:
-  #   kubernetes.io/metadata.name: {{ .Values.cluster_name }}
-  # annotations:
-  #   openshift.io/description: {{ .Values.cluster_name }} ACM
-  #   openshift.io/display-name: {{ .Values.cluster_name }} 
+  name: {{ .Values.clusterName }}
+  labels:
+    kubernetes.io/metadata.name: {{ .Values.clusterName }}
+  annotations:
+    openshift.io/description: {{ .Values.clusterName }} ACM
+    openshift.io/display-name: {{ .Values.clusterName }} 

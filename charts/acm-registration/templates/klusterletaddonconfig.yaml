@@ -1,16 +1,16 @@
 apiVersion: agent.open-cluster-management.io/v1
 kind: KlusterletAddonConfig
 metadata:
-  name: {{ .Values.cluster_name }}
-  namespace: {{ .Values.cluster_name }}
+  name: {{ .Values.clusterName }}
+  namespace: {{ .Values.clusterName }}
 spec:
-  clusterName: {{ .Values.cluster_name }}
-  clusterNamespace: {{ .Values.cluster_name }}
+  clusterName: {{ .Values.clusterName }}
+  clusterNamespace: {{ .Values.clusterName }}
   clusterLabels:
-    name: {{ .Values.cluster_name }}
+    name: {{ .Values.clusterName }}
     cloud: auto-detect
     vendor: auto-detect
-    cluster.open-cluster-management.io/clusterset: default
+    cluster.open-cluster-management.io/clusterset: {{ default "default" .Values.clusterSet }}
   applicationManager:
     enabled: true
   policyController:

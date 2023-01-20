@@ -1,6 +1,9 @@
 apiVersion: v2
 appVersion: 0.1.0
-description: A Helm chart for registration of a cluster with an ACM instance
+description: Register an OpenShift or Kubernetes cluster with ACM
 name: acm-registration
 type: application
-version: 0.1.0
+version: 0.2.1
+home: "https://rh-mobb.github.io/helm-charts/"
+maintainers:
+  - name: rh-mobb
