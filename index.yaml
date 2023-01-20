@@ -3,6 +3,19 @@ entries:
   acm-registration:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2023-01-20T20:40:50.994700893Z"
+    description: Register an OpenShift or Kubernetes cluster with ACM
+    digest: 3eea41d75ece8104682cd0f50c4d8af9140ace7eec19e83468c6f798d475b78a
+    home: https://rh-mobb.github.io/helm-charts/
+    maintainers:
+    - name: rh-mobb
+    name: acm-registration
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/acm-registration-0.2.2/acm-registration-0.2.2.tgz
+    version: 0.2.2
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2023-01-20T14:15:15.643032988Z"
     description: Register an OpenShift or Kubernetes cluster with ACM
     digest: 1324fb5035e70cd42f9c57df550da988ad92381b61a365c97e6bbf037ea76b58
@@ -629,4 +642,4 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/rosa-thanos-s3-0.1.0/rosa-thanos-s3-0.1.0.tgz
     version: 0.1.0
-generated: "2023-01-20T14:15:15.643100789Z"
+generated: "2023-01-20T20:40:50.994833391Z"
