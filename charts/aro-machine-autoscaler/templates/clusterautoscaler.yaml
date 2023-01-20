@@ -1,0 +1,8 @@
+apiVersion: "autoscaling.openshift.io/v1"
+kind: "ClusterAutoscaler"
+metadata:
+  name: default
+  labels:
+    {{- include "aro-machine-autoscaler.labels" . | nindent 4 }}
+spec:
+  {{ .Values.clusterAutoscaler.spec | toYaml | nindent 2 }}
