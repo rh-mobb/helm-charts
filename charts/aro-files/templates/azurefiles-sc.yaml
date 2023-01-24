@@ -1,0 +1,13 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: azure-file
+provisioner: kubernetes.io/azure-file
+parameters:
+  location: {{ .Values.location }}
+  secretNamespace: kube-system
+  skuName: Standard_LRS
+  storageAccount: {{ .Values.azure.storageAccountName }}
+  resourceGroup: {{ .Values.azure.azfilesRG }}
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
