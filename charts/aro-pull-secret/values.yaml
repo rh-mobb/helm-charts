@@ -1,3 +1,0 @@
-# copy this from https://console.redhat.com/openshift/downloads -> Tokens -> Pull secret
-
-pullSecret: '{"auths":{"cloud.openshift.com":{...}}'
