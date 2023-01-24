@@ -48,7 +48,7 @@ This Helm chart will deploy Azure Files StorageClass on ARO clusters.
         --sku Standard_LRS
     ```
 
-1. Setup the Resource Group permissions
+1. Setup the Resource Group permissions (skip if AZFiles RG and ARO RG are the same)
 
     ```bash
     ARO_SERVICE_PRINCIPAL_ID=$(az aro show -g $ARO_RESOURCE_GROUP \
