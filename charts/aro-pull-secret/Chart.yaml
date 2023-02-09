@@ -5,4 +5,4 @@ maintainers:
   - name: paulczar
 home: https://github.com/rh-mobb/helm-charts
 type: application
-version: 0.1.1
+version: 0.1.2

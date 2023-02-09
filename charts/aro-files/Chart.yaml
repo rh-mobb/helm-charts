@@ -2,7 +2,7 @@ apiVersion: v2
 name: aro-files
 description: A Helm chart for Deploying Azure Files StorageClass in ARO.
 type: application
-version: 0.1.0
+version: 0.1.1
 maintainers:
   - name: rcarrata
 home: https://github.com/rh-mobb/helm-charts
