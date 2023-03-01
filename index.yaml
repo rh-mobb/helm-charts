@@ -315,6 +315,19 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/nvidia-gpu-0.1.0/nvidia-gpu-0.1.0.tgz
     version: 0.1.0
+  ocp-proxy-api:
+  - apiVersion: v2
+    created: "2023-03-01T18:49:03.998894371Z"
+    description: A Helm chart for Kubernetes
+    digest: 3b113249daa8a8be89cdda920998a7f3f620e940b82e211ef0519243d97c10ff
+    home: https://rh-mobb.github.io/helm-charts/
+    maintainers:
+    - name: rh-mobb
+    name: ocp-proxy-api
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/ocp-proxy-api-0.1.0/ocp-proxy-api-0.1.0.tgz
+    version: 0.1.0
   operatorhub:
   - apiVersion: v2
     created: "2022-08-18T20:17:41.625157655Z"
@@ -642,4 +655,4 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/rosa-thanos-s3-0.1.0/rosa-thanos-s3-0.1.0.tgz
     version: 0.1.0
-generated: "2023-01-20T20:40:50.994833391Z"
+generated: "2023-03-01T18:49:03.998956071Z"
