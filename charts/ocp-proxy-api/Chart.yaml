@@ -1,8 +1,8 @@
 apiVersion: v2
 name: ocp-proxy-api
-description: A Helm chart for Kubernetes
+description: A Helm chart for Kubernetes to create and manage an nginx proxy for OCP API/Console
 type: application
-version: 0.1.0
+version: 0.1.1
 home: "https://rh-mobb.github.io/helm-charts/"
 maintainers:
   - name: rh-mobb

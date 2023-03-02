@@ -11,15 +11,19 @@ image:
   tag: "latest"
 
 ocp:
-  clusterDomain:
-  ingressLB:
+  clusterDomain: "" # poc-cz-demo.xxxx.p1.openshiftapps.com
+  ingressLB: "" # internal-xxxxx-xxxx.us-east-2.elb.amazonaws.com
 
 acls:
-  allow:
-    - 0.0.0.0/0
-  deny:
-    - 10.0.0.0/8
-  defaultDeny: true
+  # first rule wins, since deny rules are often longer, we do allow then deny
+  allow: []
+    # - 0.0.0.0/0
+    # - 65.189.91.27/32
+  deny: []
+    # - 10.0.0.0/8
+    # - 18.118.126.238/32
+  # set this to true to get a "deny all" as the last entry, likely leave deny list empty if doing this.
+  defaultDeny: false
 
 
 imagePullSecrets: []

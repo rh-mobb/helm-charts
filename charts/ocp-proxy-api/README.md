@@ -41,7 +41,7 @@ This creates an in-cluster proxy that runs on a NLB that will proxy to both the 
     oc get svc api-proxy-ocp-proxy-api -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
     ```
 
-1. Use the hostname to create CNAMES, or in dev entries in `/etc/hosts`
+1. Use the hostname to create CNAMES in your cluster's public zone, or for dev uses cases can just do entries in `/etc/hosts`
 
     example:
 
