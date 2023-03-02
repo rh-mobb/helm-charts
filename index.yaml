@@ -317,6 +317,19 @@ entries:
     version: 0.1.0
   ocp-proxy-api:
   - apiVersion: v2
+    created: "2023-03-02T17:54:31.803992184Z"
+    description: A Helm chart for Kubernetes to create and manage an nginx proxy for
+      OCP API/Console
+    digest: 1b4388e9613ec3f0414cda3db9ee100f6b7158dfba1a6003e98e8da21ffb882d
+    home: https://rh-mobb.github.io/helm-charts/
+    maintainers:
+    - name: rh-mobb
+    name: ocp-proxy-api
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/ocp-proxy-api-0.1.1/ocp-proxy-api-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
     created: "2023-03-01T18:49:03.998894371Z"
     description: A Helm chart for Kubernetes
     digest: 3b113249daa8a8be89cdda920998a7f3f620e940b82e211ef0519243d97c10ff
@@ -655,4 +668,4 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/rosa-thanos-s3-0.1.0/rosa-thanos-s3-0.1.0.tgz
     version: 0.1.0
-generated: "2023-03-01T18:49:03.998956071Z"
+generated: "2023-03-02T17:54:31.804149085Z"
