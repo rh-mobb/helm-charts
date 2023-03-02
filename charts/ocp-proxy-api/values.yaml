@@ -14,7 +14,7 @@ ocp:
   clusterDomain: ""
   # clusterDomain: poc-cz-demo.xxxx.p1.openshiftapps.com
   ingressLB: ""
-  #ingressLB: internal-xxxxx-xxxx.us-east-2.elb.amazonaws.com
+  # ingressLB: internal-xxxxx-xxxx.us-east-2.elb.amazonaws.com
 
 acls:
   # first rule wins, since deny rules are often longer, we do allow then deny
