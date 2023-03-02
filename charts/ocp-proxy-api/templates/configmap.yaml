@@ -50,13 +50,13 @@ data:
 
         server {
             listen       6443;
-            # Deny List
-            {{- range .Values.acls.deny }}
-            deny {{ . }};
-            {{- end }}
             # Allow List
             {{- range .Values.acls.allow }}
             allow {{ . }};
+            {{- end }}
+            # Deny List
+            {{- range .Values.acls.deny }}
+            deny {{ . }};
             {{- end }}
             {{- if .Values.acls.defaultDeny }}
             # Default Deny
