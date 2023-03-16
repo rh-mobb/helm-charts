@@ -432,6 +432,22 @@ entries:
     version: 0.1.0
   rosa-aws-prometheus:
   - apiVersion: v2
+    created: "2023-03-16T15:00:11.751028337Z"
+    dependencies:
+    - name: grafana-cr
+      repository: https://rh-mobb.github.io/helm-charts/
+      version: 0.1.1
+    description: A Helm chart for Kubernetes
+    digest: 3cb60c5b5fcbd3a2521097ee0b498443a52f56a5a2c93dd68b6d0d173b2d4618
+    home: https://rh-mobb.github.io/helm-charts/
+    maintainers:
+    - name: rh-mobb
+    name: rosa-aws-prometheus
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/rosa-aws-prometheus-0.1.4/rosa-aws-prometheus-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
     created: "2021-12-16T22:44:12.800720441Z"
     dependencies:
     - name: grafana-cr
@@ -668,4 +684,4 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/rosa-thanos-s3-0.1.0/rosa-thanos-s3-0.1.0.tgz
     version: 0.1.0
-generated: "2023-03-02T17:54:31.804149085Z"
+generated: "2023-03-16T15:00:11.751095237Z"
