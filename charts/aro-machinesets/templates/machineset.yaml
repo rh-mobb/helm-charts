@@ -15,6 +15,7 @@
 {{- end -}}
 {{ $name := include "aro-machinesets.fullname" . }}
 {{ range untilStep 1 (add (.Values.zoneCount | int) (1|int) | int) 1 }}
+{{ $location := $cluster.spec.location | lower }}
 ---
 apiVersion: machine.openshift.io/v1beta1
 kind: MachineSet
@@ -23,22 +24,22 @@ metadata:
     machine.openshift.io/cluster-api-cluster: {{ $cluster.spec.infraId }}
     machine.openshift.io/cluster-api-machine-role: {{ $.Values.machineRole }}
     machine.openshift.io/cluster-api-machine-type: {{ $.Values.machineRole }}
-    machine.openshift.io/cluster-api-machineset: {{ $cluster.spec.infraId }}-{{ $cluster.spec.location }}-{{ . }}
-  name: {{ $cluster.spec.infraId }}-{{ $name }}-{{ $cluster.spec.location }}-{{ . }}
+    machine.openshift.io/cluster-api-machineset: {{ $cluster.spec.infraId }}-{{ $location }}-{{ . }}
+  name: {{ $cluster.spec.infraId }}-{{ $name }}-{{ $location }}-{{ . }}
   namespace: openshift-machine-api
 spec:
   replicas: {{ $.Values.replicasPerZone }}
   selector:
     matchLabels:
       machine.openshift.io/cluster-api-cluster: {{ $cluster.spec.infraId }}
-      machine.openshift.io/cluster-api-machineset: {{ $cluster.spec.infraId }}-{{ $cluster.spec.location }}-{{ . }}
+      machine.openshift.io/cluster-api-machineset: {{ $cluster.spec.infraId }}-{{ $location }}-{{ . }}
   template:
     metadata:
       labels:
         machine.openshift.io/cluster-api-cluster: {{ $cluster.spec.infraId }}
         machine.openshift.io/cluster-api-machine-role: {{ $.Values.machineRole }}
         machine.openshift.io/cluster-api-machine-type: {{ $.Values.machineRole }}
-        machine.openshift.io/cluster-api-machineset: {{ $cluster.spec.infraId }}-{{ $cluster.spec.location }}-{{ . }}
+        machine.openshift.io/cluster-api-machineset: {{ $cluster.spec.infraId }}-{{ $location }}-{{ . }}
     spec:
       lifecycleHooks: {}
       metadata:
@@ -52,7 +53,7 @@ spec:
             namespace: openshift-machine-api
           image: {{ $machineSetSpec.image | toYaml | nindent 12 }}
           kind: AzureMachineProviderSpec
-          location: {{ $machineSetSpec.location}}
+          location: {{ $machineSetSpec.location }}
           networkResourceGroup: {{ $machineSetSpec.networkResourceGroup }}
           osDisk: {{ $machineSetSpec.osDisk | toYaml | nindent 12 }}
           publicIP: {{ $machineSetSpec.publicIP }}
