@@ -46,6 +46,7 @@ podAnnotations: {}
 service:
   type: LoadBalancer
   port: 80
+  loadBalancerSourceRanges: []
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
