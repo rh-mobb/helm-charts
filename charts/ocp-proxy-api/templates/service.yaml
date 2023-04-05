@@ -22,5 +22,5 @@ spec:
     {{- include "ocp-proxy-api.selectorLabels" . | nindent 4 }}
   {{- with .Values.service.loadBalancerSourceRanges }}
   loadBalancerSourceRanges:
-      {{- toYaml . | nindent 4 }}
+    {{- toYaml . | nindent 4 }}
   {{- end }}
