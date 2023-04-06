@@ -9,15 +9,10 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   externalTrafficPolicy: Local
+  {{- with .Values.service.ports }}
   ports:
-    - port: 6443
-      targetPort: https
-      protocol: TCP
-      name: api
-    - port: 443
-      targetPort: https
-      protocol: TCP
-      name: ingress
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
   selector:
     {{- include "ocp-proxy-api.selectorLabels" . | nindent 4 }}
   {{- with .Values.service.loadBalancerSourceRanges }}
