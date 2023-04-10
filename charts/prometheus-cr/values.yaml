@@ -7,3 +7,4 @@ basicAuthUsername: "internal"
 # Change these two fields
 sessionSecret: "112RXXaWl7wUQiSdXUMrUya7kN5gOZmHc0s202bKqAw"
 basicAuthPassword: "KgX1EUO3eQOBr1u9Df5B6XEhfxWGKaBKMhEa1ALQvu6"
+enableRemoteWriteReceiver: true
