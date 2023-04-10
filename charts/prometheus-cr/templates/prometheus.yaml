@@ -13,6 +13,9 @@ spec:
       prometheus: {{ include "prometheus-cr.fullname" . }}
       role: alert-rules
   ruleNamespaceSelector: {}
+{{ if .Values.enableRemoteWriteReceiver }}
+  enableRemoteWriteReceiver: true
+{{ end }}
   alerting:
     alertmanagers:
       - namespace: {{ .Release.Namespace}}
