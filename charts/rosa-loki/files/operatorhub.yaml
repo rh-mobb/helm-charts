@@ -1,0 +1,30 @@
+subscriptions:
+  - name: grafana-operator
+    channel: v4
+    installPlanApproval: Automatic
+    source: community-operators
+    sourceNamespace: openshift-marketplace
+  - name: cluster-logging
+    namespace: openshift-logging
+    channel: stable
+    installPlanApproval: Automatic
+    source: redhat-operators
+    sourceNamespace: openshift-marketplace
+  - name: loki-operator
+    channel: stable
+    installPlanApproval: Automatic
+    source: redhat-operators
+    sourceNamespace: openshift-marketplace
+    namespace: openshift-operators-redhat
+operatorGroups:
+  - name: cluster-logging
+    targetNamespace: ~
+  - name: openshift-operators-redhat
+    namespace: openshift-operators-redhat
+    targetNamespace: all
+catalogSources: []
+#   - name: operatorhubio
+#     sourceType: grpc
+#     image: quay.io/operator-framework/upstream-community-operators:latest
+#     displayName: Community Operators
+#     publisher: OperatorHub.io

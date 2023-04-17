@@ -24,7 +24,7 @@ See [/charts](charts) for a list of charts.
 
 ## Starters
 
-To create a new chat using one of our starters, clone down this repo and run
+To create a new chart using one of our starters, clone down this repo and run
 
 ```bash
 helm create example-cr --starter $(pwd)/../starters/cr

@@ -1,0 +1,16 @@
+aws_access_key_id:
+aws_access_key_secret:
+aws_region: us-east-1
+aws_s3_bucket_name: s3-bucket-name
+
+loki_size: 1x.extra-small
+loki_storage_class: gp3
+
+forward_infrastructure: true
+forward_application: true
+forward_debug: false
+
+grafana-cr:
+  basicAuthUsername: "admin"
+  basicAuthPassword: "th5t43r43t43sdfsd"
+  # serviceAccountAnnotations: {}
