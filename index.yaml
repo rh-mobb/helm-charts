@@ -720,6 +720,22 @@ entries:
     version: 0.1.1
   rosa-loki:
   - apiVersion: v2
+    created: "2023-04-18T19:48:41.255747836Z"
+    dependencies:
+    - name: grafana-cr
+      repository: https://rh-mobb.github.io/helm-charts/
+      version: 0.2.1
+    description: A Helm chart for Kubernetes
+    digest: 3c914c656c46184f0a86d3ee9addae2210833dbf51ed1f47fa301b5c1fef5fe0
+    home: https://rh-mobb.github.io/helm-charts/
+    maintainers:
+    - name: rh-mobb
+    name: rosa-loki
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/rosa-loki-0.1.1/rosa-loki-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
     created: "2023-04-18T13:19:48.564383762Z"
     dependencies:
     - name: grafana-cr
@@ -752,4 +768,4 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/rosa-thanos-s3-0.1.0/rosa-thanos-s3-0.1.0.tgz
     version: 0.1.0
-generated: "2023-04-18T13:19:48.564696068Z"
+generated: "2023-04-18T19:48:41.255813936Z"
