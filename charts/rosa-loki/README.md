@@ -41,7 +41,14 @@ This helm chart will set up a ROSA cluster to store Audit, Infrastructure, and A
     aws s3api create-bucket --bucket "rosa-${CLUSTER_NAME}-loki" \
       --region "${AWS_REGION}"
     ```
-
+    
+   > **Note**: Regions outside of ``us-east-1`` require the appropriate ``LocationConstraint``
+   
+    ```bash
+    aws s3api create-bucket --bucket "rosa-${CLUSTER_NAME}-loki" \
+      --region "${AWS_REGION}" --create-bucket-configuration LocationConstraint="${AWS_REGION}"
+    ```
+    
 1. Create an IAM Policy
 
     ```bash
