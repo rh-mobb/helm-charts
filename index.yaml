@@ -718,6 +718,23 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/rosa-federated-prometheus-0.1.1/rosa-federated-prometheus-0.1.1.tgz
     version: 0.1.1
+  rosa-loki:
+  - apiVersion: v2
+    created: "2023-04-18T13:19:48.564383762Z"
+    dependencies:
+    - name: grafana-cr
+      repository: https://rh-mobb.github.io/helm-charts/
+      version: 0.2.1
+    description: A Helm chart for Kubernetes
+    digest: 963af9c289de6cc0aee30dbd0042082277e352865ed69690bb4807fd25d7b507
+    home: https://rh-mobb.github.io/helm-charts/
+    maintainers:
+    - name: rh-mobb
+    name: rosa-loki
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/rosa-loki-0.1.0/rosa-loki-0.1.0.tgz
+    version: 0.1.0
   rosa-thanos-s3:
   - apiVersion: v2
     created: "2021-12-21T18:53:45.47981212Z"
@@ -735,4 +752,4 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/rosa-thanos-s3-0.1.0/rosa-thanos-s3-0.1.0.tgz
     version: 0.1.0
-generated: "2023-04-10T18:01:15.124029332Z"
+generated: "2023-04-18T13:19:48.564696068Z"
