@@ -1,0 +1,19 @@
+apiVersion: loki.grafana.com/v1
+kind: LokiStack
+metadata:
+  name: logging-loki
+  namespace: openshift-logging
+  labels:
+    {{- include "rosa-loki.labels" . | nindent 4 }}
+spec:
+  size: {{ .Values.loki_size }}
+  storage:
+    schemas:
+    - version: v12
+      effectiveDate: "2022-06-01"
+    secret:
+      name: {{ include "rosa-loki.fullname" . }}-loki-creds
+      type: s3
+  storageClassName: {{ .Values.loki_storage_class }}
+  tenants:
+    mode: openshift-logging

@@ -1,0 +1,39 @@
+# https://github.com/grafana/loki/blob/main/operator/hack/addon_grafana_gateway_ocp_oauth.yaml
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDataSource
+metadata:
+  name: {{ include "rosa-loki.fullname" . }}-prometheus
+  labels:
+    {{- include "rosa-loki.labels" . | nindent 4 }}
+spec:
+  name: {{ include "rosa-loki.fullname" . }}.yaml
+  datasources:
+  {{ if .Values.forward_application }}
+    - name: Loki (Application)
+      type: loki
+      editable: true
+      access: proxy
+      url: https://logging-loki-gateway-http.openshift-logging.svc.cluster.local:8080/api/logs/v1/application/
+      jsonData:
+        # tlsAuthWithCACert: true
+        tlsSkipVerify: true
+  {{ end }}
+  {{ if .Values.forward_infrastructure }}
+    - name: Loki (Infrastructure)
+      type: loki
+      editable: true
+      access: proxy
+      url: https://logging-loki-gateway-http.openshift-logging.svc.cluster.local:8080/api/logs/v1/infrastructure/
+      jsonData:
+        # tlsAuthWithCACert: true
+        tlsSkipVerify: true
+  {{ end }}
+  {{ if .Values.forward_audit }}
+    - name: Loki (Audit)
+      type: loki
+      access: proxy
+      url: https://logging-loki-gateway-http.openshift-logging.svc.cluster.local:8080/api/logs/v1/audit/
+      jsonData:
+        # tlsAuthWithCACert: true
+        tlsSkipVerify: true
+  {{ end }}
