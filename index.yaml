@@ -169,6 +169,22 @@ entries:
     version: 0.1.0
   aro-thanos-af:
   - apiVersion: v2
+    created: "2023-05-13T09:08:04.997933746Z"
+    dependencies:
+    - name: grafana-cr
+      repository: https://rh-mobb.github.io/helm-charts/
+      version: 0.3.0
+    description: A Helm chart for Kubernetes
+    digest: ef13fb4c318035c0d3cb2fc1a0dde9d6e1ce0ddc1cb779e15cdcc4b035491f51
+    home: https://rh-mobb.github.io/helm-charts/
+    maintainers:
+    - name: rh-mobb
+    name: aro-thanos-af
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/aro-thanos-af-0.5.0/aro-thanos-af-0.5.0.tgz
+    version: 0.5.0
+  - apiVersion: v2
     created: "2022-11-01T21:34:04.391091522Z"
     dependencies:
     - name: grafana-cr
@@ -796,4 +812,4 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/rosa-thanos-s3-0.1.0/rosa-thanos-s3-0.1.0.tgz
     version: 0.1.0
-generated: "2023-04-18T20:58:01.484828272Z"
+generated: "2023-05-13T09:08:04.998041148Z"
