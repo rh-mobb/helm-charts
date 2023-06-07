@@ -1,6 +1,6 @@
 # Helm Chart to set up Azure Files StorageClasses on ARO clusters
 
-This Helm chart will deploy Azure Files StorageClass on ARO clusters.
+This Helm chart will deploy Azure Files StorageClass on ARO clusters (using Azure Files provisioner non CSI ).
 
 ## Prerequisites
 
@@ -62,12 +62,15 @@ This Helm chart will deploy Azure Files StorageClass on ARO clusters.
 
 ## Deploy the Helm Chart
 
-1. Fill the values.yaml with your LOCATION, AZURE_STORAGE_ACCOUNT_NAME and the AZURE_FILES_RESOURCE_GROUP.
-
 1. Install Helm Chart
 
     ```bash
-    helm upgrade --install -n $NAMESPACE aro-azfiles mobb/aro-files --create-namespace
+    helm upgrade -n $NAMESPACE arofiles \
+        mobb/aro-files --install \
+        --set "location=$LOCATION" \
+        --set "azure.storageAccountName=$AZURE_STORAGE_ACCOUNT_NAME" \
+        --set "azure.azfilesRG=$AZURE_FILES_RESOURCE_GROUP" \
+        --create-namespace
     ```
 
 

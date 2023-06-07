@@ -15,8 +15,9 @@ mountOptions:
 parameters:
   location: {{ .Values.location }}
   secretNamespace: kube-system
-  skuName: Standard_LRS
+  skuName: {{ .Values.azure.skuName }}
   storageAccount: {{ .Values.azure.storageAccountName }}
   resourceGroup: {{ .Values.azure.azfilesRG }}
+  protocol: {{ .Values.azure.protocol }}
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
