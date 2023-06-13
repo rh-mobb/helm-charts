@@ -9,3 +9,6 @@ clf:
   infrastructure: true
   application: true
   audit: false
+
+lokiStack:
+  storageClassName: managed-premium
