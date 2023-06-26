@@ -1,0 +1,7 @@
+location: eastus
+
+azure:
+  storageAccountName: ""
+  azfilesRG: ""
+  protocol: smb # nfs is technically possible but currently not supported by RH
+  skuName: Standard_LRS

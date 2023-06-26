@@ -1,0 +1,23 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: azure-file
+provisioner: kubernetes.io/azure-file
+mountOptions:
+  - dir_mode=0777
+  - file_mode=0777
+  - uid=0
+  - gid=0
+  - mfsymlinks
+  - cache=strict
+  - actimeo=30
+  - noperm
+parameters:
+  location: {{ .Values.location }}
+  secretNamespace: kube-system
+  skuName: {{ .Values.azure.skuName }}
+  storageAccount: {{ .Values.azure.storageAccountName }}
+  resourceGroup: {{ .Values.azure.azfilesRG }}
+  protocol: {{ .Values.azure.protocol }}
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
