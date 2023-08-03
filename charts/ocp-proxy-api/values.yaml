@@ -85,5 +85,4 @@ tolerations: []
 affinity: {}
 
 keepalive:
-  enabled: false
   connections: 3 # A good starting point is to set this to "(replicaCount * 2) + replicaCount", e.g.: (1 x 2) + 1 = 3
