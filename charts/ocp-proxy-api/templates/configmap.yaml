@@ -42,11 +42,9 @@ data:
         }
         upstream api_backend {
           server apiserver.openshift-kube-apiserver:443;
-          keepalive {{ .Values.keepalive.connections }};
         }
         upstream ingress_backend {
           server {{ .Values.ocp.ingressLB }}:443;
-          keepalive {{ .Values.keepalive.connections }};
         }
 
         server {
@@ -66,14 +64,6 @@ data:
 
             proxy_pass   $name;
             
-            # Setting these keepalive parameters based on official docs.
-            # This avoids closing each connection and hence avoids exhausting the available resources
-            # https://nginx.org/en/docs/http/ngx_http_upstream_module.html#keepalive
-            #   and here:
-            # https://www.nginx.com/blog/avoiding-top-10-nginx-configuration-mistakes/#no-keepalives
-            proxy_http_version 1.1;
-            proxy_set_header Connection "";
-
             ssl_preread on;
         }
     }
