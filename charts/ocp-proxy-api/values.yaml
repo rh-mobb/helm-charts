@@ -86,4 +86,8 @@ affinity: {}
 
 healthcheck:
   livenessprobe:
-    timeout: 30
+    timeout: 3
+    periodSeconds: 30
+    successThreshold: 1
+    failureThreshold: 3
+    timeoutSeconds: 10

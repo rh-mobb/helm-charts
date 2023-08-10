@@ -52,6 +52,10 @@ spec:
                 - /bin/bash
                 - '-c'
                 - 'curl -sk -m {{ .Values.healthcheck.livenessprobe.timeout }} https://localhost:6443'
+            periodSeconds: {{ .Values.healthcheck.livenessprobe.periodSeconds }}
+            successThreshold: {{ .Values.healthcheck.livenessprobe.successThreshold }}
+            failureThreshold: {{ .Values.healthcheck.livenessprobe.failureThreshold }}
+            timeoutSeconds: {{ .Values.healthcheck.livenessprobe.timeoutSeconds }}
           # readinessProbe:
           #   httpGet:
           #     path: /
