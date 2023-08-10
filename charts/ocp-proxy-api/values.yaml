@@ -88,3 +88,8 @@ keepalive:
   # A good starting point for 'connections' is to set this to "(replicaCount * 2) + replicaCount"
   # e.g.: (1 x 2) + 1 = 3
   connections: 3
+
+healthcheck:
+  livenessprobe:
+    timeout: 30
+
