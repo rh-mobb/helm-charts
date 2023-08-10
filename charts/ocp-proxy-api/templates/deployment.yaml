@@ -46,10 +46,12 @@ spec:
             - name: https
               containerPort: 6443
               protocol: TCP
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
+          livenessProbe:
+            exec:
+              command:
+                - /bin/bash
+                - '-c'
+                - 'curl -sk -m {{ .Values.healthcheck.livenessprobe.timeout }} https://localhost:6443'
           # readinessProbe:
           #   httpGet:
           #     path: /
