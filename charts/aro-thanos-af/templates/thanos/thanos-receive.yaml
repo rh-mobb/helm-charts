@@ -34,7 +34,7 @@ spec:
         - --remote-write.address=0.0.0.0:19291
         - --objstore.config-file=/etc/prometheus/store-secret.yaml
         - --label
-        - 'cluster="{{ .Values.rosa.clusterName }}"'
+        - 'cluster="{{ .Values.aro.clusterName }}"'
         ports:
         - name: http
           containerPort: 19291
