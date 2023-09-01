@@ -1,9 +1,9 @@
 apiVersion: v2
 name: nvidia-gpu
-description: A Helm chart for Kubernetes
+description: Helm Chart to set up NVIDIA GPU nodes
 maintainers:
   - name: paulczar
 home: https://github.com/rh-mobb/helm-charts
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "1.16.0"

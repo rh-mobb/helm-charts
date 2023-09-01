@@ -45,7 +45,6 @@ data:
         }
         upstream ingress_backend {
           server {{ .Values.ocp.ingressLB }}:443;
-
         }
 
         server {
@@ -64,6 +63,7 @@ data:
             {{- end }}
 
             proxy_pass   $name;
+            
             ssl_preread on;
         }
     }

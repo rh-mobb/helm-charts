@@ -83,3 +83,12 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+healthcheck:
+  livenessprobe:
+    commandTimeout: 15
+    initialDelaySeconds: 60
+    timeoutSeconds: 10
+    periodSeconds: 30
+    successThreshold: 1
+    failureThreshold: 3
