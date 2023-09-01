@@ -1,3 +1,5 @@
+---
+{{ if eq .Values.clusterMetrics.method "grafana-agent" }}
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -90,3 +92,4 @@ spec:
           name: {{ include "aro-thanos-af.fullname" . }}-grafana-agent
         name: grafana-agent
 ---
+{{ end }}

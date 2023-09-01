@@ -1,3 +1,5 @@
+---
+{{ if eq .Values.clusterMetrics.method "grafana-agent" }}
 kind: ConfigMap
 metadata:
   name: {{ include "aro-thanos-af.fullname" . }}-grafana-agent
@@ -16,7 +18,7 @@ data:
       global:
         scrape_interval: 15s
         external_labels:
-          cluster: {{ .Values.rosa.clusterName }}
+          cluster: {{ .Values.aro.clusterName }}
         remote_write:
           - url: "http://thanos-receive.{{ .Release.Namespace }}.svc.cluster.local:9091/api/v1/receive"
             queue_config:
@@ -40,3 +42,4 @@ data:
               bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
               tls_config:
                 insecure_skip_verify: true
+{{ end }}
