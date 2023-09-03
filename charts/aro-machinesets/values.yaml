@@ -10,8 +10,8 @@ replicasPerZone: 1
 # default will create infra nodes
 machineRole: "infra"
 
-machineLabels:
-  node-role.kubernetes.io/infra: ""
+machineLabels: {}
+  # node-role.kubernetes.io/infra: ""
 
 machineTaints:
   - key: node-role.kubernetes.io/infra
