@@ -3,7 +3,7 @@ subscriptions:
     channel: v4
     installPlanApproval: Automatic
     source: community-operators
-    sourceNamespace: ~
+    sourceNamespace: openshift-marketplace
 
 operatorGroups:
   - name: aro-thanos-af
