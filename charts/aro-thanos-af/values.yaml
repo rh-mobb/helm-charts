@@ -6,10 +6,16 @@ fullnameOverride: "aro-thanos-af"
 
 replicaCount: 3
 
-rosa:
-  clusterName: "my-cluster"
+clusterMetrics:
+  # remoteWrite or grafana-agent
+  method: remoteWrite
+
+enableUserWorkloadMetrics: false
 
 aro:
+  # minor verson, remove the dot.
+  clusterName: openshift
+  clusterVersion: 4.11
   storageAccount:
   storageAccountKey:
   storageContainer:
@@ -26,5 +32,8 @@ grafana-cr:
   basicAuthUsername: "admin"
   basicAuthPassword: "th5t43r43t43sdfsd"
   # serviceAccountAnnotations: {}
-
-enableUserWorkloadMetrics: false
+  oauthProxy:
+    # allowHtpasswd: ""
+    # The Grafa Role to assign to Oauth Users
+    # Viewier, Editor, Admin
+    orgRoleAssigned: Admin

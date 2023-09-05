@@ -1,144 +1,137 @@
-{{ if .Values.enableUserWorkloadMetrics }}
-apiVersion: redhatcop.redhat.io/v1alpha1
-kind: ResourceLocker
+---
+apiVersion: v1
+kind: ServiceAccount
 metadata:
-  name: {{ include "aro-thanos-af.fullname" . }}-uwm
-  labels:
-    {{- include "aro-thanos-af.labels" . | nindent 4 }}
-spec:
-  serviceAccountRef:
-    name: {{ include "aro-thanos-af.serviceAccountName" . }}-rl-uwm
-  patches:
-  - targetObjectRef:
-      apiVersion: v1
-      kind: ConfigMap
-      name: cluster-monitoring-config
-      namespace: openshift-monitoring
-    patchTemplate: |
-        data:
-          config.yaml: |
-            enableUserWorkload: true
-    patchType: application/strategic-merge-patch+json
-    # sourceObjectRefs:
-    # - apiVersion: v1
-    #   kind: Namespace
-    #   name: openshift-monitoring
-    # - apiVersion: v1
-    #   kind: ServiceAccount
-    #   name: {{ include "aro-thanos-af.serviceAccountName" . }}-rl-enable-uwm
-    #   namespace: resource-locker-test
-    id: enable-user-workload-metrics
+  name: cluster-monitoring-config-patcher
+  namespace: patch-operator
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: configmap-watcher
+rules:
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["list","watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: cluster-monitoring-config-patcher
+  namespace: openshift-monitoring
+rules:
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["list","watch"]
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    resourceNames: ["cluster-monitoring-config"]
+    verbs: ["get","list","watch","patch","update"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: cluster-monitoring-config-patcher
+  namespace: openshift-monitoring
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: cluster-monitoring-config-patcher
+subjects:
+- kind: ServiceAccount
+  name: cluster-monitoring-config-patcher
+  namespace: patch-operator
+---
+{{ if .Values.enableUserWorkloadMetrics }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: user-workload-monitoring-config-patcher
+  namespace: openshift-user-workload-monitoring
+rules:
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["list","watch"]
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    resourceNames: ["user-workload-monitoring-config"]
+    verbs: ["get","list","watch","patch","update"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: user-workload-monitoring-config-patcher
+  namespace: openshift-user-workload-monitoring
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: user-workload-monitoring-config-patcher
+subjects:
+- kind: ServiceAccount
+  name: cluster-monitoring-config-patcher
+  namespace: patch-operator
+---
+{{ end }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cluster-config-watcher
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: configmap-watcher
+subjects:
+- kind: ServiceAccount
+  name: cluster-monitoring-config-patcher
+  namespace: patch-operator
 ---
 apiVersion: redhatcop.redhat.io/v1alpha1
-kind: ResourceLocker
+kind: Patch
 metadata:
-  name: {{ include "aro-thanos-af.serviceAccountName" . }}-rl-uwm-config
+ name: cluster-monitoring-config-patcher
+ namespace: patch-operator
 spec:
-  resources:
-    - excludedPaths:
-        - .metadata
-        - .status
-        - .spec.replicas
-      object:
+  serviceAccountRef:
+    name: cluster-monitoring-config-patcher
+  patches:
+    clusterMonitoringConfig:
+      patchType: application/strategic-merge-patch+json
+      patchTemplate: |
+        data:
+          config.yaml: |
+{{ if .Values.enableUserWorkloadMetrics }}
+            enableUserWorkload: true
+{{ end }}
+            prometheusK8s:
+              remoteWrite:
+                - url: "http://thanos-receive.{{ .Release.Namespace }}.svc.cluster.local:9091/api/v1/receive"
+      targetObjectRef:
         apiVersion: v1
         kind: ConfigMap
-        metadata:
-          name: user-workload-monitoring-config
-          namespace: openshift-user-workload-monitoring
+        name: cluster-monitoring-config
+        namespace: openshift-monitoring
+---
+{{ if .Values.enableUserWorkloadMetrics }}
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: Patch
+metadata:
+ name: user-workload-monitoring-config-patcher
+ namespace: patch-operator
+spec:
+  serviceAccountRef:
+    name: cluster-monitoring-config-patcher
+  patches:
+    clusterMonitoringConfig:
+      patchType: application/strategic-merge-patch+json
+      patchTemplate: |
         data:
           config.yaml: |
             prometheus:
               remoteWrite:
                 - url: "http://thanos-receive.{{ .Release.Namespace }}.svc.cluster.local:9091/api/v1/receive"
-  serviceAccountRef:
-    name: {{ include "aro-thanos-af.serviceAccountName" . }}-rl-uwm
-# ---
-# apiVersion: v1
-# kind: ConfigMap
-# metadata:
-#   name: user-workload-monitoring-config
-#   namespace: openshift-user-workload-monitoring
-# data:
-#   config.yaml: |
-#     prometheus:
-#       remoteWrite:
-#         - url: "http://thanos-receive.{{ .Release.Namespace }}.svc.cluster.local:9091/api/v1/receive"
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: {{ include "aro-thanos-af.serviceAccountName" . }}-rl-uwm
-  labels:
-    {{- include "aro-thanos-af.labels" . | nindent 4 }}
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  name: {{ include "aro-thanos-af.fullname" . }}-rl-uwm
-  namespace: openshift-user-workload-monitoring
-  labels:
-    {{- include "aro-thanos-af.labels" . | nindent 4 }}
-rules:
-- apiGroups:
-  - ""
-  resources:
-  - configmaps
-  verbs:
-  - list
-  - get
-  - watch
-  - create
-  - update
-  - patch
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: {{ include "aro-thanos-af.fullname" . }}-rl-cm
-  labels:
-    {{- include "aro-thanos-af.labels" . | nindent 4 }}
-rules:
-- apiGroups:
-  - ""
-  resources:
-  - configmaps
-  verbs:
-  - list
-  - get
-  - watch
-  - create
-  - update
-  - patch
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: {{ include "aro-thanos-af.fullname" . }}-rl-uwm
-  namespace: openshift-user-workload-monitoring
-  labels:
-    {{- include "aro-thanos-af.labels" . | nindent 4 }}
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: {{ include "aro-thanos-af.fullname" . }}-rl-cm
-subjects:
-- kind: ServiceAccount
-  name: {{ include "aro-thanos-af.serviceAccountName" . }}-rl-uwm
-  namespace: {{ .Release.Namespace }}
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: {{ include "aro-thanos-af.fullname" . }}-rl-uwm
-  namespace: openshift-monitoring
-  labels:
-    {{- include "aro-thanos-af.labels" . | nindent 4 }}
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: {{ include "aro-thanos-af.fullname" . }}-rl-cm
-subjects:
-- kind: ServiceAccount
-  name: {{ include "aro-thanos-af.serviceAccountName" . }}-rl-uwm
-  namespace: {{ .Release.Namespace }}
+      targetObjectRef:
+        apiVersion: v1
+        kind: ConfigMap
+        name: user-workload-monitoring-config
+        namespace: openshift-user-workload-monitoring
 {{ end }}
