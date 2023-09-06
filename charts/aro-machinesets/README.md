@@ -1,6 +1,8 @@
 # Helm Chart to set up extra MachineSets on ARO clusters
 
-This Helm chart will set up extra MachineSets on ARO clusters. The Defaults will configure them to be infra nodes. see [./values.yaml](values.yaml) for configurable options.
+This Helm chart will set up extra MachineSets on ARO clusters.
+The defaults are un-opinionated about the type of nodes.
+See [./values.yaml](values.yaml) for configurable options, and how to make the machineset suitable as infra-nodes.
 
 
 ## Prerequisites

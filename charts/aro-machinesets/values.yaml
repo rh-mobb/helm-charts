@@ -11,11 +11,13 @@ replicasPerZone: 1
 machineRole: "infra"
 
 machineLabels: {}
+  # uncomment this to have infra-nodes
   # node-role.kubernetes.io/infra: ""
 
-machineTaints:
-  - key: node-role.kubernetes.io/infra
-    effect: NoSchedule
+machineTaints: {}
+  # uncomment this to have dedicated infra-nodes with taints
+  # - key: node-role.kubernetes.io/infra
+  #  effect: NoSchedule
 
 ## Ignore these unless using `helm template` as they're auto-discovered.
 clusterSpec:
