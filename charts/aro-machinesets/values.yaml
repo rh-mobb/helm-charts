@@ -7,15 +7,19 @@ vmSize: Standard_D4s_v3
 zoneCount: 3
 replicasPerZone: 1
 
-# default will create infra nodes
-machineRole: "infra"
+# define type type of role
+machineRole: "TBD"
+# for infra nodes use:
+# machineRole: "infra"
 
-machineLabels:
-  node-role.kubernetes.io/infra: ""
+machineLabels: {}
+  # uncomment this to have infra-nodes
+  # node-role.kubernetes.io/infra: ""
 
-machineTaints:
-  - key: node-role.kubernetes.io/infra
-    effect: NoSchedule
+machineTaints: {}
+  # uncomment this to have dedicated infra-nodes with taints
+  # - key: node-role.kubernetes.io/infra
+  #  effect: NoSchedule
 
 ## Ignore these unless using `helm template` as they're auto-discovered.
 clusterSpec:
