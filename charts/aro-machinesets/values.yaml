@@ -26,6 +26,9 @@ clusterSpec:
   infraId: aro-cluster-hsmtw
   location: eastus
 
+## Set to true to enable spot-VMs, see: https://learn.microsoft.com/en-us/azure/openshift/howto-spot-nodes
+enableSpot: false
+
 machineSetSpec:
   image:
     offer: aro4
@@ -46,3 +49,4 @@ machineSetSpec:
   resourceGroup: aro-cddajpe1
   subnet: aro-cluster-machine-subnet
   vnet: aro-cluster-vnet
+  # spotVMOptions - optionally declare spotVMOptions when setting enableSpot to true
