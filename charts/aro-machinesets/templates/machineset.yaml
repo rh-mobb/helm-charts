@@ -63,6 +63,9 @@ spec:
           userDataSecret:
             name: worker-user-data
           vmSize: {{ $.Values.vmSize }}
+          {{- if $.Values.enableSpot }}
+          spotVMOptions: {{ $machineSetSpec.spotVMOptions | default dict | toYaml | nindent 12 }}
+          {{- end }}
           vnet: {{ $machineSetSpec.vnet }}
           zone: "{{ . }}"
 {{- end }}
