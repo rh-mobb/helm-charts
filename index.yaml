@@ -131,6 +131,18 @@ entries:
     version: 0.1.0
   aro-machinesets:
   - apiVersion: v2
+    created: "2023-09-13T16:02:45.646173806Z"
+    description: A Helm chart to configure machinesets for ARO
+    digest: 9d33b121de46f2a9deb4cd9a3fb4c33951f4ad05ec1bb7fadb68812520702550
+    home: https://github.com/rh-mobb/helm-charts
+    maintainers:
+    - name: paulczar
+    name: aro-machinesets
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/aro-machinesets-0.3.0/aro-machinesets-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
     created: "2023-09-06T18:27:31.817839733Z"
     description: A Helm chart to configure machinesets for ARO
     digest: c4d1c41d57dee5ff3613527d87c722837120ece96ed94de1756e375b1ef39f83
@@ -932,4 +944,4 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/rosa-thanos-s3-0.1.0/rosa-thanos-s3-0.1.0.tgz
     version: 0.1.0
-generated: "2023-09-06T18:27:31.817930634Z"
+generated: "2023-09-13T16:02:45.646431966Z"
