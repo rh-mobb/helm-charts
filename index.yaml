@@ -68,6 +68,18 @@ entries:
     version: 0.1.0
   aro-clf-blob:
   - apiVersion: v2
+    created: "2023-09-22T17:45:17.510402034Z"
+    description: A Helm chart for Kubernetes
+    digest: f9a2c103001fe6562077751da75ed93ece491613c17eed46629671c40faab1ed
+    home: https://github.com/rh-mobb/helm-charts
+    maintainers:
+    - name: paulczar
+    name: aro-clf-blob
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/aro-clf-blob-0.1.3/aro-clf-blob-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
     created: "2023-06-13T09:21:10.32205589Z"
     description: A Helm chart for Kubernetes
     digest: c3ff20a0b1aed5e93e08a6add2e2c4565d63811c1c4b7eaf6a63a1e9709dae22
@@ -976,4 +988,4 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/rosa-thanos-s3-0.1.0/rosa-thanos-s3-0.1.0.tgz
     version: 0.1.0
-generated: "2023-09-22T14:07:00.329524873Z"
+generated: "2023-09-22T17:45:17.510478835Z"
