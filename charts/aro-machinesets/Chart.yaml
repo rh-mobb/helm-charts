@@ -3,7 +3,7 @@ name: aro-machinesets
 description: A Helm chart to configure machinesets for ARO
 type: application
 
-version: 0.1.2
+version: 0.4.0
 maintainers:
   - name: paulczar
 home: https://github.com/rh-mobb/helm-charts

@@ -4,7 +4,6 @@ subscriptions:
     installPlanApproval: Automatic
     source: community-operators
     sourceNamespace: openshift-marketplace
-    startingCSV: grafana-operator.v4.1.1
 
 operatorGroups:
   - name: aro-thanos-af

@@ -11,4 +11,4 @@ clf:
   audit: false
 
 lokiStack:
-  storageClassName: managed-premium
+  storageClassName: managed-csi

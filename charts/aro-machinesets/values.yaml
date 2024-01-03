@@ -7,20 +7,29 @@ vmSize: Standard_D4s_v3
 zoneCount: 3
 replicasPerZone: 1
 
-# default will create infra nodes
-machineRole: "infra"
+# define type type of role
+machineRole: "TBD"
+# for infra nodes use:
+# machineRole: "infra"
 
-machineLabels:
-  node-role.kubernetes.io/infra: ""
+machineLabels: {}
+  # uncomment this to have infra-nodes
+  # node-role.kubernetes.io/infra: ""
 
-machineTaints:
-  - key: node-role.kubernetes.io/infra
-    effect: NoSchedule
+machineTaints: {}
+  # uncomment this to have dedicated infra-nodes with taints
+  # - key: node-role.kubernetes.io/infra
+  #  effect: NoSchedule
 
 ## Ignore these unless using `helm template` as they're auto-discovered.
 clusterSpec:
   infraId: aro-cluster-hsmtw
   location: eastus
+
+## Set to true to enable spot-VMs, see:
+# * https://learn.microsoft.com/en-us/azure/openshift/howto-spot-nodes
+# * https://docs.openshift.com/container-platform/4.12/machine_management/creating_machinesets/creating-machineset-azure.html#machineset-non-guaranteed-instance_creating-machineset-azure
+enableSpot: false
 
 machineSetSpec:
   image:
@@ -42,3 +51,7 @@ machineSetSpec:
   resourceGroup: aro-cddajpe1
   subnet: aro-cluster-machine-subnet
   vnet: aro-cluster-vnet
+  ## spotVMOptions - optionally declare spotVMOptions when setting enableSpot to true as described on
+  ## https://docs.openshift.com/container-platform/4.12/machine_management/creating_machinesets/creating-machineset-azure.html#machineset-non-guaranteed-instance_creating-machineset-azure
+  # spotVMOptions:
+  #   maxPrice: -1

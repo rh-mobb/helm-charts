@@ -63,6 +63,13 @@ spec:
           userDataSecret:
             name: worker-user-data
           vmSize: {{ $.Values.vmSize }}
+          {{- if $machineSetSpec.osDisk.managedDisk.diskEncryptionSet }}
+          securityProfile:
+            encryptionAtHost: true
+          {{- end }}
+          {{- if $.Values.enableSpot }}
+          spotVMOptions: {{ $machineSetSpec.spotVMOptions | default dict | toYaml | nindent 12 }}
+          {{- end }}
           vnet: {{ $machineSetSpec.vnet }}
           zone: "{{ . }}"
 {{- end }}
