@@ -23,7 +23,7 @@ spec:
         fsGroup: 65534
       containers:
       - name: thanos-receive
-        image: quay.io/thanos/thanos:v0.24.0-rc.2
+        image: quay.io/thanos/thanos:v0.34.1
         args:
         - receive
         - --tsdb.path=/data/remote-write-receive-data
