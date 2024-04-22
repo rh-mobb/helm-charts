@@ -10,5 +10,9 @@ clf:
   application: true
   audit: false
 
+serviceaccount: "aro-thanos-af-grafana-cr"
+
+bearertoken: ""
+
 lokiStack:
   storageClassName: managed-csi
