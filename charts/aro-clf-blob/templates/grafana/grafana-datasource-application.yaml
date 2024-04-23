@@ -7,6 +7,12 @@ metadata:
   labels:
     {{- include "aro-clf-blob.labels" . | nindent 4 }}
 spec:
+  valuesFrom:
+    - targetPath: "secureJsonData.httpHeaderValue2"
+      valueFrom:
+        secretKeyRef:
+          name: "loki-token"
+          key: "BEARER_TOKEN"
   instanceSelector:
     matchLabels:
       dashboards: grafana
@@ -24,5 +30,5 @@ spec:
       tlsSkipVerify: true
     secureJsonData:
       httpHeaderValue1: application
-      httpHeaderValue2: "Bearer {{ .Values.bearertoken }}"
+      httpHeaderValue2: "Bearer ${BEARER_TOKEN}"
   {{ end }}
