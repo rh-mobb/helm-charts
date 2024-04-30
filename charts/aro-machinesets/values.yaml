@@ -51,6 +51,10 @@ machineSetSpec:
   resourceGroup: aro-cddajpe1
   subnet: aro-cluster-machine-subnet
   vnet: aro-cluster-vnet
+  ## uncomment to add tags on the vms
+  # tags:
+  #   key1: value1
+  #   key2: value2
   ## spotVMOptions - optionally declare spotVMOptions when setting enableSpot to true as described on
   ## https://docs.openshift.com/container-platform/4.12/machine_management/creating_machinesets/creating-machineset-azure.html#machineset-non-guaranteed-instance_creating-machineset-azure
   # spotVMOptions:
