@@ -1,0 +1,34 @@
+# https://github.com/grafana/loki/blob/main/operator/hack/addon_grafana_gateway_ocp_oauth.yaml
+{{ if .Values.clf.application }}
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDatasource
+metadata:
+  name: {{ include "aro-clf-blob.fullname" . }}-application
+  labels:
+    {{- include "aro-clf-blob.labels" . | nindent 4 }}
+spec:
+  valuesFrom:
+    - targetPath: "secureJsonData.httpHeaderValue2"
+      valueFrom:
+        secretKeyRef:
+          name: "loki-token"
+          key: "BEARER_TOKEN"
+  instanceSelector:
+    matchLabels:
+      dashboards: grafana
+  datasource:
+    name: Loki (Application)
+    type: loki
+    editable: true
+    access: proxy
+    url: https://logging-loki-gateway-http.openshift-logging.svc.cluster.local:8080/api/logs/v1/application/
+    jsonData:
+      httpHeaderName1: X-Scope-OrgID
+      httpHeaderName2: Authorization
+      oauthPassThru: true
+      # tlsAuthWithCACert: true
+      tlsSkipVerify: true
+    secureJsonData:
+      httpHeaderValue1: application
+      httpHeaderValue2: "Bearer ${BEARER_TOKEN}"
+  {{ end }}
