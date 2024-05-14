@@ -27,5 +27,5 @@ roleRef:
   name: {{ include "grafana-cr.fullname" . }}
 subjects:
   - kind: ServiceAccount
-    name: grafana-serviceaccount
+    name: {{ include "grafana-cr.fullname" . }}-sa
     namespace: {{ .Release.Namespace }}
