@@ -1,12 +1,13 @@
 {{ range .Values.dashboards }}
 ---
-apiVersion: integreatly.org/v1alpha1
+apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
   name: {{ .name }}
-  labels:
-    app: grafana
 spec:
+  instanceSelector:
+    matchLabels:
+      dashboards: "grafana"
   json: {{ .json }}
 {{ end }}
 

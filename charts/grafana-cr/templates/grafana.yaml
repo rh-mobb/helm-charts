@@ -1,103 +1,119 @@
 ---
-apiVersion: integreatly.org/v1alpha1
+apiVersion: grafana.integreatly.org/v1beta1
 kind: Grafana
 metadata:
   name: {{ include "grafana-cr.fullname" . }}
   labels:
+    dashboards: "grafana"
   {{- include "grafana-cr.labels" . | nindent 4 }}
 spec:
+  route:
+    spec:
+      port:
+        targetPort: https
+      tls:
+        termination: reencrypt
+      to:
+        kind: Service
+        name: {{ include "grafana-cr.fullname" . }}-service
+        weight: 100
+      wildcardPolicy: None
   deployment:
-    skipCreateAdminAccount: True
-    envFrom:
-      - secretRef:
-          name: {{ include "grafana-cr.fullname" . }}-creds
+    spec:
+      template:
+        spec:
+          volumes:
+          - name: {{ include "grafana-cr.fullname" . }}-tls
+            secret:
+              secretName: {{ include "grafana-cr.fullname" . }}-tls
+          - name: {{ include "grafana-cr.fullname" . }}-proxy
+            secret:
+              secretName: {{ include "grafana-cr.fullname" . }}-proxy
+          - name: {{ include "grafana-cr.fullname" . }}-certs
+            configMap:
+              name: {{ include "grafana-cr.fullname" . }}-certs
+          containers:
+            - image: 'quay.io/openshift/origin-oauth-proxy:4.12'
+              name: grafana-proxy
+              args:
+              - -provider=openshift
+              - -https-address=:9091
+              - -http-address=
+              - -email-domain=*
+              - -upstream=http://localhost:3000
+              - '-openshift-sar={"resource": "namespaces", "verb": "get"}'
+              - '-openshift-delegate-urls={"/": {"resource": "namespaces", "verb": "get"}}'
+              - -tls-cert=/etc/tls/private/tls.crt
+              - -tls-key=/etc/tls/private/tls.key
+              - -client-secret-file=/var/run/secrets/kubernetes.io/serviceaccount/token
+              - -openshift-service-account={{ include "grafana-cr.fullname" . }}-sa
+              - -openshift-ca=/etc/pki/tls/cert.pem
+              - -openshift-ca=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+              - -openshift-ca=/etc/proxy/certs/ca-bundle.crt
+              - -cookie-secret-file=/etc/proxy/secrets/session_secret
+              - -cookie-expire=24h
+              - -scope=user:info user:check-access user:list-projects
+              - -pass-access-token=true
+              - -pass-basic-auth=false
+              - -skip-provider-button=true
+              - -skip-auth-regex=^/metrics
+              envFrom:
+                - secretRef:
+                    name: {{ include "grafana-cr.fullname" . }}-creds
+              ports:
+                - containerPort: 9091
+                  name: https
+              resources: {}
+              volumeMounts:
+                - mountPath: /etc/tls/private
+                  name: {{ include "grafana-cr.fullname" . }}-tls
+                  readOnly: false
+                - mountPath: /etc/proxy/secrets
+                  name: {{ include "grafana-cr.fullname" . }}-proxy
+                  readOnly: false
+                - mountPath: /etc/proxy/certs
+                  name: {{ include "grafana-cr.fullname" . }}-certs
+                  readOnly: false
   config:
-    analytics:
-      check_for_updates: false
-      reporting_enabled: false
+    auth.anonymous:
+      enabled: "True"
     auth:
-      disable_login_form: true
-      disable_signout_menu: true
-      sigv4_auth_enabled: true
+      disable_login_form: "False"
+      disable_signout_menu: "True"
     auth.basic:
-      enabled: false
+      enabled: "True"
     auth.proxy:
-      auto_sign_up: true
-      enabled: true
-      header_name: X-Forwarded-User
+      auto_sign_up: "True"
+      enabled: "True"
+      enable_login_token: "True"
+      header_property: "username"
+      header_name: "X-Forwarded-User"
     log:
       level: {{ .Values.logLevel }}
       mode: console
-    security:
-      admin_user: system:does-not-exist
-      cookie_secure: true
     users:
-      auto_assign_org: true
+      auto_assign_org: "True"
       auto_assign_org_role: {{ .Values.oauthProxy.orgRoleAssigned }}
-      default_theme: light
-      editors_can_admin: true
-      viewers_can_edit: true
-  containers:
-    - image: 'quay.io/openshift/origin-oauth-proxy:4.12'
-      name: grafana-proxy
-      args:
-      - -provider=openshift
-      - -https-address=:9091
-      - -http-address=
-      - -email-domain=*
-      - -upstream=http://localhost:3000
-      - '-openshift-sar={"resource": "namespaces", "verb": "get"}'
-      - '-openshift-delegate-urls={"/": {"resource": "namespaces", "verb": "get"}}'
-      - -tls-cert=/etc/tls/private/tls.crt
-      - -tls-key=/etc/tls/private/tls.key
-      - -client-secret-file=/var/run/secrets/kubernetes.io/serviceaccount/token
-      - -openshift-service-account=grafana-serviceaccount
-      - -openshift-ca=/etc/pki/tls/cert.pem
-      - -openshift-ca=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-      - -cookie-secret-file=/etc/proxy/secrets/session_secret
-      - -cookie-expire=24h
-      - -scope=user:info user:check-access user:list-projects
-      - -pass-access-token=true
-      - -pass-basic-auth=false
-      - -display-htpasswd-form=false
-      - -htpasswd-file=/etc/proxy/htpasswd/auth
-      - -skip-provider-button=true
-      ports:
-        - containerPort: 9091
-          name: grafana-proxy
-      resources: {}
-      volumeMounts:
-        - mountPath: /etc/tls/private
-          name: secret-{{ include "grafana-cr.fullname" . }}-tls
-          readOnly: false
-        - mountPath: /etc/proxy/secrets
-          name: secret-{{ include "grafana-cr.fullname" . }}-proxy
-          readOnly: false
-        - mountPath: /etc/proxy/htpasswd
-          name: secret-{{ include "grafana-cr.fullname" . }}-htpasswd
-          readOnly: true
+      default_theme: dark
+      editors_can_admin: "True"
+      viewers_can_edit: "True"
   secrets:
     - {{ include "grafana-cr.fullname" . }}-tls
     - {{ include "grafana-cr.fullname" . }}-proxy
     - {{ include "grafana-cr.fullname" . }}-htpasswd
   service:
-    ports:
-      - name: grafana-proxy
-        port: 9091
-        protocol: TCP
-        targetPort: grafana-proxy
-    annotations:
-      service.alpha.openshift.io/serving-cert-secret-name: {{ include "grafana-cr.fullname" . }}-tls
-  ingress:
-    enabled: True
-    targetPort: grafana-proxy
-    termination: reencrypt
+    metadata:
+      annotations:
+        service.beta.openshift.io/serving-cert-secret-name: {{ include "grafana-cr.fullname" . }}-tls
+    spec:
+      ports:
+        - name: https
+          port: 9091
+          protocol: TCP
+          targetPort: https
+  client:
+    preferIngress: false
   serviceAccount:
-    annotations:
-      serviceaccounts.openshift.io/oauth-redirectreference.primary: '{"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"grafana-route"}}'
-      {{- with .Values.serviceAccountAnnotations }}
-      {{- toYaml . | nindent 6 }}
-      {{- end }}
-  dashboardLabelSelector:
-    - matchExpressions:
-        - { key: "app", operator: In, values: ['grafana'] }
+    metadata:
+      annotations:
+        serviceaccounts.openshift.io/oauth-redirectreference.primary: '{"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"{{ include "grafana-cr.fullname" . }}-route"}}'
