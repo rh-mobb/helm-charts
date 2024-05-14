@@ -6,8 +6,7 @@ version: 0.7.0
 dependencies:
   - name: grafana-cr
     version: "0.5.0"
-    #repository: "https://rh-mobb.github.io/helm-charts/"
-    repository: file://../grafana-cr
+    repository: "https://rh-mobb.github.io/helm-charts/"
 home: "https://rh-mobb.github.io/helm-charts/"
 maintainers:
   - name: rh-mobb
