@@ -446,6 +446,18 @@ entries:
     version: 0.1.0
   grafana-cr:
   - apiVersion: v2
+    created: "2024-05-14T16:27:52.954242504Z"
+    description: A Helm chart for Deploying Grafana instances using the Grafana Operator
+    digest: 39adb138e6aa5e4e17fe1148c0f809afe1fa5b6c62b28b7fd0506501473712cf
+    home: https://github.com/rh-mobb/helm-charts
+    maintainers:
+    - name: paulczar
+    name: grafana-cr
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/grafana-cr-0.5.0/grafana-cr-0.5.0.tgz
+    version: 0.5.0
+  - apiVersion: v2
     created: "2023-09-05T17:33:00.877335159Z"
     description: A Helm chart for Deploying Grafana instances using the Grafana Operator
     digest: 962baed272ce18ab5bc873f0cd37e645514a18e33e1e4df8c582d5c78a13db48
@@ -1040,4 +1052,4 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/rosa-thanos-s3-0.1.0/rosa-thanos-s3-0.1.0.tgz
     version: 0.1.0
-generated: "2024-04-30T17:43:43.107461948Z"
+generated: "2024-05-14T16:27:52.954483995Z"
