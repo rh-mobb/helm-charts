@@ -1037,6 +1037,25 @@ entries:
     version: 0.1.0
   rosa-thanos-s3:
   - apiVersion: v2
+    created: "2024-05-15T18:18:41.509526628Z"
+    dependencies:
+    - name: grafana-cr
+      repository: https://rh-mobb.github.io/helm-charts/
+      version: 0.5.0
+    - name: alloy
+      repository: https://grafana.github.io/helm-charts
+      version: 0.2.0
+    description: A Helm chart for Kubernetes
+    digest: 23a04c61969807f6216212384c8e108ba7b0f8940c9d4daf47ac8b462d0a9685
+    home: https://rh-mobb.github.io/helm-charts/
+    maintainers:
+    - name: rh-mobb
+    name: rosa-thanos-s3
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/rosa-thanos-s3-0.3.0/rosa-thanos-s3-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
     created: "2021-12-21T18:53:45.47981212Z"
     dependencies:
     - name: grafana-cr
@@ -1052,4 +1071,4 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/rosa-thanos-s3-0.1.0/rosa-thanos-s3-0.1.0.tgz
     version: 0.1.0
-generated: "2024-05-14T16:27:52.954483995Z"
+generated: "2024-05-15T18:18:41.50961335Z"
