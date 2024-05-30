@@ -1,6 +1,6 @@
 subscriptions:
   - name: gpu-operator-certified
-    channel: v23.3
+    channel: v24.3
     installPlanApproval: Automatic
     source: certified-operators
     sourceNamespace: openshift-marketplace
