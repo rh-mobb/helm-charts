@@ -18,7 +18,7 @@ image:
   repository: fluent/fluent-bit
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 1.6
+  tag: 2.2
 
 nameOverride: ""
 fullnameOverride: ""

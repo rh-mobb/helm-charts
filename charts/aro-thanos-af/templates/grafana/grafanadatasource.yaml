@@ -1,17 +1,19 @@
-apiVersion: integreatly.org/v1alpha1
-kind: GrafanaDataSource
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDatasource
 metadata:
   name: {{ include "aro-thanos-af.fullname" . }}-prometheus
   labels:
     {{- include "aro-thanos-af.labels" . | nindent 4 }}
 spec:
-  name: {{ include "aro-thanos-af.fullname" . }}.yaml
-  datasources:
-    - access: proxy
-      editable: false
-      isDefault: true
-      jsonData:
-        timeInterval: 5s
-      name: prometheus
-      type: prometheus
-      url: 'http://thanos-querier.{{ .Release.Namespace }}.svc.cluster.local:9090'
+  instanceSelector:
+    matchLabels:
+      dashboards: grafana
+  datasource:
+    access: proxy
+    editable: false
+    isDefault: true
+    jsonData:
+      timeInterval: 5s
+    name: prometheus
+    type: prometheus
+    url: 'http://thanos-querier.{{ .Release.Namespace }}.svc.cluster.local:9090'

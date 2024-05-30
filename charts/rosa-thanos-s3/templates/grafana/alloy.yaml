@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+  name: grafana-alloy-config
+data:
+  config.alloy: |-
+    prometheus.scrape "cluster_metrics" {
+      job_name     = "cluster-monitoring"
+      forward_to = [prometheus.remote_write.cluster_metrics.receiver]
+      targets    = [
+        {
+          "__address__" = "prometheus-k8s.openshift-monitoring.svc.cluster.local:9091",
+          "__scheme__" = "https",
+          "__metrics_path__" = "/federate",
+        },
+      ]
+      honor_labels = true
+      params       = {
+              "match[]" = ["{job!=\"\"}"],
+      }
+      scrape_interval = "30s"
+      scrape_timeout  = "30s"
+      metrics_path    = "/federate"
+      scheme          = "https"
+
+      authorization {
+        type             = "Bearer"
+        credentials_file = "/var/run/secrets/kubernetes.io/serviceaccount/token"
+      }
+      tls_config {
+        insecure_skip_verify = true
+      }
+    }
+
+    prometheus.remote_write "cluster_metrics" {
+      external_labels = {
+        cluster = "{{ .Values.rosa.clusterName }}",
+      }
+      endpoint {
+        name = "thanos-receive"
+        url  = "http://thanos-receive.{{ .Release.Namespace }}.svc.cluster.local:9091/api/v1/receive"
+        queue_config {
+          capacity             = 2500
+          max_shards           = 200
+          max_samples_per_send = 1000
+        }
+        metadata_config { }
+      }
+    }
