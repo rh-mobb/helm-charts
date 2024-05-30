@@ -548,6 +548,19 @@ entries:
   nvidia-gpu:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-05-30T15:57:46.300635565Z"
+    description: Helm Chart to set up NVIDIA GPU nodes
+    digest: bbfb3a514e1971e1dca83824830a17057b0ef990529a1780d7aee8df41f68bf7
+    home: https://github.com/rh-mobb/helm-charts
+    maintainers:
+    - name: paulczar
+    name: nvidia-gpu
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/nvidia-gpu-0.1.2/nvidia-gpu-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-06-27T18:06:10.425522687Z"
     description: Helm Chart to set up NVIDIA GPU nodes
     digest: c94c52e251acb6cfed22093c5091528c9f14af9334da44151824ce0c2c0d616c
@@ -1087,4 +1100,4 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/rosa-thanos-s3-0.1.0/rosa-thanos-s3-0.1.0.tgz
     version: 0.1.0
-generated: "2024-05-15T18:19:21.064341639Z"
+generated: "2024-05-30T15:57:46.300799152Z"
