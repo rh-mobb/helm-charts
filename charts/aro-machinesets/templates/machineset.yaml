@@ -54,6 +54,7 @@ spec:
           image: {{ $machineSetSpec.image | toYaml | nindent 12 }}
           kind: AzureMachineProviderSpec
           location: {{ $machineSetSpec.location }}
+          acceleratedNetworking: {{ $machineSetSpec.acceleratedNetworking }}
           networkResourceGroup: {{ $machineSetSpec.networkResourceGroup }}
           osDisk: {{ $machineSetSpec.osDisk | toYaml | nindent 12 }}
           publicIP: {{ $machineSetSpec.publicIP }}

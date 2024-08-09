@@ -40,6 +40,8 @@ machineSetSpec:
     version: 410.84.20220125
   location: eastus
   networkResourceGroup: aro-cluster-rg
+  ## set to false if SKU does not support accelerated networking
+  acceleratedNetworking: true
   osDisk:
     diskSettings: {}
     diskSizeGB: 128
