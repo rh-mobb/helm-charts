@@ -16,7 +16,7 @@ machineLabels: {}
   # uncomment this to have infra-nodes
   # node-role.kubernetes.io/infra: ""
 
-machineTaints: {}
+machineTaints: []
   # uncomment this to have dedicated infra-nodes with taints
   # - key: node-role.kubernetes.io/infra
   #  effect: NoSchedule
@@ -40,6 +40,8 @@ machineSetSpec:
     version: 410.84.20220125
   location: eastus
   networkResourceGroup: aro-cluster-rg
+  ## set to false if SKU does not support accelerated networking
+  acceleratedNetworking: true
   osDisk:
     diskSettings: {}
     diskSizeGB: 128
