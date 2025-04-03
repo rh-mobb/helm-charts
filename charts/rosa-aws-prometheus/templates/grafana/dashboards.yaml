@@ -1,11 +1,15 @@
 {{ range $path, $_ := .Files.Glob "files/dashboards/*.json" }}
 ---
-apiVersion: integreatly.org/v1alpha1
+apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
   name: {{ base $path }}
   labels:
-    app: grafana
+    {{- include "rosa-aws-prometheus.labels" $ | nindent 4 }}
 spec:
+  instanceSelector:
+    matchLabels:
+      dashboards:  grafana
+  folder:  {{ include "rosa-aws-prometheus.fullname" $ }}
   json: {{ $.Files.Get $path }}
 {{ end }}

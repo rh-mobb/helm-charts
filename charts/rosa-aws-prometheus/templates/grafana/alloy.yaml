@@ -1,0 +1,176 @@
+kind: ConfigMap
+metadata:
+  name: grafana-alloy-config
+  labels:
+    {{- include "rosa-aws-prometheus.labels" . | nindent 4 }}
+apiVersion: v1
+data:
+  config.alloy: |-
+
+    livedebugging {
+      enabled = {{ .Values.alloy.liveDebugging }}
+    }
+    logging {
+      level = "{{ .Values.alloy.logLevel }}"
+    }
+
+    prometheus.scrape "cluster_metrics" {
+      job_name     = "cluster-monitoring"
+      forward_to = [prometheus.remote_write.cluster_metrics.receiver]
+      targets    = [
+        {
+          "__address__" = "prometheus-k8s.openshift-monitoring.svc.cluster.local:9091",
+          "__scheme__" = "https",
+          "__metrics_path__" = "/federate",
+        },
+      ]
+      honor_labels = true
+      params       = {
+              "match[]" = ["{job!=\"\"}"],
+      }
+      scrape_interval = "30s"
+      scrape_timeout  = "30s"
+      metrics_path    = "/federate"
+      scheme          = "https"
+
+      authorization {
+        type             = "Bearer"
+        credentials_file = "/var/run/secrets/kubernetes.io/serviceaccount/token"
+
+      }
+      tls_config {
+        insecure_skip_verify = true
+      }
+    }
+
+    prometheus.relabel "cluster_metrics" {
+      forward_to = [prometheus.remote_write.cluster_metrics.receiver]
+      rule {
+        source_labels = ["job"]
+        separator = ";"
+        regex = "(.*)"
+        target_label = "__tmp_prometheus_job_name"
+        replacement = "$1"
+        action = "replace"
+      }
+      rule {
+        source_labels = ["__meta_kubernetes_service_label_prometheus"]
+        separator = ";"
+        regex = "k8s"
+        replacement = "$1"
+        action = "keep"
+      }
+      rule {
+        source_labels = ["__meta_kubernetes_endpoint_port_name"]
+        separator = ";"
+        regex = "web"
+        replacement = "$1"
+        action = "keep"
+      }
+      rule {
+        source_labels = ["__meta_kubernetes_endpoint_address_target_kind", "__meta_kubernetes_endpoint_address_target_name"]
+        separator = ";"
+        regex = "Node;(.*)"
+        target_label = "node"
+        replacement = "${1}"
+        action = "replace"
+      }
+      rule {
+        source_labels = ["__meta_kubernetes_endpoint_address_target_kind", "__meta_kubernetes_endpoint_address_target_name"]
+        separator = ";"
+        regex = "Pod;(.*)"
+        target_label = "pod"
+        replacement = "${1}"
+        action = "replace"
+      }
+      rule {
+        source_labels = ["__meta_kubernetes_namespace"]
+        separator = ";"
+        regex = "(.*)"
+        target_label = "namespace"
+        replacement = "$1"
+        action = "replace"
+      }
+      rule {
+        source_labels = ["__meta_kubernetes_service_name"]
+        separator = ";"
+        regex = "(.*)"
+        target_label = "service"
+        replacement = "$1"
+        action = "replace"
+      }
+      rule {
+        source_labels = ["__meta_kubernetes_pod_name"]
+        separator = ";"
+        regex = "(.*)"
+        target_label = "pod"
+        replacement = "$1"
+        action = "replace"
+      }
+      rule {
+        source_labels = ["__meta_kubernetes_pod_container_name"]
+        separator = ";"
+        regex = "(.*)"
+        target_label = "container"
+        replacement = "$1"
+        action = "replace"
+      }
+      rule {
+        source_labels = ["__meta_kubernetes_service_name"]
+        separator = ";"
+        regex = "(.*)"
+        target_label = "job"
+        replacement = "${1}"
+        action = "replace"
+      }
+      rule {
+        separator = ";"
+        regex = "(.*)"
+        target_label = "endpoint"
+        replacement = "web"
+        action = "replace"
+      }
+      rule {
+        source_labels = ["__address__"]
+        separator = ";"
+        regex = "(.*)"
+        modulus = "1"
+        target_label = "__tmp_hash"
+        replacement = "$1"
+        action = "hashmod"
+      }
+      rule {
+        source_labels = ["__tmp_hash"]
+        separator = ";"
+        regex = "0"
+        replacement = "$1"
+        action = "keep"
+      }
+    }
+
+    prometheus.receive_http "workload_metrics" {
+      http {
+        listen_address = "0.0.0.0"
+        listen_port = 9999
+      }
+      forward_to = [prometheus.remote_write.cluster_metrics.receiver]
+    }
+
+    prometheus.remote_write "cluster_metrics" {
+      external_labels = {
+        cluster = "{{ .Values.rosa.clusterName }}",
+      }
+      endpoint {
+        name = "aws-prometheus"
+        url  = "https://aps-workspaces.{{ .Values.aws.region }}.amazonaws.com/workspaces/{{ .Values.aws.workspaceId }}/api/v1/remote_write"
+        sigv4 {
+          region = "{{ .Values.aws.region }}"
+        }
+        queue_config {
+          capacity             = 2500
+          max_shards           = 200
+          max_samples_per_send = 1000
+        }
+        metadata_config { }
+      }
+    }
