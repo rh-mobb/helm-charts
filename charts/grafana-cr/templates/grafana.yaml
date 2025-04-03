@@ -112,10 +112,6 @@ spec:
       default_theme: dark
       editors_can_admin: "True"
       viewers_can_edit: "True"
-  # secrets:
-  #   - {{ include "grafana-cr.fullname" . }}-tls
-  #   - {{ include "grafana-cr.fullname" . }}-proxy
-  #   - {{ include "grafana-cr.fullname" . }}-htpasswd
   service:
     metadata:
       annotations:
@@ -132,4 +128,6 @@ spec:
     metadata:
       annotations:
         serviceaccounts.openshift.io/oauth-redirectreference.primary: '{"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"{{ include "grafana-cr.fullname" . }}-route"}}'
+        {{ if .Values.serviceAccountAnnotations }}
         {{ .Values.serviceAccountAnnotations | toYaml | nindent 8 }}
+        {{ end }}
