@@ -6,6 +6,9 @@ fullnameOverride: "aws-prometheus-proxy"
 
 replicaCount: 3
 
+rosa:
+  cluster_name: rosa
+
 aws:
   roleArn: ""
   region: "us-east-2"
@@ -14,7 +17,6 @@ aws:
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
-  # Annotations to add to the service account
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name: "aws-prometheus-proxy"
@@ -22,4 +24,24 @@ serviceAccount:
 grafana-cr:
   basicAuthUsername: "admin"
   basicAuthPassword: "password"
-  # serviceAccountAnnotations: {}
+  fullnameOverride: grafana
+  serviceAccountAnnotations: {}
+  sigv4Proxy:
+    enabled: true
+
+alloy:
+  alloy:
+    configMap:
+      create: false
+      name: grafana-alloy-config
+      key: config.alloy
+    extraPorts:
+      - name: remote-write
+        port: 9999
+        targetPort: 9999
+        protocol: TCP
+  serviceAccount:
+    create: false
+    name: "aws-prometheus-proxy"
+  liveDebugging: false
+  logLevel: info
