@@ -4,7 +4,7 @@ kind: Grafana
 metadata:
   name: {{ include "grafana-cr.fullname" . }}
   labels:
-    dashboards: "grafana"
+    dashboards: {{ include "grafana-cr.fullname" . }}
   {{- include "grafana-cr.labels" . | nindent 4 }}
 spec:
   route:
@@ -74,6 +74,19 @@ spec:
                 - mountPath: /etc/proxy/certs
                   name: {{ include "grafana-cr.fullname" . }}-certs
                   readOnly: false
+            {{ if .Values.sigv4Proxy.enabled }}
+            - name: aws-sigv4-proxy
+              image: public.ecr.aws/aws-observability/aws-sigv4-proxy:1.0
+              args:
+                - --name
+                - aps
+                - --region
+                - {{ .Values.sigv4Proxy.region }}
+                - --host
+                - aps-workspaces.{{ .Values.sigv4Proxy.region }}.amazonaws.com
+                - --port
+                - :8005
+            {{ end }}
   config:
     auth.anonymous:
       enabled: "True"
@@ -88,6 +101,8 @@ spec:
       enable_login_token: "True"
       header_property: "username"
       header_name: "X-Forwarded-User"
+    dataproxy:
+      enabled: "true"
     log:
       level: {{ .Values.logLevel }}
       mode: console
@@ -97,10 +112,10 @@ spec:
       default_theme: dark
       editors_can_admin: "True"
       viewers_can_edit: "True"
-  secrets:
-    - {{ include "grafana-cr.fullname" . }}-tls
-    - {{ include "grafana-cr.fullname" . }}-proxy
-    - {{ include "grafana-cr.fullname" . }}-htpasswd
+  # secrets:
+  #   - {{ include "grafana-cr.fullname" . }}-tls
+  #   - {{ include "grafana-cr.fullname" . }}-proxy
+  #   - {{ include "grafana-cr.fullname" . }}-htpasswd
   service:
     metadata:
       annotations:
@@ -117,3 +132,4 @@ spec:
     metadata:
       annotations:
         serviceaccounts.openshift.io/oauth-redirectreference.primary: '{"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"{{ include "grafana-cr.fullname" . }}-route"}}'
+        {{ .Values.serviceAccountAnnotations | toYaml | nindent 8 }}

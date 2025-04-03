@@ -18,3 +18,7 @@ dashboards: []
 dataSources: []
 
 serviceAccountAnnotations: {}
+
+sigv4Proxy:
+  enabled: false
+  region: "us-east-2"
