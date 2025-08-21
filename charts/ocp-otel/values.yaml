@@ -1,0 +1,61 @@
+
+serviceAccount:
+  create: true
+  annotations: #{}
+    eks.amazonaws.com/role-arn: arn:aws:iam::660250927410:role/pczarkow-lokistack-access-role
+uiPlugin:
+  enabled: true
+
+collector:
+  # image: ~
+  # image: otel/opentelemetry-collector-contrib:latest
+  # This image appears to have all the contrib collections
+  # of inputs/outputs to cover both s3 and oltp
+  # if you don't need s3, recommend setting to `~`.
+  image: quay.io/signalfx/splunk-otel-collector
+
+  inputs:
+    application:
+      enabled: true
+    infrastructure:
+      enabled: true
+    audit:
+      enabled: false
+    otlp:
+      enabled: true
+    fluentforward:
+      enabled: true
+
+  outputs:
+    debug:
+      enabled: true
+      verbosity: detailed # basic
+    s3:
+      enabled: true
+      region: "us-east-2"
+      bucket: "pczarkow-lokistack-storage"
+      prefix: "otel" # /{{ .namespace }}"
+      # when this is set to true, the prefix for app logs will be the
+      # namespace they come from
+      application_logs_by_namespace: false
+    lokistack:
+      enabled: true
+
+  pipelines:
+      # for simplicty in Helm logic we only allow one inputRef per pipeline
+      # which is different to the CLF forwarder.
+      # todo - write a validator
+    - name: Application
+      inputRef: application
+      outputRefs: [debug, s3, lokistack]
+    - name: Infrastructure
+      inputRef: infrastructure
+      outputRefs: [debug, s3, lokistack]
+    # - name: Audit
+    #   inputRefs: audit
+    #   outputRefs: [audit, s3]
+
+
+  extra_envs: []
+    # - name: OTEL_EXPORTER_OTLP_ENDPOINT
+    #   value: "dns:///otel-collector.default.svc.cluster.local:4317"
