@@ -622,6 +622,19 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/nvidia-gpu-0.1.0/nvidia-gpu-0.1.0.tgz
     version: 0.1.0
+  ocp-otel:
+  - apiVersion: v2
+    created: "2025-08-21T14:23:33.959436174Z"
+    description: A Helm chart for Kubernetes
+    digest: d172584bcd11e333a26b02ca293d1bd78e8b51bccf8379ea848802a4de7ef875
+    home: https://github.com/rh-mobb/helm-charts
+    maintainers:
+    - name: paulczar
+    name: ocp-otel
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/ocp-otel-0.1.0/ocp-otel-0.1.0.tgz
+    version: 0.1.0
   ocp-proxy-api:
   - apiVersion: v2
     created: "2023-08-11T14:22:35.314302138Z"
@@ -1156,4 +1169,4 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/rosa-thanos-s3-0.1.0/rosa-thanos-s3-0.1.0.tgz
     version: 0.1.0
-generated: "2025-07-09T18:24:29.210285056Z"
+generated: "2025-08-21T14:23:33.959607888Z"
