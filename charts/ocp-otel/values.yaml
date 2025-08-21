@@ -1,8 +1,6 @@
-
 serviceAccount:
   create: true
-  annotations: #{}
-    eks.amazonaws.com/role-arn: arn:aws:iam::660250927410:role/pczarkow-lokistack-access-role
+  annotations: {}
 uiPlugin:
   enabled: true
 
@@ -29,12 +27,12 @@ collector:
   outputs:
     debug:
       enabled: true
-      verbosity: detailed # basic
+      verbosity: detailed  # basic
     s3:
       enabled: true
       region: "us-east-2"
       bucket: "pczarkow-lokistack-storage"
-      prefix: "otel" # /{{ .namespace }}"
+      prefix: "otel"  # /{{ .namespace }}"
       # when this is set to true, the prefix for app logs will be the
       # namespace they come from
       application_logs_by_namespace: false
@@ -54,7 +52,6 @@ collector:
     # - name: Audit
     #   inputRefs: audit
     #   outputRefs: [audit, s3]
-
 
   extra_envs: []
     # - name: OTEL_EXPORTER_OTLP_ENDPOINT
