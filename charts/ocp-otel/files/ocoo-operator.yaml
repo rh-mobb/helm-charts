@@ -1,0 +1,10 @@
+subscriptions:
+  - channel: stable
+    installPlanApproval: Automatic
+    name: cluster-observability-operator
+    source: redhat-operators
+    sourceNamespace: openshift-marketplace
+
+operatorGroups:
+  - name: openshift-cluster-observability-operator-og
+    targetNamespace: all

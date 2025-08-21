@@ -1,0 +1,10 @@
+subscriptions:
+  - channel: stable
+    installPlanApproval: Automatic
+    name: opentelemetry-product
+    source: redhat-operators
+    sourceNamespace: openshift-marketplace
+
+operatorGroups:
+  - name: openshift-opentelemetry-og
+    targetNamespace: all
