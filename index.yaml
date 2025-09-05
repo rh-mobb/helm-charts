@@ -624,6 +624,18 @@ entries:
     version: 0.1.0
   ocp-otel:
   - apiVersion: v2
+    created: "2025-09-05T17:32:55.699318991Z"
+    description: A Helm chart for Kubernetes
+    digest: 182b8054948f47a895e88c8c67665d6aba0be094c7e0cfe93aa3860bf4a2ee04
+    home: https://github.com/rh-mobb/helm-charts
+    maintainers:
+    - name: paulczar
+    name: ocp-otel
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/ocp-otel-0.1.1/ocp-otel-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
     created: "2025-08-21T14:23:33.959436174Z"
     description: A Helm chart for Kubernetes
     digest: d172584bcd11e333a26b02ca293d1bd78e8b51bccf8379ea848802a4de7ef875
@@ -1169,4 +1181,4 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/rosa-thanos-s3-0.1.0/rosa-thanos-s3-0.1.0.tgz
     version: 0.1.0
-generated: "2025-08-21T14:23:33.959607888Z"
+generated: "2025-09-05T17:32:55.699417538Z"
