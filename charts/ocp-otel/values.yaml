@@ -5,12 +5,12 @@ uiPlugin:
   enabled: true
 
 collector:
-  # image: ~
+  image: ~
   # image: otel/opentelemetry-collector-contrib:latest
   # This image appears to have all the contrib collections
   # of inputs/outputs to cover both s3 and oltp
   # if you don't need s3, recommend setting to `~`.
-  image: quay.io/signalfx/splunk-otel-collector
+  # image: quay.io/signalfx/splunk-otel-collector
 
   inputs:
     application:
@@ -27,7 +27,8 @@ collector:
   outputs:
     debug:
       enabled: true
-      verbosity: detailed  # basic
+      # change verbosity to basic to just see that logs are flowing
+      verbosity: detailed
     s3:
       enabled: true
       region: "us-east-2"
