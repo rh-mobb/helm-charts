@@ -14,7 +14,7 @@ curl -sSL https://raw.githubusercontent.com/rh-mobb/helm-charts/main/charts/rosa
 Deploy from the Grafana Helm Chart:
 
 ```bash
-helm repo add mobb https://mobb.github.io/helm-charts
+helm repo add mobb https://rh-mobb.github.io/helm-charts
 helm install -n grafana my-release mobb/grafana-cr
 ```
 
@@ -40,7 +40,7 @@ curl -sSL https://raw.githubusercontent.com/rh-mobb/helm-charts/main/charts/rosa
 Deploy from the Grafana Helm Chart:
 
 ```bash
-helm repo add mobb https://mobb.github.io/helm-charts
+helm repo add mobb https://rh-mobb.github.io/helm-charts
 helm install -n $NAMESPACE my-release mobb/grafana-cr
 ```
 
