@@ -1,5 +1,5 @@
 # https://github.com/grafana/loki/blob/main/operator/hack/addon_grafana_gateway_ocp_oauth.yaml
-apiVersion: integreatly.org/v1beta1
+apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDataSource
 metadata:
   name: {{ include "aro-clf-blob.fullname" . }}-prometheus
