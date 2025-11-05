@@ -7,6 +7,9 @@ metadata:
     {{- include "aro-clf-blob.labels" . | nindent 4 }}
 spec:
   name: {{ include "aro-clf-blob.fullname" . }}.yaml
+  instanceSelector:
+    matchLabels:
+      dashboards: grafana
   datasources:
   {{ if .Values.clf.application }}
     - name: Loki (Application)
