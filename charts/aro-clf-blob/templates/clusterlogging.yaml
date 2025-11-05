@@ -1,15 +1,15 @@
-apiVersion: observability.openshift.io/v1
-kind: ClusterLogging
-metadata:
-  name: instance
-  namespace: openshift-logging
-  labels:
-    {{- include "aro-clf-blob.labels" . | nindent 4 }}
-spec:
-  managementState: Managed
-  logStore:
-    type: lokistack
-    lokistack:
-      name: logging-loki
-  collection:
-    type: vector
+# apiVersion: observability.openshift.io/v1
+# kind: ClusterLogging
+# metadata:
+#   name: instance
+#   namespace: openshift-logging
+#   labels:
+#     {{- include "aro-clf-blob.labels" . | nindent 4 }}
+# spec:
+#   managementState: Managed
+#   logStore:
+#     type: lokistack
+#     lokistack:
+#       name: logging-loki
+#   collection:
+#     type: vector
