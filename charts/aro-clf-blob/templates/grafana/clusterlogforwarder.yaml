@@ -5,6 +5,7 @@ metadata:
   namespace: openshift-logging
 spec:
   managementState: Managed
+  serviceAccount: logging-collector
   pipelines:
   - name: all-to-default
     inputRefs:
