@@ -8,7 +8,7 @@ spec:
   serviceAccount:
     name: cluster-logging-operator
   outputs:
-    - type: lokistack
+    - type: lokiStack
       name: logging-loki
   pipelines:
   - name: all-to-default
