@@ -8,8 +8,8 @@ spec:
   serviceAccount:
     name: cluster-logging-operator
   outputs:
-    type: lokistack
-    name: logging-loki
+    - type: lokistack
+      name: logging-loki
   pipelines:
   - name: all-to-default
     inputRefs:
