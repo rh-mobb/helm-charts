@@ -1,71 +1,71 @@
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: cluster-logging-operator
-  namespace: openshift-logging
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: manager-rolebinding
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: logging-collector-logs-writer
-subjects:
-  - kind: ServiceAccount
-    name: cluster-logging-operator
-    namespace: openshift-logging
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: manager-rolebinding
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-logging-write-application-logs
-subjects:
-  - kind: ServiceAccount
-    name: cluster-logging-operator
-    namespace: openshift-logging
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: manager-rolebinding
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-logging-write-infrastructure-logs
-subjects:
-  - kind: ServiceAccount
-    name: cluster-logging-operator
-    namespace: openshift-logging
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: manager-rolebinding
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-logging-write-audit-logs
-subjects:
-  - kind: ServiceAccount
-    name: cluster-logging-operator
-    namespace: openshift-logging
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: manager-rolebinding
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: clusterlogforwarders.observability.openshift.io-v1-edit
-subjects:
-  - kind: ServiceAccount
-    name: cluster-logging-operator
-    namespace: openshift-logging
----
+# apiVersion: v1
+# kind: ServiceAccount
+# metadata:
+#   name: cluster-logging-operator
+#   namespace: openshift-logging
+# ---
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: ClusterRoleBinding
+# metadata:
+#   name: manager-rolebinding
+# roleRef:
+#   apiGroup: rbac.authorization.k8s.io
+#   kind: ClusterRole
+#   name: logging-collector-logs-writer
+# subjects:
+#   - kind: ServiceAccount
+#     name: cluster-logging-operator
+#     namespace: openshift-logging
+# ---
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: ClusterRoleBinding
+# metadata:
+#   name: manager-rolebinding
+# roleRef:
+#   apiGroup: rbac.authorization.k8s.io
+#   kind: ClusterRole
+#   name: cluster-logging-write-application-logs
+# subjects:
+#   - kind: ServiceAccount
+#     name: cluster-logging-operator
+#     namespace: openshift-logging
+# ---
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: ClusterRoleBinding
+# metadata:
+#   name: manager-rolebinding
+# roleRef:
+#   apiGroup: rbac.authorization.k8s.io
+#   kind: ClusterRole
+#   name: cluster-logging-write-infrastructure-logs
+# subjects:
+#   - kind: ServiceAccount
+#     name: cluster-logging-operator
+#     namespace: openshift-logging
+# ---
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: ClusterRoleBinding
+# metadata:
+#   name: manager-rolebinding
+# roleRef:
+#   apiGroup: rbac.authorization.k8s.io
+#   kind: ClusterRole
+#   name: cluster-logging-write-audit-logs
+# subjects:
+#   - kind: ServiceAccount
+#     name: cluster-logging-operator
+#     namespace: openshift-logging
+# ---
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: ClusterRoleBinding
+# metadata:
+#   name: manager-rolebinding
+# roleRef:
+#   apiGroup: rbac.authorization.k8s.io
+#   kind: ClusterRole
+#   name: clusterlogforwarders.observability.openshift.io-v1-edit
+# subjects:
+#   - kind: ServiceAccount
+#     name: cluster-logging-operator
+#     namespace: openshift-logging
+# ---
