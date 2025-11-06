@@ -5,7 +5,11 @@ metadata:
   namespace: openshift-logging
 spec:
   managementState: Managed
-  serviceAccount: logging-collector
+  serviceAccount:
+    name: cluster-logging-operator
+  outputs:
+    type: lokistack
+    name: logging-loki
   pipelines:
   - name: all-to-default
     inputRefs:
