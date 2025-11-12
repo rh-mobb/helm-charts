@@ -6,10 +6,21 @@ metadata:
 spec:
   managementState: Managed
   serviceAccount:
-    name: cluster-logging-operator
+    name: logging-collector
   outputs:
-    - type: lokiStack
-      name: logging-loki
+  - name: lokistack-out
+    type: lokiStack
+    lokiStack:
+      target:
+        name: logging-loki
+        namespace: openshift-logging
+      authentication:
+        token:
+          from: serviceAccount
+    tls:
+      ca:
+        key: service-ca.crt
+        configMapName: openshift-service-ca.crt
   pipelines:
   - name: all-to-default
     inputRefs:
@@ -23,4 +34,4 @@ spec:
     - audit
     {{ end }}
     outputRefs:
-    - default
+    - lokistack-out

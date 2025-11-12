@@ -6,11 +6,11 @@ metadata:
   labels:
     {{- include "aro-clf-blob.labels" . | nindent 4 }}
 spec:
-  size: 1x.extra-small
+  size: 1x.pico
   storage:
     schemas:
-    - version: v12
-      effectiveDate: 2022-06-01
+    - version: v13
+      effectiveDate: 2025-11-02
     secret:
       name: logging-loki-azure
       type: azure
