@@ -27,3 +27,43 @@ subjects:
 - apiGroup: rbac.authorization.k8s.io
   kind: Group
   name: system:authenticated
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: grafana-serviceaccount-cluster-logging-audit-view
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-logging-audit-view
+subjects:
+  - kind: ServiceAccount
+    name: grafana-serviceaccount
+    namespace: custom-logging
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: grafana-serviceaccount-cluster-logging-application-view-custom-logging-ns
+  namespace: custom-logging
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-logging-application-view
+subjects:
+  - kind: ServiceAccount
+    name: grafana-serviceaccount
+    namespace: custom-logging
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: grafana-serviceaccount-cluster-logging-infrastructure-view
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-logging-infrastructure-view
+subjects:
+  - kind: ServiceAccount
+    name: grafana-serviceaccount
+    namespace: custom-logging
