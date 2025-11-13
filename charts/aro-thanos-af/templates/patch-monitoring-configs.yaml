@@ -85,6 +85,13 @@ subjects:
   name: cluster-monitoring-config-patcher
   namespace: patch-operator
 ---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: cluster-monitoring-config
+  namespace: openshift-monitoring
+data: {}
+---
 apiVersion: redhatcop.redhat.io/v1alpha1
 kind: Patch
 metadata:
