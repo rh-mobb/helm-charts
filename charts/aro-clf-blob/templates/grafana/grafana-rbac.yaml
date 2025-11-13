@@ -13,23 +13,6 @@ subjects:
   name: aro-thanos-af-grafana-cr-sa
   namespace: {{ .Release.Namespace }}
 ---
-# NOTE: This one no longer exists?
-#
-# apiVersion: rbac.authorization.k8s.io/v1
-# kind: ClusterRoleBinding
-# metadata:
-#   name: {{ include "aro-clf-blob.fullname" . }}-users-application-logs-reader
-#   labels:
-#     {{- include "aro-clf-blob.labels" . | nindent 4 }}
-# roleRef:
-#   apiGroup: rbac.authorization.k8s.io
-#   kind: ClusterRole
-#   name: logging-application-logs-reader
-# subjects:
-# - apiGroup: rbac.authorization.k8s.io
-#   kind: Group
-#   name: system:authenticated
-#---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
