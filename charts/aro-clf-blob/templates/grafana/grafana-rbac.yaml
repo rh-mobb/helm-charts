@@ -10,26 +10,26 @@ roleRef:
   name: system:auth-delegator
 subjects:
 - kind: ServiceAccount
-  name: aro-thanos-af-grafana-cr-sa
+  name: grafana-operator-controller-manager
   namespace: {{ .Release.Namespace }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: aro-thanos-af-grafana-cr-sa-cluster-logging-audit-view
+  name: grafana-operator-controller-manager-cluster-logging-audit-view
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: cluster-logging-audit-view
 subjects:
   - kind: ServiceAccount
-    name: aro-thanos-af-grafana-cr-sa
+    name: grafana-operator-controller-manager
     namespace: custom-logging
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: aro-thanos-af-grafana-cr-sa-cluster-logging-application-view-custom-logging-ns
+  name: grafana-operator-controller-manager-cluster-logging-application-view-custom-logging-ns
   namespace: custom-logging
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -37,18 +37,18 @@ roleRef:
   name: cluster-logging-application-view
 subjects:
   - kind: ServiceAccount
-    name: aro-thanos-af-grafana-cr-sa
+    name: grafana-operator-controller-manager
     namespace: custom-logging
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: aro-thanos-af-grafana-cr-sa-cluster-logging-infrastructure-view
+  name: grafana-operator-controller-manager-cluster-logging-infrastructure-view
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: cluster-logging-infrastructure-view
 subjects:
   - kind: ServiceAccount
-    name: aro-thanos-af-grafana-cr-sa
+    name: grafana-operator-controller-manager
     namespace: custom-logging
