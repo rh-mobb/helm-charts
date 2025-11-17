@@ -80,6 +80,18 @@ entries:
     version: 0.1.0
   aro-clf-blob:
   - apiVersion: v2
+    created: "2025-11-17T04:45:51.683943019Z"
+    description: A Helm chart for Kubernetes
+    digest: 57351b697ecf8dc4dd417885ae1f415f1770e0d8c0ddb4c8d3acf95d65f3b0b7
+    home: https://github.com/rh-mobb/helm-charts
+    maintainers:
+    - name: paulczar
+    name: aro-clf-blob
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/aro-clf-blob-0.2.24/aro-clf-blob-0.2.24.tgz
+    version: 0.2.24
+  - apiVersion: v2
     created: "2023-09-22T17:45:17.510402034Z"
     description: A Helm chart for Kubernetes
     digest: f9a2c103001fe6562077751da75ed93ece491613c17eed46629671c40faab1ed
@@ -264,6 +276,22 @@ entries:
     - https://github.com/rh-mobb/helm-charts/releases/download/aro-pull-secret-0.1.0/aro-pull-secret-0.1.0.tgz
     version: 0.1.0
   aro-thanos-af:
+  - apiVersion: v2
+    created: "2025-11-17T04:45:51.884613869Z"
+    dependencies:
+    - name: grafana-cr
+      repository: https://scorpiion.github.io/helm-charts/
+      version: 0.5.2
+    description: A Helm chart for Kubernetes
+    digest: cbd7dbb32da9b53d6dd49b1b34444408954c9cd8e92a57d2c47872de339c3ba8
+    home: https://rh-mobb.github.io/helm-charts/
+    maintainers:
+    - name: rh-mobb
+    name: aro-thanos-af
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/aro-thanos-af-0.7.1/aro-thanos-af-0.7.1.tgz
+    version: 0.7.1
   - apiVersion: v2
     created: "2024-05-15T18:19:21.064188061Z"
     dependencies:
@@ -473,6 +501,18 @@ entries:
     - https://github.com/rh-mobb/helm-charts/releases/download/aro-thanos-af-0.1.0/aro-thanos-af-0.1.0.tgz
     version: 0.1.0
   grafana-cr:
+  - apiVersion: v2
+    created: "2025-11-17T04:45:52.105404788Z"
+    description: A Helm chart for Deploying Grafana instances using the Grafana Operator
+    digest: babbaac989c7381174ff390c762b50e84c7e149e83ddce7680e0cec53377abb4
+    home: https://github.com/rh-mobb/helm-charts
+    maintainers:
+    - name: paulczar
+    name: grafana-cr
+    type: application
+    urls:
+    - https://github.com/rh-mobb/helm-charts/releases/download/grafana-cr-0.5.2/grafana-cr-0.5.2.tgz
+    version: 0.5.2
   - apiVersion: v2
     created: "2025-04-03T20:12:41.083054963Z"
     description: A Helm chart for Deploying Grafana instances using the Grafana Operator
@@ -1181,4 +1221,4 @@ entries:
     urls:
     - https://github.com/rh-mobb/helm-charts/releases/download/rosa-thanos-s3-0.1.0/rosa-thanos-s3-0.1.0.tgz
     version: 0.1.0
-generated: "2025-09-05T17:32:55.699417538Z"
+generated: "2025-11-17T04:45:52.320638134Z"
