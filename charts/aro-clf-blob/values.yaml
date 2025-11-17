@@ -8,7 +8,7 @@ azure:
 clf:
   infrastructure: true
   application: true
-  audit: false
+  audit: false # NOTE: Enabling audit logs requires additional permissions
 
 lokiStack:
   storageClassName: managed-csi
