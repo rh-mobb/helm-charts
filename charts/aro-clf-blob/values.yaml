@@ -8,7 +8,7 @@ azure:
 clf:
   infrastructure: true
   application: true
-  audit: false
+  audit: true
 
 lokiStack:
   storageClassName: managed-csi

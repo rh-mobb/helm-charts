@@ -5,14 +5,14 @@ subscriptions:
   source: redhat-operators
   sourceNamespace: openshift-marketplace
   namespace: openshift-logging
-  startingCSV: cluster-logging.5.5.2
+  startingCSV: cluster-logging.6.3.1
 - name: loki-operator
   channel: stable
   installPlanApproval: Automatic
   source: redhat-operators
   sourceNamespace: openshift-marketplace
   namespace: openshift-operators-redhat
-  startingCSV: loki-operator.5.5.2
+  startingCSV: loki-operator.6.3.1
 operatorGroups:
 - name: openshift-logging
   namespace: openshift-logging

@@ -1,4 +1,3 @@
-
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -25,6 +24,46 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: {{ include "grafana-cr.fullname" . }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "grafana-cr.fullname" . }}-sa
+    namespace: {{ .Release.Namespace }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "grafana-cr.fullname" . }}-sa-cluster-logging-audit-view
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-logging-audit-view
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "grafana-cr.fullname" . }}-sa
+    namespace: {{ .Release.Namespace }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "grafana-cr.fullname" . }}-sa-cluster-logging-application-view-{{ .Release.Namespace }}-ns
+  namespace: {{ .Release.Namespace }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-logging-application-view
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "grafana-cr.fullname" . }}-sa
+    namespace: {{ .Release.Namespace }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "grafana-cr.fullname" . }}-sa-cluster-logging-infrastructure-view
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-logging-infrastructure-view
 subjects:
   - kind: ServiceAccount
     name: {{ include "grafana-cr.fullname" . }}-sa
