@@ -7,7 +7,6 @@ fullnameOverride: "aro-thanos-af"
 replicaCount: 3
 
 clusterMetrics:
-  # remoteWrite or grafana-agent
   method: remoteWrite
 
 enableUserWorkloadMetrics: false
