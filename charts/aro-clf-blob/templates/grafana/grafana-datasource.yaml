@@ -22,13 +22,13 @@ spec:
       tlsSkipVerify: true
       httpHeaderName1: 'Authorization'
     secureJsonData:
-      httpHeaderValue1: 'Bearer \${token}'
-      valuesFrom:
-      - targetPath: secureJsonData.httpHeaderValue1
-        valueFrom:
-          secretKeyRef:
-            name: aro-thanos-af-grafana-cr-sa-token
-            key: token
+      httpHeaderValue1: 'Bearer ${token}'
+  valuesFrom:
+  - targetPath: secureJsonData.httpHeaderValue1
+    valueFrom:
+      secretKeyRef:
+        name: aro-thanos-af-grafana-cr-sa-token
+        key: token
 {{ end }}
 ---
 
@@ -56,13 +56,13 @@ spec:
       tlsSkipVerify: true
       httpHeaderName1: 'Authorization'
     secureJsonData:
-      httpHeaderValue1: 'Bearer \${token}'
-      valuesFrom:
-      - targetPath: secureJsonData.httpHeaderValue1
-        valueFrom:
-          secretKeyRef:
-            name: aro-thanos-af-grafana-cr-sa-token
-            key: token
+      httpHeaderValue1: 'Bearer ${token}'
+  valuesFrom:
+  - targetPath: secureJsonData.httpHeaderValue1
+    valueFrom:
+      secretKeyRef:
+        name: aro-thanos-af-grafana-cr-sa-token
+        key: token
 {{ end }}
 
 ---
@@ -90,11 +90,11 @@ spec:
       tlsSkipVerify: true
       httpHeaderName1: 'Authorization'
     secureJsonData:
-      httpHeaderValue1: 'Bearer \${token}'
-      valuesFrom:
-      - targetPath: secureJsonData.httpHeaderValue1
-        valueFrom:
-          secretKeyRef:
-            name: aro-thanos-af-grafana-cr-sa-token
-            key: token
+      httpHeaderValue1: 'Bearer ${token}'
+  valuesFrom:
+  - targetPath: secureJsonData.httpHeaderValue1
+    valueFrom:
+      secretKeyRef:
+        name: aro-thanos-af-grafana-cr-sa-token
+        key: token
 {{ end }}
