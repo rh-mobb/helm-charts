@@ -20,14 +20,15 @@ spec:
     jsonData:
       # tlsAuthWithCACert: true
       tlsSkipVerify: true
-      httpHeaderName1: "Authorization"
-      secureJsonDataFrom:
-        - attribute: httpHeaderValue1
-          secretKeyRef:
-            name: aro-thanos-af-grafana-cr-sa-token
-            key: token
+    secureJsonData:
+        httpHeaderValue1: 'Bearer \${token}'
+    valuesFrom:
+    - targetPath: secureJsonData.httpHeaderValue1
+        valueFrom:
+        secretKeyRef:
+          name: aro-thanos-af-grafana-cr-sa-token
+          key: token
 {{ end }}
-
 ---
 
 # https://github.com/grafana/loki/blob/main/operator/hack/addon_grafana_gateway_ocp_oauth.yaml
@@ -52,12 +53,14 @@ spec:
     jsonData:
       # tlsAuthWithCACert: true
       tlsSkipVerify: true
-      httpHeaderName1: "Authorization"
-      secureJsonDataFrom:
-        - attribute: httpHeaderValue1
-          secretKeyRef:
-            name: aro-thanos-af-grafana-cr-sa-token
-            key: token
+    secureJsonData:
+        httpHeaderValue1: 'Bearer \${token}'
+    valuesFrom:
+    - targetPath: secureJsonData.httpHeaderValue1
+        valueFrom:
+        secretKeyRef:
+          name: aro-thanos-af-grafana-cr-sa-token
+          key: token
 {{ end }}
 
 ---
@@ -83,10 +86,12 @@ spec:
     jsonData:
       # tlsAuthWithCACert: true
       tlsSkipVerify: true
-      httpHeaderName1: "Authorization"
-      secureJsonDataFrom:
-        - attribute: httpHeaderValue1
-          secretKeyRef:
-            name: aro-thanos-af-grafana-cr-sa-token
-            key: token
+    secureJsonData:
+        httpHeaderValue1: 'Bearer \${token}'
+    valuesFrom:
+    - targetPath: secureJsonData.httpHeaderValue1
+        valueFrom:
+        secretKeyRef:
+          name: aro-thanos-af-grafana-cr-sa-token
+          key: token
 {{ end }}
