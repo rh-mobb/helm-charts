@@ -8,5 +8,6 @@ spec:
   instanceSelector:
     matchLabels:
       app: "grafana"
-  json: {{ $.Files.Get $path }}
+  json: |
+{{ .Files.Get $path | indent 4 }}
 {{ end }}
