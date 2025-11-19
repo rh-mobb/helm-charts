@@ -21,8 +21,10 @@ spec:
       # tlsAuthWithCACert: true
       tlsSkipVerify: true
       httpHeaderName1: 'Authorization'
+      httpHeaderName2: 'X-Scope-OrgID'
     secureJsonData:
       httpHeaderValue1: 'Bearer ${token}'
+      httpHeaderValue2: 'application'
   valuesFrom:
   - targetPath: secureJsonData.httpHeaderValue1
     valueFrom:
@@ -55,8 +57,10 @@ spec:
       # tlsAuthWithCACert: true
       tlsSkipVerify: true
       httpHeaderName1: 'Authorization'
+      httpHeaderName2: 'X-Scope-OrgID'
     secureJsonData:
       httpHeaderValue1: 'Bearer ${token}'
+      httpHeaderValue2: 'infrastructure'
   valuesFrom:
   - targetPath: secureJsonData.httpHeaderValue1
     valueFrom:
@@ -89,8 +93,10 @@ spec:
       # tlsAuthWithCACert: true
       tlsSkipVerify: true
       httpHeaderName1: 'Authorization'
+      httpHeaderName2: 'X-Scope-OrgID'
     secureJsonData:
       httpHeaderValue1: 'Bearer ${token}'
+      httpHeaderValue2: 'audit'
   valuesFrom:
   - targetPath: secureJsonData.httpHeaderValue1
     valueFrom:
