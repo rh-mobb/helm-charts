@@ -41,20 +41,21 @@ subjects:
   - kind: ServiceAccount
     name: {{ include "grafana-cr.fullname" . }}-sa
     namespace: {{ .Release.Namespace }}
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: {{ include "grafana-cr.fullname" . }}-sa-cluster-logging-application-view
-  namespace: {{ .Release.Namespace }}
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-logging-application-view
-subjects:
-  - kind: ServiceAccount
-    name: {{ include "grafana-cr.fullname" . }}-sa
-    namespace: {{ .Release.Namespace }}
+# OBS: This does not work! It also breaks the namespace specific permissions below
+# ---
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: ClusterRoleBinding
+# metadata:
+#   name: {{ include "grafana-cr.fullname" . }}-sa-cluster-logging-application-view
+#   namespace: {{ .Release.Namespace }}
+# roleRef:
+#   apiGroup: rbac.authorization.k8s.io
+#   kind: ClusterRole
+#   name: cluster-logging-application-view
+# subjects:
+#   - kind: ServiceAccount
+#     name: {{ include "grafana-cr.fullname" . }}-sa
+#     namespace: {{ .Release.Namespace }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
