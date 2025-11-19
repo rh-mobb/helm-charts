@@ -5,7 +5,7 @@ type: application
 version: 0.7.2
 dependencies:
   - name: grafana-cr
-    version: "0.5.2"
+    version: "0.5.3"
     repository: "https://scorpiion.github.io/helm-charts/"
 home: "https://rh-mobb.github.io/helm-charts/"
 maintainers:
