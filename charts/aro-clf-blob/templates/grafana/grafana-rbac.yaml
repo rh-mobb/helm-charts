@@ -10,6 +10,6 @@ roleRef:
   name: system:auth-delegator
 subjects:
 - kind: ServiceAccount
-  name: grafana-operator-controller-manager
+  name: aro-thanos-af-grafana-cr-sa
   namespace: {{ .Release.Namespace }}
 ---
