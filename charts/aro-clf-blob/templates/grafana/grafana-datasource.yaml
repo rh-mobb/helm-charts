@@ -20,6 +20,12 @@ spec:
     jsonData:
       # tlsAuthWithCACert: true
       tlsSkipVerify: true
+      httpHeaderName1: "Authorization"
+      secureJsonDataFrom:
+        - attribute: httpHeaderValue1
+          secretKeyRef:
+            name: aro-thanos-af-grafana-cr-sa-token
+            key: token
 {{ end }}
 
 ---
@@ -46,6 +52,12 @@ spec:
     jsonData:
       # tlsAuthWithCACert: true
       tlsSkipVerify: true
+      httpHeaderName1: "Authorization"
+      secureJsonDataFrom:
+        - attribute: httpHeaderValue1
+          secretKeyRef:
+            name: aro-thanos-af-grafana-cr-sa-token
+            key: token
 {{ end }}
 
 ---
@@ -71,4 +83,10 @@ spec:
     jsonData:
       # tlsAuthWithCACert: true
       tlsSkipVerify: true
+      httpHeaderName1: "Authorization"
+      secureJsonDataFrom:
+        - attribute: httpHeaderValue1
+          secretKeyRef:
+            name: aro-thanos-af-grafana-cr-sa-token
+            key: token
 {{ end }}
