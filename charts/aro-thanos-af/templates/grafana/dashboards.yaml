@@ -9,5 +9,5 @@ spec:
     matchLabels:
       app: "grafana"
   json: |
-{{ .Files.Get $path | indent 4 }}
+{{ $.Files.Get $path | indent 4 }}
 {{ end }}
