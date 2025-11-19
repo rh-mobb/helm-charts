@@ -7,6 +7,6 @@ metadata:
 spec:
   instanceSelector:
     matchLabels:
-      dashboards: "grafana"
+      app: "grafana"
   json: {{ $.Files.Get $path }}
 {{ end }}

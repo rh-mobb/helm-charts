@@ -4,7 +4,7 @@ kind: Grafana
 metadata:
   name: {{ include "grafana-cr.fullname" . }}
   labels:
-    dashboards: {{ include "grafana-cr.fullname" . }}
+    app: grafana
   {{- include "grafana-cr.labels" . | nindent 4 }}
 spec:
   route:

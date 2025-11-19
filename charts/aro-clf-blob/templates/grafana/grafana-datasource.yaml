@@ -10,7 +10,7 @@ spec:
   name: {{ include "aro-clf-blob.fullname" . }}-loki-app.yaml
   instanceSelector:
     matchLabels:
-      dashboards: grafana
+      app: grafana
   datasource:
     name: Loki (Application)
     type: loki
@@ -36,7 +36,7 @@ spec:
   name: {{ include "aro-clf-blob.fullname" . }}-loki-infra.yaml
   instanceSelector:
     matchLabels:
-      dashboards: grafana
+      app: grafana
   datasource:
     name: Loki (Infrastructure)
     type: loki
@@ -62,7 +62,7 @@ spec:
   name: {{ include "aro-clf-blob.fullname" . }}-loki-audit.yaml
   instanceSelector:
     matchLabels:
-      dashboards: grafana
+      app: grafana
   datasource:
     name: Loki (Audit)
     type: loki
