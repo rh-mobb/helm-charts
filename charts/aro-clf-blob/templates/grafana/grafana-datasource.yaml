@@ -20,6 +20,7 @@ spec:
     jsonData:
       # tlsAuthWithCACert: true
       tlsSkipVerify: true
+      httpHeaderName1: 'Authorization'
     secureJsonData:
         httpHeaderValue1: 'Bearer \${token}'
     valuesFrom:
@@ -53,6 +54,7 @@ spec:
     jsonData:
       # tlsAuthWithCACert: true
       tlsSkipVerify: true
+      httpHeaderName1: 'Authorization'
     secureJsonData:
         httpHeaderValue1: 'Bearer \${token}'
     valuesFrom:
@@ -86,6 +88,7 @@ spec:
     jsonData:
       # tlsAuthWithCACert: true
       tlsSkipVerify: true
+      httpHeaderName1: 'Authorization'
     secureJsonData:
         httpHeaderValue1: 'Bearer \${token}'
     valuesFrom:
