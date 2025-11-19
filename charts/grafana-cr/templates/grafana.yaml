@@ -33,7 +33,7 @@ spec:
             configMap:
               name: {{ include "grafana-cr.fullname" . }}-certs
           containers:
-            - image: 'quay.io/openshift/origin-oauth-proxy:4.12'
+            - image: 'quay.io/openshift/origin-oauth-proxy:4.21'
               name: grafana-proxy
               args:
               - -provider=openshift
