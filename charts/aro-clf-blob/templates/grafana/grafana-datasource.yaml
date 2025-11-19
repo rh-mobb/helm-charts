@@ -25,7 +25,7 @@ spec:
         httpHeaderValue1: 'Bearer \${token}'
     valuesFrom:
     - targetPath: secureJsonData.httpHeaderValue1
-        valueFrom:
+      valueFrom:
         secretKeyRef:
           name: aro-thanos-af-grafana-cr-sa-token
           key: token
@@ -59,7 +59,7 @@ spec:
         httpHeaderValue1: 'Bearer \${token}'
     valuesFrom:
     - targetPath: secureJsonData.httpHeaderValue1
-        valueFrom:
+      valueFrom:
         secretKeyRef:
           name: aro-thanos-af-grafana-cr-sa-token
           key: token
@@ -93,7 +93,7 @@ spec:
         httpHeaderValue1: 'Bearer \${token}'
     valuesFrom:
     - targetPath: secureJsonData.httpHeaderValue1
-        valueFrom:
+      valueFrom:
         secretKeyRef:
           name: aro-thanos-af-grafana-cr-sa-token
           key: token
