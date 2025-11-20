@@ -107,9 +107,9 @@ spec:
       patchTemplate: |
         data:
           config.yaml: |
-{{ if .Values.enableUserWorkloadMetrics }}
+{{- if .Values.enableUserWorkloadMetrics }}
             enableUserWorkload: true
-{{ end }}
+{{- end }}
             prometheusK8s:
               remoteWrite:
                 - url: "http://thanos-receive.{{ .Release.Namespace }}.svc.cluster.local:9091/api/v1/receive"
