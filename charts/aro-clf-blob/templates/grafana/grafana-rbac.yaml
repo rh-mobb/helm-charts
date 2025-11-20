@@ -10,6 +10,14 @@ roleRef:
   name: system:auth-delegator
 subjects:
 - kind: ServiceAccount
-  name: grafana-operator-controller-manager
+  name: aro-thanos-af-grafana-cr-sa
   namespace: {{ .Release.Namespace }}
 ---
+apiVersion: v1
+kind: Secret
+type: kubernetes.io/service-account-token
+metadata:
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    kubernetes.io/service-account.name: aro-thanos-af-grafana-cr-sa
+  name: aro-thanos-af-grafana-cr-sa-token

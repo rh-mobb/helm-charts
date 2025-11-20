@@ -10,7 +10,7 @@ spec:
   name: {{ include "aro-clf-blob.fullname" . }}-loki-app.yaml
   instanceSelector:
     matchLabels:
-      dashboards: grafana
+      app: grafana
   datasource:
     name: Loki (Application)
     type: loki
@@ -20,8 +20,18 @@ spec:
     jsonData:
       # tlsAuthWithCACert: true
       tlsSkipVerify: true
+      httpHeaderName1: 'Authorization'
+      httpHeaderName2: 'X-Scope-OrgID'
+    secureJsonData:
+      httpHeaderValue1: 'Bearer ${token}'
+      httpHeaderValue2: 'application'
+  valuesFrom:
+  - targetPath: secureJsonData.httpHeaderValue1
+    valueFrom:
+      secretKeyRef:
+        name: aro-thanos-af-grafana-cr-sa-token
+        key: token
 {{ end }}
-
 ---
 
 # https://github.com/grafana/loki/blob/main/operator/hack/addon_grafana_gateway_ocp_oauth.yaml
@@ -36,7 +46,7 @@ spec:
   name: {{ include "aro-clf-blob.fullname" . }}-loki-infra.yaml
   instanceSelector:
     matchLabels:
-      dashboards: grafana
+      app: grafana
   datasource:
     name: Loki (Infrastructure)
     type: loki
@@ -46,6 +56,17 @@ spec:
     jsonData:
       # tlsAuthWithCACert: true
       tlsSkipVerify: true
+      httpHeaderName1: 'Authorization'
+      httpHeaderName2: 'X-Scope-OrgID'
+    secureJsonData:
+      httpHeaderValue1: 'Bearer ${token}'
+      httpHeaderValue2: 'infrastructure'
+  valuesFrom:
+  - targetPath: secureJsonData.httpHeaderValue1
+    valueFrom:
+      secretKeyRef:
+        name: aro-thanos-af-grafana-cr-sa-token
+        key: token
 {{ end }}
 
 ---
@@ -62,7 +83,7 @@ spec:
   name: {{ include "aro-clf-blob.fullname" . }}-loki-audit.yaml
   instanceSelector:
     matchLabels:
-      dashboards: grafana
+      app: grafana
   datasource:
     name: Loki (Audit)
     type: loki
@@ -71,4 +92,15 @@ spec:
     jsonData:
       # tlsAuthWithCACert: true
       tlsSkipVerify: true
+      httpHeaderName1: 'Authorization'
+      httpHeaderName2: 'X-Scope-OrgID'
+    secureJsonData:
+      httpHeaderValue1: 'Bearer ${token}'
+      httpHeaderValue2: 'audit'
+  valuesFrom:
+  - targetPath: secureJsonData.httpHeaderValue1
+    valueFrom:
+      secretKeyRef:
+        name: aro-thanos-af-grafana-cr-sa-token
+        key: token
 {{ end }}

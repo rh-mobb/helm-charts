@@ -2,7 +2,7 @@ apiVersion: v2
 name: grafana-cr
 description: A Helm chart for Deploying Grafana instances using the Grafana Operator
 type: application
-version: 0.5.2
+version: 0.5.6
 home: https://github.com/rh-mobb/helm-charts
 maintainers:
   - name: paulczar

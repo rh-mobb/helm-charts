@@ -5,7 +5,7 @@ metadata:
 spec:
   instanceSelector:
     matchLabels:
-      dashboards: "grafana"
+      app: grafana
   json: |
     {
       "annotations": {

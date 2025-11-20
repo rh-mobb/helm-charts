@@ -5,6 +5,14 @@ metadata:
   name: cluster-monitoring-config-patcher
   namespace: patch-operator
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-monitoring-config
+  namespace: openshift-monitoring
+data:
+  config.yaml: |
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
