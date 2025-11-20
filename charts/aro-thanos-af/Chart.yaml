@@ -6,7 +6,7 @@ version: 0.8.6
 dependencies:
   - name: grafana-cr
     version: "0.5.6"
-    repository: "https://scorpiion.github.io/helm-charts/"
+    repository: "https://rh-mobb.github.io/helm-charts/"
 home: "https://rh-mobb.github.io/helm-charts/"
 maintainers:
   - name: rh-mobb
