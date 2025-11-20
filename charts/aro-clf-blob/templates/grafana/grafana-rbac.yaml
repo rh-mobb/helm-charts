@@ -13,3 +13,11 @@ subjects:
   name: aro-thanos-af-grafana-cr-sa
   namespace: {{ .Release.Namespace }}
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: {{ .Release.Namespace }}
+  type: kubernetes.io/service-account-token
+  annotations:
+    kubernetes.io/service-account.name: aro-thanos-af-grafana-cr-sa
+  name: aro-thanos-af-grafana-cr-sa-token
