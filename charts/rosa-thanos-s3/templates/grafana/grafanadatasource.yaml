@@ -5,10 +5,10 @@ metadata:
   labels:
     {{- include "rosa-thanos-s3.labels" . | nindent 4 }}
 spec:
-  name: {{ include "rosa-thanos-s3.fullname" . }}.yaml
   instanceSelector:
     matchLabels:
-      dashboards: grafana
+      app.kubernetes.io/name: grafana-cr
+      app.kubernetes.io/instance: {{ .Release.Name }}
   datasource:
     name: prometheus
     access: proxy
