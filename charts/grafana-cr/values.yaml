@@ -22,3 +22,15 @@ serviceAccountAnnotations: {}
 sigv4Proxy:
   enabled: false
   region: "us-east-2"
+
+# Persistent Volume Configuration
+persistentVolume:
+  # Enable persistent storage for Grafana
+  enabled: true
+  # Size of the persistent volume
+  size: 10Gi
+  # Access modes for the PVC
+  accessModes:
+    - ReadWriteOnce
+  # Optional: Specify a storage class (leave empty for cluster default)
+  # storageClassName: "gp2"
