@@ -20,6 +20,10 @@ spec:
       wildcardPolicy: None
   deployment:
     spec:
+      {{- if .Values.persistentVolume.enabled }}
+      strategy:
+        type: Recreate
+      {{- end }}
       template:
         spec:
           volumes:
@@ -32,6 +36,11 @@ spec:
           - name: {{ include "grafana-cr.fullname" . }}-certs
             configMap:
               name: {{ include "grafana-cr.fullname" . }}-certs
+          {{- if .Values.persistentVolume.enabled }}
+          - name: grafana-data
+            persistentVolumeClaim:
+              claimName: {{ include "grafana-cr.fullname" . }}-pvc
+          {{- end }}
           containers:
             - image: 'quay.io/openshift/origin-oauth-proxy:4.21'
               name: grafana-proxy
@@ -74,6 +83,10 @@ spec:
                 - mountPath: /etc/proxy/certs
                   name: {{ include "grafana-cr.fullname" . }}-certs
                   readOnly: false
+                {{- if .Values.persistentVolume.enabled }}
+                - mountPath: /var/lib/grafana
+                  name: grafana-data
+                {{- end }}
             {{ if .Values.sigv4Proxy.enabled }}
             - name: aws-sigv4-proxy
               image: public.ecr.aws/aws-observability/aws-sigv4-proxy:1.0
@@ -87,6 +100,18 @@ spec:
                 - --port
                 - :8005
             {{ end }}
+  {{- if .Values.persistentVolume.enabled }}
+  persistentVolumeClaim:
+    spec:
+      accessModes:
+        {{- toYaml .Values.persistentVolume.accessModes | nindent 8 }}
+      resources:
+        requests:
+          storage: {{ .Values.persistentVolume.size }}
+      {{- if .Values.persistentVolume.storageClassName }}
+      storageClassName: {{ .Values.persistentVolume.storageClassName }}
+      {{- end }}
+  {{- end }}
   config:
     auth.anonymous:
       enabled: "True"
@@ -106,6 +131,9 @@ spec:
     log:
       level: {{ .Values.logLevel }}
       mode: console
+    security:
+      admin_user: "{{ .Values.basicAuthUsername }}"
+      admin_password: "{{ .Values.basicAuthPassword }}"
     users:
       auto_assign_org: "True"
       auto_assign_org_role: {{ .Values.oauthProxy.orgRoleAssigned }}
