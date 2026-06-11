@@ -131,6 +131,9 @@ spec:
     log:
       level: {{ .Values.logLevel }}
       mode: console
+    security:
+      admin_user: "{{ .Values.basicAuthUsername }}"
+      admin_password: "{{ .Values.basicAuthPassword }}"
     users:
       auto_assign_org: "True"
       auto_assign_org_role: {{ .Values.oauthProxy.orgRoleAssigned }}
