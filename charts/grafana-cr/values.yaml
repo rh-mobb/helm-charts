@@ -8,8 +8,8 @@ oauthProxy:
   # If this is set will use the basic Auth credentials from above
   # as a bypass to allow you to manage/modify grafana settings in the GUI
   allowHtpasswd: ""
-  # The Grafa Role to assign to Oauth Users
-  # Viewier, Editor, Admin
+  # The Grafana Role to assign to OAuth Users
+  # Viewer, Editor, Admin
   orgRoleAssigned: Viewer
   cookieSecret: "ZXhhbXBsZS1jb29raWUtc2VjcmV0enp6"
 
