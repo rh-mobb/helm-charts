@@ -53,6 +53,9 @@ machineSetSpec:
   resourceGroup: aro-cddajpe1
   subnet: aro-cluster-machine-subnet
   vnet: aro-cluster-vnet
+  ## uncomment to allocate the vms from a capacity reservation group (the vms must be zonal), see
+  ## https://learn.microsoft.com/en-us/azure/virtual-machines/capacity-reservation-overview
+  # capacityReservationGroupID: /subscriptions/<subscriptionId>/resourceGroups/<resourceGroup>/providers/Microsoft.Compute/capacityReservationGroups/<name>
   ## uncomment to add tags on the vms
   # tags:
   #   key1: value1

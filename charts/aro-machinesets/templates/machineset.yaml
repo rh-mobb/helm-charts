@@ -55,6 +55,9 @@ spec:
           kind: AzureMachineProviderSpec
           location: {{ $machineSetSpec.location }}
           acceleratedNetworking: {{ $machineSetSpec.acceleratedNetworking }}
+          {{- if $machineSetSpec.capacityReservationGroupID }}
+          capacityReservationGroupID: {{ $machineSetSpec.capacityReservationGroupID }}
+          {{- end }}
           networkResourceGroup: {{ $machineSetSpec.networkResourceGroup }}
           osDisk: {{ $machineSetSpec.osDisk | toYaml | nindent 12 }}
           publicIP: {{ $machineSetSpec.publicIP }}
